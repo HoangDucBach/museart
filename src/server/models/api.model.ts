@@ -113,4 +113,4 @@ Video.init({
     }
 }, { sequelize, modelName: 'videos', timestamps: false });
 
-sequelize.sync().then(r => console.log('Database synced')).catch(e => console.log(e));
+
