@@ -1,9 +1,8 @@
 import {Sequelize} from "sequelize";
 import { config } from "dotenv-flow";
+import {AppConfig} from "../config";
 
-config({
-    node_env: 'development'
-});
+config({node_env: AppConfig.NODE_ENV});
 export const sequelize = new Sequelize(
     process.env.DATABASE_NAME as string,
     process.env.DATABASE_USER as string,

@@ -1,11 +1,9 @@
 import {DataTypes, Model, Optional} from "sequelize";
 import {sequelize} from "./config.model";
 import { config } from "dotenv-flow";
+import {AppConfig} from "../config";
 
-config({
-    node_env: 'development'
-});
-
+config({node_env: AppConfig.NODE_ENV});
 
 interface UserAttributes {
     id: number;

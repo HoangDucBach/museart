@@ -4,7 +4,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import {router as routerUser} from "./routes/user.route";
 import {apiRouter} from "./routes/api.route";
-config({node_env: 'development'});
+import {AppConfig} from "./config";
+config({node_env: AppConfig.NODE_ENV});
 
 const app = express();
 const port = process.env.PORT || 8000;
