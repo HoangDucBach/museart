@@ -1,0 +1,38 @@
+-- MUSEUM DATABASE
+CREATE TABLE IF NOT EXISTS artworks(
+    detail JSONB
+);
+CREATE TABLE IF NOT EXISTS exhibitions(
+    detail JSONB
+);
+CREATE TABLE IF NOT EXISTS products(
+    detail JSONB
+);
+CREATE TABLE IF NOT EXISTS sounds(
+    detail JSONB
+);
+CREATE TABLE IF NOT EXISTS products(
+    detail JSONB
+);
+CREATE TABLE IF NOT EXISTS images(
+    detail JSONB
+);
+CREATE TABLE IF NOT EXISTS videos(
+    detail JSONB
+);
+
+-- USER DATABASE
+CREATE TABLE IF NOT EXISTS users(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
