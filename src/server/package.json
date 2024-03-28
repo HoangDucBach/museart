@@ -23,7 +23,7 @@
     "typescript": "^5.4.3"
   },
   "scripts": {
-    "build": "npx tsc",
+    "build": "nodemon app.ts",
     "start": "nodemon dist/app.js",
     "dev": "nodemon app.ts"
   }
