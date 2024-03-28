@@ -11,4 +11,5 @@ export const sequelize = new Sequelize(
         dialect: process.env.DATABASE_DIALECT as 'mysql' | 'mariadb' | 'postgres' | 'mssql',
         host: process.env.DATABASE_HOST,
         port: parseInt(process.env.DATABASE_PORT as string) || 5432,
+        ssl: process.env.DATABASE_SSL === 'true',
     });
