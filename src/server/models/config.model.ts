@@ -1,8 +1,9 @@
-import {Sequelize} from "sequelize";
+import { Sequelize } from "sequelize";
 import { config } from "dotenv-flow";
-import {AppConfig} from "../config";
+import { AppConfig } from "../config";
 
-config({node_env: AppConfig.NODE_ENV});
+config({ node_env: AppConfig.NODE_ENV });
+
 export const sequelize = new Sequelize(
     process.env.DATABASE_NAME as string,
     process.env.DATABASE_USER as string,
@@ -11,5 +12,6 @@ export const sequelize = new Sequelize(
         dialect: process.env.DATABASE_DIALECT as 'mysql' | 'mariadb' | 'postgres' | 'mssql',
         host: process.env.DATABASE_HOST,
         port: parseInt(process.env.DATABASE_PORT as string) || 5432,
-        ssl: process.env.DATABASE_SSL === 'true',
-    });
+        ssl: { require: true, rejectUnauthorized: false } as any,
+    }
+);
