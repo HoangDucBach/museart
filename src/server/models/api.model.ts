@@ -1,51 +1,116 @@
-import {DataTypes, Model} from 'sequelize';
-import {sequelize} from "./config.model";
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from './config.model';
 
-class BaseModel extends Model {
+interface BaseModelAttributes {
+    id: number;
+    detail: any;
+}
+
+class BaseModel extends Model<BaseModelAttributes> {
+    public id!: number;
     public detail!: any;
 }
 
-class Artwork extends BaseModel {}
-class Exhibition extends BaseModel {}
-class Product extends BaseModel {}
-class Sound extends BaseModel {}
-class Image extends BaseModel {}
-class Video extends BaseModel {}
+BaseModel.init({
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, {
+    sequelize,
+    modelName: 'base_models',
+    timestamps: false
+});
+
+export class Artwork extends BaseModel {}
+export class Exhibition extends BaseModel {}
+export class Article extends BaseModel {}
+export class Product extends BaseModel {}
+export class Sound extends BaseModel {}
+export class Image extends BaseModel {}
+export class Video extends BaseModel {}
 
 Artwork.init({
-}, {
-    sequelize,
-    modelName: 'artworks',
-});
-
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, { sequelize, modelName: 'artworks', timestamps: false });
 Exhibition.init({
-}, {
-    sequelize,
-    modelName: 'exhibitions',
-});
-
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, { sequelize, modelName: 'exhibitions', timestamps: false });
+Article.init({
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, { sequelize, modelName: 'articles', timestamps: false });
 Product.init({
-}, {
-    sequelize,
-    modelName: 'products',
-});
-
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, { sequelize, modelName: 'products', timestamps: false });
 Sound.init({
-}, {
-    sequelize,
-    modelName: 'sounds',
-});
-
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, { sequelize, modelName: 'sounds', timestamps: false });
 Image.init({
-}, {
-    sequelize,
-    modelName: 'images',
-});
-
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, { sequelize, modelName: 'images', timestamps: false });
 Video.init({
-}, {
-    sequelize,
-    modelName: 'videos',
-});
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    detail: {
+        type: DataTypes.JSON,
+        allowNull: false
+    }
+}, { sequelize, modelName: 'videos', timestamps: false });
 
 sequelize.sync().then(r => console.log('Database synced')).catch(e => console.log(e));

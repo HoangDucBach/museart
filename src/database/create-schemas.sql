@@ -1,25 +1,38 @@
 -- MUSEUM DATABASE
+-- MUSEUM DATABASE
 CREATE TABLE IF NOT EXISTS artworks(
+    id SERIAL PRIMARY KEY,
     detail JSONB
 );
+
 CREATE TABLE IF NOT EXISTS exhibitions(
+    id SERIAL PRIMARY KEY,
+    detail JSONB
+);
+CREATE TABLE IF NOT EXISTS articles(
+    id SERIAL PRIMARY KEY,
     detail JSONB
 );
 CREATE TABLE IF NOT EXISTS products(
+    id SERIAL PRIMARY KEY,
     detail JSONB
 );
+
 CREATE TABLE IF NOT EXISTS sounds(
+    id SERIAL PRIMARY KEY,
     detail JSONB
 );
-CREATE TABLE IF NOT EXISTS products(
-    detail JSONB
-);
+
 CREATE TABLE IF NOT EXISTS images(
+    id SERIAL PRIMARY KEY,
     detail JSONB
 );
+
 CREATE TABLE IF NOT EXISTS videos(
+    id SERIAL PRIMARY KEY,
     detail JSONB
 );
+
 
 -- USER DATABASE
 CREATE TABLE IF NOT EXISTS users(
