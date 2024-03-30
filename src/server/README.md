@@ -1,4 +1,4 @@
-# REST API Museart Documment
+# REST API Museart Document
 
 # REST API
 
@@ -14,18 +14,53 @@ Tài liệu đặc tả về cách CRUD các resource trên server.
 
 ## Endpoint
 
+`POST /auth/signin`
+
+Xác thực người dùng
+
+### Request
+
+```json
+{
+  "username": "admin",
+  "password": "admin"
+}
+```
+### Response
+
+Trả về token của user
+```json
+{
+  "status": "success",
+  "token": "<token here>"
+  }
+```
+`POST /auth/signup`
+
+### Request
+
+```json
+{
+  "username": "admin",
+  "email": "admin",
+  "password": "admin",
+  "role": "admin"
+}
+
+## Endpoint
+
 `GET /artworks`
 
 ### Headers
 
 * Yêu cầu phải có header `Authorization` với giá trị là token của user
 
-    ```json
-    {
-    "Content-Type": "application/json",
-    "Authorization": "<token here>"
-    }
-    ```
+```json
+{
+"Content-Type": "application/json",
+"Authorization": "<token here>"
+}
+```
 
 ### Parameters
 
@@ -39,7 +74,7 @@ Tài liệu đặc tả về cách CRUD các resource trên server.
 
 Trả về danh sách artworks
 
-`GET /artworks/:id`
+`GET /artworks/: id`
 
 ### Response
 
@@ -47,17 +82,17 @@ Trả về thông tin chi tiết của artwork
 
 ```json
 {
-  "status": "success",
-  "data": {
-    "id": 1,
-    "name": "The Starry Night",
-    "artist": "Vincent van Gogh",
-    "description": "The Starry Night is an oil on canvas painting by Dutch Post-Impressionist painter Vincent van Gogh. Painted in June 1889, it depicts the view from the east-facing window of his asylum room at Saint-Rémy-de-Provence, just before sunrise, with the addition of an idealized village.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
-    "createdAt": "2021-09-29T08:00:00.000Z",
-    "updatedAt": "2021-09-29T08:00:00.000Z",
-    ...
-  }
+"status": "success",
+"data": {
+"id": 1,
+"name": "The Starry Night",
+"artist": "Vincent van Gogh",
+"description": "The Starry Night is an oil on canvas painting by Dutch Post-Impressionist painter Vincent van Gogh. Painted in June 1889, it depicts the view from the east-facing window of his asylum room at Saint-Rémy-de-Provence, just before sunrise, with the addition of an idealized village.",
+"image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+"createdAt": "2021-09-29T08:00:00.000Z",
+"updatedAt": "2021-09-29T08:00:00.000Z",
+...
+}
 }
 ```
 
@@ -83,14 +118,17 @@ Trả về thông tin chi tiết của artwork
 ### Response
 
 Trả về thông tin chi tiết của user
+
 * `data`: thông tin chi tiết của user
-    * `id`: id của user
-    * `username`: tên đăng nhập
-    * `email`: email của user
-    * `role`: quyền của user
-    * `createdAt`: thời gian tạo
-    * `updatedAt`: thời gian cập nhật
+  * `id`: id của user
+  * `username`: tên đăng nhập
+  * `email`: email của user
+  * `role`: quyền của user
+  * `createdAt`: thời gian tạo
+  * `updatedAt`: thời gian cập nhật
+
 #### Example
+
 ```json
 {
   "status": "success",
@@ -103,8 +141,11 @@ Trả về thông tin chi tiết của user
     "updatedAt": "2021-09-29T08:00:00.000Z"
   }
 ```
+
 ## Errors
+
 API này sử dụng những status sau
+
 * `200 OK`: Trả về khi tất cả request thành công
 * `201 Created`: Trả về khi một resource đã được tạo thành công
 * `204 No Content`: Trả về khi không có dữ liệu nào được trả về
