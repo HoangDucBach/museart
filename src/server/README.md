@@ -46,10 +46,10 @@ Trả về token của user
   "password": "admin",
   "role": "admin"
 }
-
+```
 ## Endpoint
 
-`GET /artworks`
+`GET api/artworks`
 
 ### Headers
 
@@ -74,7 +74,7 @@ Trả về token của user
 
 Trả về danh sách artworks
 
-`GET /artworks/: id`
+`GET /api/artworks/: id`
 
 ### Response
 
@@ -96,12 +96,12 @@ Trả về thông tin chi tiết của artwork
 }
 ```
 
-`PUT /artworks`
+`PUT /api/artworks`
 
 * Yêu cầu phải có header `Authorization` với giá trị là token của user
 * Yêu cầu phải có role là `admin`
 
-`DELETE /artworks`
+`DELETE /api/artworks`
 
 * Yêu cầu phải có header `Authorization` với giá trị là token của user
 * Yêu cầu phải có role là `admin`
@@ -140,6 +140,7 @@ Trả về thông tin chi tiết của user
     "createdAt": "2021-09-29T08:00:00.000Z",
     "updatedAt": "2021-09-29T08:00:00.000Z"
   }
+}
 ```
 
 ## Errors
