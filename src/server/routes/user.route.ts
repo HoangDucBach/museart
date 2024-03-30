@@ -7,9 +7,7 @@ export const router = express.Router();
 
 router.route("/")
     .post(validateUserData)
-    .get((req, res) => {
-        res.send("Get all users");
-    });
+    .get(authenticateAdmin, UserControllerInstance.getAll);
 router.route("/signup").post(validateUserData, UserControllerInstance.signUp);
 router.route("/signin").post(UserControllerInstance.signIn);
 

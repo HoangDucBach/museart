@@ -83,20 +83,6 @@ export class ExhibitionController implements IBaseController {
 
     async get(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const queryConditions = createQueryCondition(req.query);
-            const exhibitionId = req.params.id
-            if (exhibitionId) {
-                queryConditions.where = {'detail.id': exhibitionId};
-            }
-            const exhibitions = await Exhibition.findAll(queryConditions);
-            res.status(200).json(exhibitions);
-        } catch (error) {
-            res.status(500).json({error: 'Error getting exhibitions'});
-        }
-    }
-
-    async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
-        try {
             const exhibitionId = req.params.id;
             const exhibition = await Exhibition.findAll({where: {'detail.id': exhibitionId}});
             if (exhibition) {
@@ -107,7 +93,21 @@ export class ExhibitionController implements IBaseController {
         } catch (error) {
             res.status(500).json({error: 'Error getting exhibition'});
         }
-        return Promise.resolve(undefined);
+    }
+
+    async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const queryConditions = createQueryCondition(req.query);
+            const exhibitionId = req.params.id
+            if (exhibitionId) {
+                queryConditions.where = {'detail.id': exhibitionId};
+            }
+            const exhibitions = await Exhibition.findAll(queryConditions);
+            res.status(200).json(exhibitions);
+        } catch (error) {
+            res.status(500).json({error: 'Error getting exhibitions'});
+        }
+
         return Promise.resolve(undefined);
     }
 
@@ -127,20 +127,6 @@ export class ExhibitionController implements IBaseController {
 export class ArticleController implements IBaseController {
     async get(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const queryConditions = createQueryCondition(req.query);
-            const articleId = req.params.id
-            if (articleId) {
-                queryConditions.where = {'detail.id': articleId};
-            }
-            const articles = await Article.findAll(queryConditions);
-            res.status(200).json(articles);
-        } catch (error) {
-            res.status(500).json({error: 'Error getting articles'});
-        }
-    }
-
-    async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
-        try {
             const articleId = req.params.id;
             const article = await Article.findAll({where: {'detail.id': articleId}});
             if (article) {
@@ -150,6 +136,20 @@ export class ArticleController implements IBaseController {
             }
         } catch (error) {
             res.status(500).json({error: 'Error getting article'});
+        }
+    }
+
+    async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const queryConditions = createQueryCondition(req.query);
+            const articleId = req.params.id
+            if (articleId) {
+                queryConditions.where = {'detail.id': articleId};
+            }
+            const articles = await Article.findAll(queryConditions);
+            res.status(200).json(articles);
+        } catch (error) {
+            res.status(500).json({error: 'Error getting articles'});
         }
 
     }
@@ -186,19 +186,6 @@ export class ArticleController implements IBaseController {
 export class ProductController implements IBaseController {
     async get(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const queryConditions = createQueryCondition(req.query);
-            const productId = req.params.id
-            if (productId) {
-                queryConditions.where = {'detail.id': productId};
-            }
-            const products = await Product.findAll(queryConditions);
-            res.status(200).json(products);
-        } catch (error) {
-            res.status(500).json({error: 'Error getting products'});
-        }
-    }
-    async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
-        try {
             const productId = req.params.id;
             const product = await Product.findAll({where: {'detail.id': productId}});
             if (product) {
@@ -208,6 +195,20 @@ export class ProductController implements IBaseController {
             }
         } catch (error) {
             res.status(500).json({error: 'Error getting product'});
+        }
+
+    }
+    async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const queryConditions = createQueryCondition(req.query);
+            const productId = req.params.id
+            if (productId) {
+                queryConditions.where = {'detail.id': productId};
+            }
+            const products = await Product.findAll(queryConditions);
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).json({error: 'Error getting products'});
         }
     }
 
