@@ -125,13 +125,9 @@ export class UserController implements IBaseController {
             if (!user) {
                 return res.status(404).json({message: 'User not found'});
             }
-            // const isValidPassword = await bcrypt.compare(password, user.password);
-            // if (!isValidPassword) {
-            //     return res.status(401).json({message: 'Invalid password'});
-            // }
             const token = jwt.sign({
                 id: user.id,
-                email: user.email
+                email: user.email,
             }, process.env.SECRET_KEY as string, {expiresIn: '1h'});
             res.json({token});
         } catch (error) {
@@ -140,4 +136,5 @@ export class UserController implements IBaseController {
         }
     }
 }
+
 export const UserControllerInstance = new UserController();

@@ -54,11 +54,16 @@ export class ArtworkController implements IBaseController {
     async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const artworkId = req.params.id;
-            Artwork.update(req.body, {where: {'detail.id': artworkId}}).then(r => {
+            const artwork = await Artwork.findOne({where: {'detail.id': artworkId}});
+
+            if (artwork !== null) {
+                artwork.detail = {...artwork.detail, ...req.body};
+                await artwork.save();
+                console.log(artwork);
                 res.status(200).json({message: 'Artwork updated'});
-            });
-            res.status(200).json({message: 'Artwork updated'});
+            }
         } catch (error) {
+            console.log(error);
             res.status(500).json({error: 'Error updating artwork'});
         }
     }
@@ -114,10 +119,12 @@ export class ExhibitionController implements IBaseController {
     async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const exhibitionId = req.params.id;
-            Exhibition.update(req.body, {where: {'detail.id': exhibitionId}}).then(r => {
+            const exhibition = await Exhibition.findOne({where: {'detail.id': exhibitionId}});
+            if (exhibition !== null) {
+                exhibition.detail = {...exhibition.detail, ...req.body};
+                await exhibition.save();
                 res.status(200).json({message: 'Exhibition updated'});
-            });
-            res.status(200).json({message: 'Exhibition updated'});
+            }
         } catch (error) {
             res.status(500).json({error: 'Error updating exhibition'});
         }
@@ -161,10 +168,12 @@ export class ArticleController implements IBaseController {
     async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const articleId = req.params.id;
-            Article.update(req.body, {where: {'detail.id': articleId}}).then(r => {
+            const article = await Article.findOne({where: {'detail.id': articleId}});
+            if (article !== null) {
+                article.detail = {...article.detail, ...req.body};
+                await article.save();
                 res.status(200).json({message: 'Article updated'});
-            });
-            res.status(200).json({message: 'Article updated'});
+            }
         } catch (error) {
             res.status(500).json({error: 'Error updating article'});
         }
@@ -198,6 +207,7 @@ export class ProductController implements IBaseController {
         }
 
     }
+
     async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const queryConditions = createQueryCondition(req.query);
@@ -219,9 +229,12 @@ export class ProductController implements IBaseController {
     async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const productId = req.params.id;
-            Product.update(req.body, {where: {'detail.id': productId}}).then(r => {
+            const product = await Product.findOne({where: {'detail.id': productId}});
+            if (product !== null) {
+                product.detail = {...product.detail, ...req.body};
+                await product.save();
                 res.status(200).json({message: 'Product updated'});
-            });
+            }
         } catch (error) {
             res.status(500).json({error: 'Error updating product'});
         }

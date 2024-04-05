@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
 import {Request, Response, NextFunction} from "express";
+import {UserController, UserControllerInstance} from "../controllers/user.controller";
+import {User} from "../models/user.model";
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers['authorization'];
-    console.log(req.headers);
     if (!token) {
         return res.status(401).json({message: 'Access denied. Token is required.'});
     }
@@ -20,15 +21,20 @@ export const authenticateAdmin = (req: Request, res: Response, next: NextFunctio
     if (!token) {
         return res.status(401).send('Access denied. Token is required.');
     }
-    jwt.verify(token, process.env.SECRET_KEY as string, (err, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY as string, async (err, decoded) => {
         if (err) {
             return res.status(403).json('Invalid token.');
         }
         const payload = decoded as jwt.JwtPayload;
-        if (payload.role !== 'admin') {
-            return res.status(403).json('Access denied. Admin only.');
+        const user = await User.findOne({where: {id: payload.id}});
+
+        if (user !== null) {
+            if (user.role === 'admin') {
+                req.user = payload;
+                next();
+            } else {
+                res.status(403).json({message: 'Unauthorized access'});
+            }
         }
-        req.user = payload;
-        next();
     });
 }
