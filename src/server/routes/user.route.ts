@@ -6,8 +6,8 @@ import {authenticateAdmin} from "../middlewares/auth.middleware";
 export const router = express.Router();
 
 router.route("/")
-    .post(validateUserData)
-    .get(authenticateAdmin, UserControllerInstance.getAll);
+    .post(validateUserData);
+    // .get(authenticateAdmin, UserControllerInstance.getAll);
 router.route("/signup").post(validateUserData, UserControllerInstance.signUp);
 router.route("/signin").post(UserControllerInstance.signIn);
 

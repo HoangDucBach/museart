@@ -7,8 +7,8 @@ import {
 } from "../controllers/api.controller";
 
 export const apiRouter = express.Router();
-apiRouter.route("/*")
-    .get(authenticateToken);
+// apiRouter.route("/*")
+//     .get(authenticateToken);
 apiRouter.get('/artworks', (ArtworkControllerInstance.getAll));
 apiRouter.get('/artworks/:id', (ArtworkControllerInstance.get));
 apiRouter.put('/artworks/:id', authenticateAdmin, ArtworkControllerInstance.update);
