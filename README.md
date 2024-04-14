@@ -89,3 +89,16 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 [Figma]:https://img.shields.io/badge/Figma-222222?style=for-the-badge&logo=figma
 [Figma-url]:https://www.figma.com/
+
+## Quickstart
+```bash
+# clone project
+git clone https://github.com/HoangDucBach/museart.git
+cd museart
+cd src
+
+# run frontend
+cd mobile
+npm install
+npm start
+In a new terminal: npm run android
