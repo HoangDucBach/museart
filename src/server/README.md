@@ -52,8 +52,8 @@ Trả về token của user
 ```json
 {
   "username": "admin",
-  "email": "admin",
-  "password": "admin",
+  "email": "admin@gmail.com",
+  "password": "admin123",
   "role": "admin"
 }
 ```
@@ -136,7 +136,7 @@ Example:
 
 * Yêu cầu phải có header `Authorization` với giá trị là token của user
 * Yêu cầu phải có role là `admin`
-
+k 
 
 ## Errors
 
