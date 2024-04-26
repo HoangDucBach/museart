@@ -8,12 +8,12 @@ import Dashboard from "../components/Dashboard";
 import Comment from "../components/Comment";
 import FrameComponent from "../components/FrameComponent";
 
-const Artworks = () => {
+const Exhibitions = () => {
   const navigation = useNavigation();
 
   return (
     <View style={{ flex: 1 }}>
-      <Dashboard namePage={"Dashboard"}>
+      <Dashboard namePage={"Exhibitions"}>
         {/* <SettingsMenu style={{paddingTop: 10}}/> */}
         <View style={{justifyContent: "space-around", flexDirection: "row",}}>
           <FrameComponent/>
@@ -31,6 +31,8 @@ const Artworks = () => {
           <FrameComponent frameFlex={2} frameAspectRatio={2}/>
           <FrameComponent/>
         </View>
+        <Comment userName={"Luong"} date={"20/04/2024"} text={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived "}/>
+        <Comment userName={"Luong"} date={"20/04/2024"} text={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived "}/>
         <Comment userName={"Luong"} date={"20/04/2024"} text={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived "}/>
       </Dashboard>
     </View>
@@ -134,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Artworks;
+export default Exhibitions;

@@ -8,6 +8,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import Artworks from "./screens/Artworks";
+import Cart from "./screens/Cart";
+import Exhibitions from "./screens/Exhibitions";
+import Articles from "./screens/Articles";
+import Shopping from "./screens/Shopping";
+import Payment from "./screens/Payment";
+import NavbarBottom from "./components/NavbarBottom";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -25,9 +31,10 @@ const App = () => {
 
   return (
     <>
-      <NavigationContainer>
+      <NavigationContainer style ={{color: "black"}}>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Payment" component={Payment}/>
             <Stack.Screen
               name="SignIn"
               component={SignIn}
@@ -43,8 +50,29 @@ const App = () => {
               component={Artworks}
               options={{headerShown: false}}
               />
+              <Stack.Screen
+              name="Exhibitions"
+              component={Exhibitions}
+              options={{headerShown: false}}
+              />
+              <Stack.Screen
+              name="Articles"
+              component={Articles}
+              options={{headerShown: false}}
+              />
+            <Stack.Screen
+              name="Shopping"
+              component={Shopping}
+              options={{headerShown: false}}
+              />
+            <Stack.Screen
+              name="Cart"
+              component={Cart}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         ) : null}
+        {<NavbarBottom/>}
       </NavigationContainer>
     </>
   );

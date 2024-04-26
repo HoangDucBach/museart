@@ -1,14 +1,26 @@
 import React from "react";
-import { StyleSheet, View, Image, Pressable } from "react-native";
+import { useState } from "react";
+import { StyleSheet, View, Image, Pressable, Modal, SafeAreaView } from "react-native";
 import { Border, Color, Padding } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
+import SettingsMenu from "./SettingsMenu";
 
 const NavbarTop = () => {
-  
-  const onBackPress = () => {console.log("Click back button")}
-  const onMenuPress = () => {console.log("Click menu button")}
+  const navigation = useNavigation();
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const onBackPress = () => {
+    if (navigation.canGoBack()) navigation.goBack();
+  };
+
+  const onMenuPress = () => {
+    setIsMenuVisible(!isMenuVisible);
+    setIsModalVisible(!isModalVisible);
+  };
 
   return (
-    <View style={styles.navbartop}>
+    <SafeAreaView style={styles.navbartop}>
       <Pressable onPress={onBackPress} style={styles.iconContainer}>
         <Image
           contentFit="cover"
@@ -21,9 +33,23 @@ const NavbarTop = () => {
           source={require("../assets/frame-45.png")}
         />
       </Pressable>
-    </View>
+      <Modal
+        visible={isModalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setIsModalVisible(false)} // Xử lý khi người dùng nhấn nút back trên thiết bị
+      >
+        <Pressable style={{}} onPress={() => setIsModalVisible(false)}>
+          <SafeAreaView>
+           <SettingsMenu />
+          </SafeAreaView>
+        </Pressable>
+      </Modal>
+    </SafeAreaView>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   iconContainer: {
@@ -35,7 +61,7 @@ const styles = StyleSheet.create({
     width: 35,
   },
   navbartop: {
-    width: 380,
+    width: "100%",
     justifyContent: "space-between",
     flexDirection: "row",
     marginTop: 50,

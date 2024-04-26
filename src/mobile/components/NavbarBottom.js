@@ -2,10 +2,14 @@ import React, { useMemo, useState } from "react";
 // import { Image } from "expo-image";
 import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import { Padding, Border, FontSize, FontFamily, Color } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
 
 
 const NavbarBottom = ({tab}) => 
 {
+
+  const navigation = useNavigation();
+
   const [selectedTab, setSelectedTab] = useState(tab);
   console.log("Open tab: " + selectedTab);
 
@@ -13,13 +17,12 @@ const NavbarBottom = ({tab}) =>
   {
     if (tab != selectedTab) {
       setSelectedTab(tab);
+      navigation.navigate(tab);
     }
   }
 
   return (
-    <View
-      style={[styles.navbarbottom]}
-    >
+    <View style={[styles.navbarbottom]}>
       <Pressable onPress= {() => {handleTabPress("Artworks")}}
                 style={[styles.navbaritemFlexBox, selectedTab == "Artworks" && styles.navbaritem]}>
         <Image
@@ -66,7 +69,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     borderRadius: Border.br_81xl,
-    // flex: 1,
   },
   navbaritemChild: {
     width: 30,
@@ -85,11 +87,8 @@ const styles = StyleSheet.create({
     backgroundColor: Color.surfaceSurfaceContainerHighest,
     paddingHorizontal: Padding.p_mini,
     alignItems: "center",
-    // flex: 2,
   },
   navbarbottom: {
-    alignSelf: "stretch",
-    // alignItems: "center",
     backgroundColor: Color.surfaceSurfaceContainer,
     justifyContent: "space-between",
     flexDirection: "row",
@@ -97,6 +96,7 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_3xs,
     borderRadius: Border.br_81xl,
     overflow: "hidden",
+    margin: 10,
   },
 });
 

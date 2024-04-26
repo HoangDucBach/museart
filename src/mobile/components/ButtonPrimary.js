@@ -10,46 +10,58 @@ const ButtonPrimary = ({
   text,
   textColor,
   textSize,
-  textMargin,
+  textMarginHorizontal,
+  textMarginVertical,
+  textAlign,
   image,
   buttonPrimaryBackgroundColor,
-  buttonPrimaryBorderColor,
+  buttonPrimaryBorderWidth,
   buttonPrimaryFlex,
   buttonPrimaryPosition,
   buttonPrimaryAlignSelf,
   buttonPrimaryMarginTop,
   buttonPrimaryMarginLeft,
+  buttonPrimaryPaddingHorizontal,
+  buttonPrimaryPaddingVertical,
 }) => {
   const buttonPrimaryStyle = useMemo(() => {
     return {
       ...getStyleValue("backgroundColor", buttonPrimaryBackgroundColor),
-      ...getStyleValue("borderColor", buttonPrimaryBorderColor),
+      ...getStyleValue("borderWidth", buttonPrimaryBorderWidth),
       ...getStyleValue("flex", buttonPrimaryFlex),
       ...getStyleValue("position", buttonPrimaryPosition),
       ...getStyleValue("alignSelf", buttonPrimaryAlignSelf),
       ...getStyleValue("marginTop", buttonPrimaryMarginTop),
       ...getStyleValue("marginLeft", buttonPrimaryMarginLeft),
+      ...getStyleValue("paddingHorizontal", buttonPrimaryPaddingHorizontal),
+      ...getStyleValue("paddingVertical", buttonPrimaryPaddingVertical),
     };
   }, [
     buttonPrimaryBackgroundColor,
-    buttonPrimaryBorderColor,
+    buttonPrimaryBorderWidth,
     buttonPrimaryFlex,
     buttonPrimaryPosition,
     buttonPrimaryAlignSelf,
     buttonPrimaryMarginTop,
     buttonPrimaryMarginLeft,
+    buttonPrimaryPaddingHorizontal,
+    buttonPrimaryPaddingVertical,
   ]);
   
   const textLayoutStyle = useMemo(() => {
     return {
       ...getStyleValue("color", textColor),
       ...getStyleValue("fontSize", textSize),
-      ...getStyleValue("margin", textMargin)
+      ...getStyleValue("marginHorizontal", textMarginHorizontal),
+      ...getStyleValue("marginVertical", textMarginVertical),
+      ...getStyleValue("textAlign", textAlign),
     };
    }, [
     textColor,
     textSize,
-    textMargin,
+    textMarginHorizontal,
+    textMarginVertical,
+    textAlign
   ]);
 
   return (

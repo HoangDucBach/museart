@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -17,6 +18,15 @@ import { FontFamily, Padding, Color, Border, FontSize } from "../GlobalStyles";
 
 const SignIn = () => {
   const navigation = useNavigation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleSignIn = () => {
+    // Xử lý đăng nhập thành công
+    setIsLoggedIn(true);
+    // console.log(isLoggedIn);
+  };
+
+  const handleGuess = () => setIsLoggedIn(true);
 
   return (
     <ImageBackground
@@ -60,11 +70,15 @@ const SignIn = () => {
           />
           <TextInput placeholder="Password" secureTextEntry={true} style={styles.username}/>
         </View>
-        <Pressable onPress={() => navigation.navigate("Artworks")} 
+        <Pressable onPress={() => {
+                                handleSignIn();
+                                if (isLoggedIn) navigation.navigate("Artworks");}}
                   style={[styles.signinbutton, styles.signinbuttonSpaceBlock]}>
             <Text style={[styles.signIn1, styles.signTypo]}>Sign in</Text>
         </Pressable>
-        <Pressable onPress={() => navigation.navigate("Artworks")}
+        <Pressable onPress={() => {
+                                handleGuess();
+                                navigation.navigate("Artworks");}}
                   style={[styles.guessbutton, styles.signinbuttonSpaceBlock]}>
             <Text style={[styles.signIn1, styles.signTypo]}>Guess</Text>
         </Pressable>
