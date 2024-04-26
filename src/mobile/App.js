@@ -14,8 +14,11 @@ import Articles from "./screens/Articles";
 import Shopping from "./screens/Shopping";
 import Payment from "./screens/Payment";
 import NavbarBottom from "./components/NavbarBottom";
+import { Dimensions } from "react-native";
 
 const App = () => {
+  console.log(Dimensions.get("screen"));
+  
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
   const [fontsLoaded, error] = useFonts({

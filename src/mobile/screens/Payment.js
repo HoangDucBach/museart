@@ -62,7 +62,7 @@ const Payment = ({
                         </View>
                         <View style={{flexDirection: "row"}}>
                             <View style={[styles.textInContainer, {marginTop: 15}]}>
-                                    <Image source={require("../assets/Frame 83.png")}/>
+                                    <Image source={require("../assets/frame-83.png")}/>
                                     <TextInput placeholder="Your detail address" style={[styles.textLayout]}/>
                             </View>
                         </View>
