@@ -7,13 +7,13 @@ export const FontFamily = {
   };
   /* font sizes */
   export const FontSize = {
+    labelSmallRegular_size: 10,
+    typographyLabelSmall_size: 11,
     labelMediumBold_size: 13,
-    headline5Bold_size: 24,
     size_sm: 14,
     labelLargeBold_size: 16,
-    labelSmallRegular_size: 10,
     titleMediumBold_size: 20,
-    typographyLabelSmall_size: 11,
+    headline5Bold_size: 24,
     bodyXlargeBold_size: 25,
     headline3Bold_size: 35,
     headline2Bold_size: 41,

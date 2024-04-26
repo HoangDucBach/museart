@@ -3,13 +3,17 @@ import * as React from "react";
 import { StyleSheet, Text, Image, View, Pressable } from "react-native";
 import { Padding, Color, FontSize, Border, FontFamily } from "../GlobalStyles";
 import ButtonPrimary from "./ButtonPrimary";
+import { useNavigation } from "@react-navigation/native";
 
 const SettingsMenu = () => {
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.settingsMenu}>
-      <MenuItem imageSource={require("../assets/explore.png")} text="About" />
+      <MenuItem imageSource={require("../assets/explore.png")} text="About" func = {() => console.log("Click About")} />
       <MenuItem imageSource={require("../assets/navbaritem.png")} text="Setting" />
-      <MenuItem imageSource={require("../assets/frame-14.png")} text="Cart" />
+      <MenuItem imageSource={require("../assets/frame-14.png")} text="Cart" func = {() => navigation.navigate("Cart")}/>
       <MenuItem imageSource={require("../assets/frame-141.png")} text="Feedback" />
       <View style={[styles.flexRow, styles.flexRowButton]}> 
         <ButtonPrimary text="Sign in"
@@ -32,19 +36,11 @@ const SettingsMenu = () => {
   );
 };
 
-const MenuItem = ({ imageSource, text }) => {
+const MenuItem = ({ imageSource, text, func }) => {
   return (
-    <Pressable style={[styles.menuItem, styles.flexRow]}>
+    <Pressable onPress={func} style={[styles.menuItem, styles.flexRow]}>
       <Image style={styles.menuItemImage} source={imageSource} />
       <Text style={styles.menuItemText}>{text}</Text>
-    </Pressable>
-  );
-};
-
-const Button = ({ label, backgroundColor, marginLeft }) => {
-  return (
-    <Pressable style={[styles.button, { backgroundColor, marginLeft }]}>
-      <Text style={styles.buttonText}>{label}</Text>
     </Pressable>
   );
 };
@@ -91,6 +87,9 @@ const styles = StyleSheet.create({
     shadowColor: Color.colorBlack,
   },
   settingsMenu: {
+    alignSelf: "flex-end",
+    marginTop: 50,
+    marginLeft: 10,
     backgroundColor: Color.surfaceSurfaceContainer,
     shadowRadius: 20,
     elevation: 20,
