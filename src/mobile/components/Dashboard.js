@@ -1,22 +1,25 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { Text, StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
 import NavbarTop from "../components/NavbarTop";
 import DashboardSearchEngine from "../components/DashboardSearchEngine";
-import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
+import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../GlobalStyles";
 
 const Dashboard = ({
     namePage,
     children,
 
 }) => {
+  const isDarkMode = useSelector(state => state.isDarkMode);
+
     return (
-    <SafeAreaView style={styles.artworks}>
+    <SafeAreaView style={[styles.artworks, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainer} : null]}>
       {/* <View style={{paddingHorizontal: 10}}> */}
         <NavbarTop/>
       {/* </View> */}
       <View style={styles.body}>
         <View style={styles.dashboardtitleFlexBox}>
-          <Text style={styles.dashboard}>{namePage}</Text>
+          <Text style={[styles.dashboard, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>{namePage}</Text>
         </View>
         <DashboardSearchEngine />
       </View>

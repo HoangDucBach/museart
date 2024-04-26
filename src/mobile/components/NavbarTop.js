@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { StyleSheet, View, Image, Pressable, Modal, SafeAreaView } from "react-native";
-import { Border, Color, Padding } from "../GlobalStyles";
+import { Border, Color, ColorDark, Padding } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import SettingsMenu from "./SettingsMenu";
 
 const NavbarTop = () => {
+  const isDarkMode = useSelector(state => state.isDarkMode);
+
   const navigation = useNavigation();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -21,13 +24,13 @@ const NavbarTop = () => {
 
   return (
     <SafeAreaView style={styles.navbartop}>
-      <Pressable onPress={onBackPress} style={styles.iconContainer}>
+      <Pressable onPress={onBackPress} style={[styles.iconContainer, isDarkMode ? {backgroundColor: ColorDark.primaryPrimary} : null]}>
         <Image
           contentFit="cover"
           source={require("../assets/vector.png")}
         />
       </Pressable>
-      <Pressable onPress={onMenuPress} style={styles.iconContainer}>
+      <Pressable onPress={onMenuPress} style={[styles.iconContainer, isDarkMode ? {backgroundColor: ColorDark.primaryPrimary} : null]}>
         <Image
           contentFit="cover"
           source={require("../assets/frame-45.png")}
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     flexDirection: "row",
-    marginTop: 50,
+    // marginTop: 50,
   },
 });
 

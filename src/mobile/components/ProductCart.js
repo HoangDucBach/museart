@@ -1,6 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { Color, Border, FontFamily, FontSize, Padding } from "../GlobalStyles";
+import { Color, ColorDark, Border, FontFamily, FontSize, Padding } from "../GlobalStyles";
 import ButtonPrimary from "./ButtonPrimary";
 
 const ProductCash = ({
@@ -10,8 +11,10 @@ const ProductCash = ({
     image,
     number,
 }) => {
+  const isDarkMode = useSelector(state => state.isDarkMode);
+
     return (
-    <View style={[styles.frameParent, styles.frameParentFlexBox]}>
+    <View style={[styles.frameParent, styles.frameParentFlexBox, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
       <View>
         <Image
           style={[styles.componentChild, styles.frameParentLayout]} 
@@ -21,9 +24,9 @@ const ProductCash = ({
       </View>
       <View style={[styles.frameGroup]}>
         <View>
-          <Text style={[styles.product, styles.buyNowTypo]}>{title}</Text>
-          <Text style={[styles.product1, styles.textTypo]}>{text}</Text>
-          <Text style={[styles.text, styles.textTypo]}>${price}</Text>
+          <Text style={[styles.product, styles.buyNowTypo, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>{title}</Text>
+          <Text style={[styles.product1, styles.textTypo, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}>{text}</Text>
+          <Text style={[styles.text, styles.textTypo, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}>${price}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <View style={{ flexDirection: "row"}}>
@@ -36,7 +39,7 @@ const ProductCash = ({
                 />
               </View>
               <View>
-                <Text style={[styles.textTypo, { fontSize: FontSize.labelMediumRegular_size, color: Color.primaryPrimaryFixed }]}>{number}</Text>
+                <Text style={[styles.textTypo, { fontSize: FontSize.labelLargeBold_size, color: Color.primaryPrimaryFixed }]}>{number}</Text>
               </View>
               <View style={{ alignSelf: "flex-end" }}>
                 <ButtonPrimary
@@ -75,13 +78,13 @@ const styles = StyleSheet.create({
       overflow: "hidden",
     },
     buyNowTypo: {
-      fontFamily: FontFamily.headline2Bold,
+      fontFamily: FontFamily.labelMediumBold,
       fontWeight: "700",
       textAlign: "left",
     },
     textTypo: {
       marginTop: 5,
-      fontFamily: FontFamily.headline2Bold,
+      fontFamily: FontFamily.labelMediumBold,
       fontWeight: "700",
       textAlign: "left",
     },

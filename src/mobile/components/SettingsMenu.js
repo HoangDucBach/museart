@@ -1,20 +1,30 @@
 import * as React from "react";
-// import { Image } from "expo-image";
-import { StyleSheet, Text, Image, View, Pressable } from "react-native";
-import { Padding, Color, FontSize, Border, FontFamily } from "../GlobalStyles";
+import { Image } from "expo-image";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import { Padding, Color, ColorDark, FontSize, Border, FontFamily } from "../GlobalStyles";
 import ButtonPrimary from "./ButtonPrimary";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../store";
+import { useEffect } from "react";
 
 const SettingsMenu = () => {
+  const isDarkMode = useSelector(state => state.isDarkMode);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(Color.surface);
+  }, [Color.surface]);
 
   return (
-    <View style={styles.settingsMenu}>
-      <MenuItem imageSource={require("../assets/explore.png")} text="About" func = {() => console.log("Click About")} />
-      <MenuItem imageSource={require("../assets/navbaritem.png")} text="Setting" />
-      <MenuItem imageSource={require("../assets/frame-14.png")} text="Cart" func = {() => navigation.navigate("Cart")}/>
-      <MenuItem imageSource={require("../assets/frame-141.png")} text="Feedback" />
+    <View style={[styles.settingsMenu, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
+      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/explore.png")} text="About" func = {() => {
+        dispatch(toggleTheme());
+       }} />
+      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/navbaritem.png")} text="Setting" />
+      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/frame-14.png")} text="Cart" func = {() => navigation.navigate("Cart")}/>
+      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/frame-141.png")} text="Feedback" />
       <View style={[styles.flexRow, styles.flexRowButton]}> 
         <ButtonPrimary text="Sign in"
                         textSize={FontSize.labelLargeBold_size}
@@ -28,7 +38,7 @@ const SettingsMenu = () => {
                        buttonPrimaryFlex={1} 
                        />
       </View>
-      <View style={styles.ellipseParent}>
+      <View style={[styles.ellipseParent, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
         <Image source={require("../assets/ellipse-3.png")} />
         <Image source={require("../assets/ellipse-41.png")} />
       </View>
@@ -36,11 +46,11 @@ const SettingsMenu = () => {
   );
 };
 
-const MenuItem = ({ imageSource, text, func }) => {
+const MenuItem = ({ isDarkMode, imageSource, text, func }) => {
   return (
     <Pressable onPress={func} style={[styles.menuItem, styles.flexRow]}>
       <Image style={styles.menuItemImage} source={imageSource} />
-      <Text style={styles.menuItemText}>{text}</Text>
+      <Text style={[styles.menuItemText, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>{text}</Text>
     </Pressable>
   );
 };
@@ -59,7 +69,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontFamily: FontFamily.labelLargeMedium,
     fontSize: FontSize.labelLargeBold_size,
-    // fontWeight: 500,
+    color: Color.surfaceOnSurface,
+    fontWeight: "500",
   },
   flexRow: {
     flexDirection: "row",
