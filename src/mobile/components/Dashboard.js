@@ -2,11 +2,7 @@ import * as React from "react";
 import { Text, StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
 import NavbarTop from "../components/NavbarTop";
 import DashboardSearchEngine from "../components/DashboardSearchEngine";
-import FrameComponent1 from "../components/FrameComponent11";
-import NavbarBottom from "../components/NavbarBottom";
 import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
-import ButtonPrimary from "../components/ButtonPrimary";
-import SettingsMenu from "../components/SettingsMenu";
 
 const Dashboard = ({
     namePage,
@@ -15,9 +11,9 @@ const Dashboard = ({
 }) => {
     return (
     <SafeAreaView style={styles.artworks}>
-      <View style={{paddingHorizontal: 10}}>
+      {/* <View style={{paddingHorizontal: 10}}> */}
         <NavbarTop/>
-      </View>
+      {/* </View> */}
       <View style={styles.body}>
         <View style={styles.dashboardtitleFlexBox}>
           <Text style={styles.dashboard}>{namePage}</Text>
