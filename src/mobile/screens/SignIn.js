@@ -9,7 +9,6 @@ import {
   Image,
   Pressable,
   TextInput,
-  KeyboardAvoidingView,
   ScrollView
 } from "react-native";
 // import { Image } from "expo-image";
