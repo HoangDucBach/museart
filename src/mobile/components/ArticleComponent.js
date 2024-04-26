@@ -1,6 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { View, StyleSheet, Text, Pressable } from "react-native";
-import { Padding, Color, FontFamily, Border, FontSize } from "../GlobalStyles";
+import { Padding, Color, ColorDark, FontFamily, Border, FontSize } from "../GlobalStyles";
 import ButtonPrimary from "./ButtonPrimary";
 
 const ArticleComponent =({
@@ -8,18 +9,19 @@ const ArticleComponent =({
     date,
     text,
 }) => {
-    
+    const isDarkMode = useSelector(state => state.isDarkMode);
+
     return (
         <View style={{padding: 10}}>
-            <Text style={[styles.username, styles.usernameTypo]}>{article}</Text>
-            <Text style={[styles.ddmmyyyy, styles.usernameTypo]}>{date}</Text>
-            <Text style={styles.text}>{text}</Text>
+            <Text style={[styles.username, styles.usernameTypo, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}>{article}</Text>
+            <Text style={[styles.ddmmyyyy, styles.usernameTypo, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}>{date}</Text>
+            <Text style={[styles.text, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>{text}</Text>
             <Pressable style={{marginTop: 5}}>
-                <Text style={[styles.readMore]}>Read more</Text>
+                <Text style={[styles.readMore, isDarkMode ? {color: ColorDark.primaryPrimary} : null]}>Read more</Text>
             </Pressable>
             <View
                 style={{
-                    borderBottomColor: 'black',
+                    borderBottomColor: isDarkMode ? "white" : "black",
                     borderBottomWidth: StyleSheet.hairlineWidth,
                     marginTop: 10,
                 }}

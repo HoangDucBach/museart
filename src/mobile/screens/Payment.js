@@ -89,8 +89,8 @@ const Payment = ({
                         </View>
                     </View>
                     <View style={{flex: 1}}></View>
-                    <View style={{justifyContent:"space-between"}}>
-                        <View style={{flexDirection: "row"}}>
+                    <View style={{flex: 1, }}>
+                        <View style={{flex: 1, flexDirection: "row", justifyContent:"space-between"}}>
                         <ButtonPrimary
                             text={"Cancel"}
                             buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}

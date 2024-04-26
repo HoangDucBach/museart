@@ -1,8 +1,11 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { Border, FontSize, FontFamily, Color, Padding } from "../GlobalStyles";
 
 const NotificationSuccess = () => {
+  const isDarkMode = useSelector(state => state.isDarkMode);
+
   return (
     <View style={styles.notificationsuccess}>
       <View style={styles.notificationsuccessInner}>

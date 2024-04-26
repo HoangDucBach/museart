@@ -1,6 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { Color, Border, FontFamily, FontSize, Padding } from "../GlobalStyles";
+import { Color, ColorDark, Border, FontFamily, FontSize, Padding } from "../GlobalStyles";
 import ButtonPrimary from "./ButtonPrimary";
 
 const ProductShopping = ({
@@ -9,8 +10,10 @@ const ProductShopping = ({
     price,
     image,
 }) => {
+  const isDarkMode = useSelector(state => state.isDarkMode);
+
     return (
-    <View style={[styles.frameParent, styles.frameParentFlexBox]}>
+    <View style={[styles.frameParent, styles.frameParentFlexBox, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
       <View>
         <Image style={[styles.componentChild, styles.frameParentLayout]} 
                 contentFit={"contain"}
@@ -18,9 +21,9 @@ const ProductShopping = ({
       </View>
       <View style={[styles.frameGroup]}>
         <View style={{justifyContent: "space-between"}}>
-          <Text style={[styles.product, styles.buyNowTypo]}>{title}</Text>
-          <Text style={[styles.product1, styles.textTypo]}>{text}</Text>
-          <Text style={[styles.text, styles.textTypo]}>${price}</Text>
+          <Text style={[styles.product, styles.buyNowTypo, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>{title}</Text>
+          <Text style={[styles.product1, styles.textTypo, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}>{text}</Text>
+          <Text style={[styles.text, styles.textTypo, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>${price}</Text>
         </View>
         <View style={{flex: 1, marginTop: 10}}>
             <View style={{ alignItems: "stretch", flexDirection: "row" }}>
@@ -59,13 +62,13 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buyNowTypo: {
-    fontFamily: FontFamily.headline2Bold,
+    fontFamily: FontFamily.labelMediumBold,
     fontWeight: "700",
     textAlign: "left",
   },
   textTypo: {
     marginTop: 5,
-    fontFamily: FontFamily.headline2Bold,
+    fontFamily: FontFamily.labelMediumBold,
     fontWeight: "700",
     textAlign: "left",
   },
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: FontSize.labelMediumBold_size,
-    color: Color.surfaceOnSurfaceVarient,
+    color: Color.surfaceOnSurface,
   },
   frameGroup: {
     marginLeft: 10,

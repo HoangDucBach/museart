@@ -12,7 +12,6 @@ const ButtonPrimary = ({
   textSize,
   textMarginHorizontal,
   textMarginVertical,
-  textAlign,
   image,
   buttonPrimaryBackgroundColor,
   buttonPrimaryBorderWidth,
@@ -23,6 +22,7 @@ const ButtonPrimary = ({
   buttonPrimaryMarginLeft,
   buttonPrimaryPaddingHorizontal,
   buttonPrimaryPaddingVertical,
+  onPressButton,
 }) => {
   const buttonPrimaryStyle = useMemo(() => {
     return {
@@ -54,18 +54,16 @@ const ButtonPrimary = ({
       ...getStyleValue("fontSize", textSize),
       ...getStyleValue("marginHorizontal", textMarginHorizontal),
       ...getStyleValue("marginVertical", textMarginVertical),
-      ...getStyleValue("textAlign", textAlign),
     };
    }, [
     textColor,
     textSize,
     textMarginHorizontal,
     textMarginVertical,
-    textAlign
   ]);
 
   return (
-    <Pressable onPress = {() => console.log("Press:" + text)} style={[styles.buttonprimary, buttonPrimaryStyle]}>
+    <Pressable onPress = {onPressButton} style={[styles.buttonprimary, buttonPrimaryStyle]}>
       {image !== "unset" ? <Image source={image}/> : null}
       <Text style={[styles.textLayout, textLayoutStyle]}>{text}</Text>
     </Pressable>
@@ -85,6 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.primaryPrimary,
     borderColor: Color.primaryPrimary,
     alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: Padding.p_mini,
     paddingVertical: Padding.p_3xs,
     flexDirection: "row",

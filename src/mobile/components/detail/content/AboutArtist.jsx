@@ -6,7 +6,7 @@ import FrameComponent from "./FrameButton";
 
 const AboutArtist = () => {
     return (
-        <View>
+        <View style={{padding: 10}}>
             <View
                 style={[
                     styles.aboutArtistContainer,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     aboutArtistContainer: {
         flexDirection:"column",
-        width: Dimensions.get('window').width,
+        // width: Dimensions.get('window').width,
         justifyContent: "center",
         marginVertical: 15,
     },

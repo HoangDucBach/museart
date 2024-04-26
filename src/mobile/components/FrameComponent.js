@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { Color, FontSize, FontFamily, Border, Padding } from "../GlobalStyles";
@@ -14,6 +15,7 @@ const FrameComponent = ({
   frameFlex,
   frameAspectRatio,
 }) => {
+  const isDarkMode = useSelector(state => state.isDarkMode);
 
   const frameScale =  useMemo(() => {
     return {
