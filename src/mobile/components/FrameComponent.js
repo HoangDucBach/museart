@@ -15,7 +15,7 @@ const FrameComponent = ({
   frameFlex,
   frameAspectRatio,
 }) => {
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   const frameScale =  useMemo(() => {
     return {

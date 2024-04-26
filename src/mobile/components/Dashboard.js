@@ -10,7 +10,7 @@ const Dashboard = ({
     children,
 
 }) => {
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
     return (
     <SafeAreaView style={[styles.artworks, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainer} : null]}>

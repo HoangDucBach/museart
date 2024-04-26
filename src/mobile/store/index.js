@@ -6,15 +6,40 @@ const themeSlice = createSlice({
     reducers: {
         toggleTheme: state => {
             state.isDarkMode = !state.isDarkMode;
-            console.log(state);
+        }
+    }
+})
+
+const tabSlice = createSlice({
+    name: "tab",
+    initialState: {tab: "nothing"},
+    reducers: {
+        toggleTab: (state, action) => {
+            state.tab = action.payload
+        }
+    }
+})
+
+const gestureSlice = createSlice({
+    name: "gesture",
+    initialState: {move: 0},
+    reducers: {
+        toggleMove: (state, action) => {
+            state.move = action.payload
         }
     }
 })
 
 export const { toggleTheme } = themeSlice.actions;
+export const { toggleTab } = tabSlice.actions;
+export const { toggleMove } = gestureSlice.actions;
 
 const store = configureStore({
-    reducer: themeSlice.reducer
+    reducer: {
+        theme: themeSlice.reducer,
+        tab: tabSlice.reducer,
+        gesture: gestureSlice.reducer,
+    }
 })
 
 export default store;

@@ -9,7 +9,7 @@ import { toggleTheme } from "../store";
 import { useEffect } from "react";
 
 const SettingsMenu = () => {
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -19,12 +19,12 @@ const SettingsMenu = () => {
 
   return (
     <View style={[styles.settingsMenu, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
-      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/explore.png")} text="About" func = {() => {
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/explore.png") : require("../assets/explore.png")} text="About" func = {() => {
         dispatch(toggleTheme());
        }} />
-      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/navbaritem.png")} text="Setting" />
-      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/frame-14.png")} text="Cart" func = {() => navigation.navigate("Cart")}/>
-      <MenuItem isDarkMode={isDarkMode} imageSource={require("../assets/frame-141.png")} text="Feedback" />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/item.png") : require("../assets/navbaritem.png")} text="Setting" />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame14.png") : require("../assets/frame-14.png")} text="Cart" func = {() => navigation.navigate("Cart")}/>
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame15.png") : require("../assets/frame-141.png")} text="Feedback" />
       <View style={[styles.flexRow, styles.flexRowButton]}> 
         <ButtonPrimary text="Sign in"
                         textSize={FontSize.labelLargeBold_size}

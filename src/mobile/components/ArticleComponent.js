@@ -9,7 +9,7 @@ const ArticleComponent =({
     date,
     text,
 }) => {
-    const isDarkMode = useSelector(state => state.isDarkMode);
+    const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
     return (
         <View style={{padding: 10}}>

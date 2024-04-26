@@ -1,20 +1,32 @@
-import * as React from "react";
-import { Text, StyleSheet, View, SafeAreaView } from "react-native";
+import React, { useRef } from "react";
+import { Text, StyleSheet, View, PanResponder, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
 import Dashboard from "../components/Dashboard";
 import Comment from "../components/Comment";
 import FrameComponent from "../components/FrameComponent";
-import AboutArtist from "../components/detail/content/AboutArtist";
 import AboutTitle from "../components/detail/content/AboutTitle";
-import Sound from "../components/detail/content/Sound";
 import BoardExtraInfoArtwork from "../components/detail/picure/BoardExtraInfoArtwork";
+import { useDispatch } from "react-redux";
+import { toggleMove } from "../store";
 
 const Artworks = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => {
+        // console.log(gestureState.dy);
+        if (gestureState.dy > 10) dispatch(toggleMove(1));
+        else if (gestureState.dy < -5) dispatch(toggleMove(-1));
+      }
+    })
+  ).current;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }} {...panResponder.panHandlers}>
       <Dashboard namePage={"Dashboard"}>
         <View style={{justifyContent: "space-around", flexDirection: "row",}}>
           <FrameComponent/>

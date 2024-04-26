@@ -7,7 +7,7 @@ const DashboardSearchEngine = () => {
 
   const onFrame41Press = () => {console.log("press frame-41")}
   const onFrame40Press = () => {console.log("press frame-40")}
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
     

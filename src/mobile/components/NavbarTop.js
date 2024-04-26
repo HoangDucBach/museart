@@ -1,13 +1,20 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, View, Image, Pressable, Modal, SafeAreaView } from "react-native";
 import { Border, Color, ColorDark, Padding } from "../GlobalStyles";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useNavigationState } from "@react-navigation/native";
 import SettingsMenu from "./SettingsMenu";
+import { toggleTab } from "../store";
 
 const NavbarTop = () => {
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const dispatch = useDispatch();
+
+  const routes = useNavigationState(state => state.routes);
+
+  dispatch(toggleTab(routes[routes.length - 1].name));
 
   const navigation = useNavigation();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -64,10 +71,12 @@ const styles = StyleSheet.create({
     width: 35,
   },
   navbartop: {
-    width: "100%",
+    // width: "100%",
+    marginHorizontal: 10,
+    alignSelf: "stretch",
     justifyContent: "space-between",
     flexDirection: "row",
-    // marginTop: 50,
+    marginTop: 50,
   },
 });
 

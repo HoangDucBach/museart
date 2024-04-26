@@ -1,11 +1,11 @@
 const Stack = createNativeStackNavigator();
-import * as React from "react";
+import React, { useRef } from "react";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import store from "./store";
 import { useFonts } from "expo-font";
-// import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import { View, PanResponder, Animated } from "react-native";
 
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
@@ -18,6 +18,10 @@ import Payment from "./screens/Payment";
 import NavbarBottom from "./components/NavbarBottom";
 
 const App = () => {
+
+  // const[hideNavarBottom, setHideNavarBottom] = React.useState(false);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
 
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
@@ -76,7 +80,9 @@ const App = () => {
               />
             </Stack.Navigator>
           ) : null}
-          {<NavbarBottom/>}
+          <Animated.View style={{ opacity: fadeAnim}}>
+            <NavbarBottom/>
+          </Animated.View>
         </NavigationContainer>
     </Provider>
       </>
