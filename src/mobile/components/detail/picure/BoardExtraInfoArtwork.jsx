@@ -1,9 +1,15 @@
 import React, { useMemo } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import { Color, FontSize, FontFamily, Border, Padding } from "../../../GlobalStyles";
+import {
+  Color,
+  FontSize,
+  FontFamily,
+  Border,
+  Padding,
+} from "../../../GlobalStyles";
 
-const BoardExtraInfoArtwork = () => {
+const BoardExtraInfoArtwork = ({ commentAmount, likeAmount, date }) => {
   return (
     <View style={[styles.boardextrainfoartwork]}>
       <View style={styles.frameParent}>
@@ -15,7 +21,7 @@ const BoardExtraInfoArtwork = () => {
               contentFit="cover"
               source={require("../../../assets/group-17.png")}
             />
-            <Text style={[styles.text, styles.textTypo]}>123</Text>
+            <Text style={[styles.text, styles.textTypo]}>{commentAmount}</Text>
           </View>
         </View>
         <View style={styles.commentParent}>
@@ -26,7 +32,7 @@ const BoardExtraInfoArtwork = () => {
               contentFit="cover"
               source={require("../../../assets/group-192.png")}
             />
-            <Text style={[styles.text, styles.textTypo]}>123</Text>
+            <Text style={[styles.text, styles.textTypo]}>{likeAmount}</Text>
           </View>
         </View>
         <View style={styles.commentParent}>
@@ -38,7 +44,7 @@ const BoardExtraInfoArtwork = () => {
                 contentFit="cover"
                 source={require("../../../assets/group-15.png")}
               />
-              <Text style={[styles.text, styles.textTypo]}>dd/mm/yyyy</Text>
+              <Text style={[styles.text, styles.textTypo]}>{date}</Text>
             </View>
           </View>
         </View>
