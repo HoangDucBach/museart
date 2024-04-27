@@ -11,7 +11,7 @@ const ProductCash = ({
     image,
     number,
 }) => {
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
     return (
     <View style={[styles.frameParent, styles.frameParentFlexBox, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>

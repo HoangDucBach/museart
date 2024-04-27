@@ -7,7 +7,7 @@ const DashboardSearchEngine = () => {
 
   const onFrame41Press = () => {console.log("press frame-41")}
   const onFrame40Press = () => {console.log("press frame-40")}
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
     
@@ -17,7 +17,7 @@ const DashboardSearchEngine = () => {
         contentFit="cover"
         source={require("../assets/vector1.png")}
       />
-      <TextInput placeholder="Search picture, product, . . ." style={[styles.searchPictureProduct, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}/>
+      <TextInput placeholder="Search picture, product, . . ." style={[styles.searchPictureProduct, isDarkMode ? {color: "#534341"} : null]}/>
       <Pressable onPress={onFrame41Press}>
         <Image
           style={styles.dashboardsearchengineChild}

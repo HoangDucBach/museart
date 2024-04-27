@@ -1,11 +1,11 @@
 const Stack = createNativeStackNavigator();
-import * as React from "react";
+import React, { useRef } from "react";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import store from "./store";
 import { useFonts } from "expo-font";
-// import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import { View, PanResponder, Animated } from "react-native";
 
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
@@ -19,8 +19,11 @@ import NavbarBottom from "./components/NavbarBottom";
 import { Dimensions } from "react-native";
 
 const App = () => {
-  console.log(Dimensions.get("screen"));
-  
+
+  // const[hideNavarBottom, setHideNavarBottom] = React.useState(false);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
   const [fontsLoaded, error] = useFonts({
@@ -36,52 +39,57 @@ const App = () => {
 
   return (
     <>
-    <Provider store={store}>
+      <Provider store={store}>
         <NavigationContainer theme={DarkTheme}>
           {hideSplashScreen ? (
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Payment" component={Payment}/>
               <Stack.Screen
                 name="SignIn"
                 component={SignIn}
                 options={{ headerShown: false }}
               />
               <Stack.Screen
-                name = "SignUp"
+                name="SignUp"
                 component={SignUp}
-                options={{ headerShown: false}}
+                options={{ headerShown: false }}
               />
               <Stack.Screen
                 name="Artworks"
                 component={Artworks}
-                options={{headerShown: false}}
-                />
-                <Stack.Screen
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
                 name="Exhibitions"
                 component={Exhibitions}
-                options={{headerShown: false}}
-                />
-                <Stack.Screen
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
                 name="Articles"
                 component={Articles}
-                options={{headerShown: false}}
-                />
+                options={{ headerShown: false }}
+              />
               <Stack.Screen
                 name="Shopping"
                 component={Shopping}
-                options={{headerShown: false}}
-                />
+                options={{ headerShown: false }}
+              />
               <Stack.Screen
                 name="Cart"
                 component={Cart}
                 options={{ headerShown: false }}
               />
+              <Stack.Screen
+                name="Payment"
+                component={Payment}
+              />
             </Stack.Navigator>
           ) : null}
-          {<NavbarBottom/>}
+          <Animated.View style={{ opacity: fadeAnim }}>
+            <NavbarBottom />
+          </Animated.View>
         </NavigationContainer>
-    </Provider>
-      </>
+      </Provider>
+    </>
   );
 };
 export default App;

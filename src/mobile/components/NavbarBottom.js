@@ -1,36 +1,56 @@
-import React, { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // import { Image } from "expo-image";
-import { StyleSheet, Text, View, Pressable, Image } from "react-native";
+import { StyleSheet, Text, View, Pressable, Image, Animated } from "react-native";
 import { Padding, Border, FontSize, FontFamily, Color, ColorDark } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import { toggleTab } from "../store";
 
 
-const NavbarBottom = ({tab}) => 
+const NavbarBottom = () => 
 {
 
   const navigation = useNavigation();
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const selectedTab = useSelector(state => state.tab.tab);
+  const move = useSelector(state => state.gesture.move);
+  const dispatch = useDispatch();
 
-  const [selectedTab, setSelectedTab] = useState(tab);
-  console.log("Open tab: " + selectedTab);
+  const moveAnim = useRef(new Animated.Value(1)).current;
+
+  if (move == 1) {
+    Animated.timing(moveAnim, {
+      toValue: 0, 
+      duration: 500,
+      useNativeDriver: true, 
+    }).start();
+  }
+  else if (move == -1) {
+    Animated.timing(moveAnim, {
+      toValue: 100, 
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }
 
   const handleTabPress = (tab) =>
   {
     if (tab != selectedTab) {
-      setSelectedTab(tab);
+      dispatch(toggleTab(tab));
       navigation.navigate(tab);
     }
   }
-
+  
+  if (move == 0) return null;
+  
   return (
-    <View style={[styles.navbarbottom, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainer} : null]}>
+    <Animated.View style={[styles.navbarbottom, {transform: [{ translateY: moveAnim }]}, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainer} : null]}>
       <Pressable onPress= {() => {handleTabPress("Artworks")}}
                 style={[styles.navbaritemFlexBox, selectedTab == "Artworks" && [styles.navbaritem, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHighest} : null]]}>
         <Image
           style={styles.navbaritemChild}
           contentFit="cover"
-          source={require("../assets/artworkicon.png")}
+          source={isDarkMode ? require("../assets/artworkDark.png") : require("../assets/artworkicon.png")}
         />
         { selectedTab == "Artworks" && <Text style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Artworks</Text>}
       </Pressable>
@@ -39,7 +59,7 @@ const NavbarBottom = ({tab}) =>
         <Image
           style={styles.navbaritemChild}
           contentFit="cover"
-          source={require("../assets/frame-32.png")}
+          source={isDarkMode ? require("../assets/Frame32.png") :require("../assets/frame-32.png")}
         />
         { selectedTab == "Exhibitions" && <Text style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Exhibitions</Text>}
       </Pressable>
@@ -48,7 +68,7 @@ const NavbarBottom = ({tab}) =>
         <Image
           style={styles.navbaritemChild}
           contentFit="cover"
-          source={require("../assets/articleicon.png")}
+          source={isDarkMode ? require("../assets/Frame33.png") :require("../assets/articleicon.png")}
         />
         { selectedTab == "Articles" && <Text style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Articles</Text>}
       </Pressable>
@@ -57,11 +77,11 @@ const NavbarBottom = ({tab}) =>
         <Image
           style={styles.navbaritemChild}
           contentFit="cover"
-          source={require("../assets/shoppingicon.png")}
+          source={isDarkMode ? require("../assets/Frame34.png") :require("../assets/shoppingicon.png")}
         />
         { selectedTab == "Shopping" && <Text style={[styles.textLayout, , isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Shopping</Text>}
         </Pressable>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -91,14 +111,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   navbarbottom: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
     backgroundColor: Color.surfaceSurfaceContainer,
+    alignSelf: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     paddingHorizontal: Padding.p_xl,
     paddingVertical: Padding.p_3xs,
     borderRadius: Border.br_81xl,
     overflow: "hidden",
-    margin: 10,
+    margin: 5,
   },
 });
 

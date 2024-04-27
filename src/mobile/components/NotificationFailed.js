@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import { FontSize, FontFamily, Color, Border, Padding } from "../GlobalStyles";
 
 const NotificationFailed = () => {
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
     <View style={styles.notificationfailed}>
