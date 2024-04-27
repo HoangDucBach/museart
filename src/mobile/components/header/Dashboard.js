@@ -1,34 +1,34 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { Text, StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
-import NavbarTop from "../components/NavbarTop";
-import DashboardSearchEngine from "../components/DashboardSearchEngine";
-import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../GlobalStyles";
+import NavbarTop from "./NavbarTop";
+import DashboardSearchEngine from "./DashboardSearchEngine";
+import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../../GlobalStyles";
 
 const Dashboard = ({
-    namePage,
-    children,
+  namePage,
+  children,
 
 }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
-    return (
-    <SafeAreaView style={[styles.artworks, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainer} : null]}>
+  return (
+    <SafeAreaView style={[styles.artworks, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]}>
       {/* <View style={{paddingHorizontal: 10}}> */}
-        <NavbarTop/>
+      <NavbarTop />
       {/* </View> */}
       <View style={styles.body}>
         <View style={styles.dashboardtitleFlexBox}>
-          <Text style={[styles.dashboard, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>{namePage}</Text>
+          <Text style={[styles.dashboard, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{namePage}</Text>
         </View>
         <DashboardSearchEngine />
       </View>
-      <ScrollView style={{padding: 10, paddingBottom: 20, alignSelf: "stretch",}}>
+      <ScrollView style={{ padding: 10, paddingBottom: 20, alignSelf: "stretch", }}>
         {children}
-        <View style={{height: 70}}/>
+        <View style={{ height: 70 }} />
       </ScrollView>
     </SafeAreaView>
-    );
+  );
 };
 
 const styles = StyleSheet.create({
