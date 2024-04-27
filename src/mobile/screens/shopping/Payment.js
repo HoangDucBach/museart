@@ -1,11 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet, TextInput, Image } from "react-native";
-import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../GlobalStyles";
-import NavbarTop from "../components/NavbarTop";
-import ButtonPrimary from "../components/ButtonPrimary";
+import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../../GlobalStyles";
+import NavbarTop from "../../components/header/NavbarTop";
+import ButtonPrimary from "../../components/button/ButtonPrimary";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMove } from "../store";
+import { toggleMove } from "../../store";
 
 const Payment = ({
     numberOfProduct,
@@ -67,7 +67,7 @@ const Payment = ({
                         </View>
                         <View style={{ flexDirection: "row" }}>
                             <View style={[styles.textInContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null, { marginTop: 15 }]}>
-                                <Image source={require("../assets/Frame 83.png")} />
+                                <Image source={require("../../assets/frame-83.png")} />
                                 <TextInput placeholder="Your detail address" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
                             </View>
                         </View>
@@ -78,16 +78,16 @@ const Payment = ({
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
                             <ButtonPrimary
-                                image={require("../assets/frame.png")}
+                                image={require("../../assets/frame.png")}
                                 buttonPrimaryBackgroundColor={isDarkMode ? ColorDark.surfaceSurfaceContainerHighest : Color.surfaceSurfaceContainerHighest}
                             />
                             <ButtonPrimary
-                                image={require("../assets/frame1.png")}
+                                image={require("../../assets/frame1.png")}
                                 buttonPrimaryBackgroundColor={isDarkMode ? ColorDark.surfaceSurfaceContainerHighest : Color.surfaceSurfaceContainerHighest}
                                 buttonPrimaryMarginLeft={15}
                             />
                             <ButtonPrimary
-                                image={require("../assets/frame2.png")}
+                                image={require("../../assets/frame2.png")}
                                 buttonPrimaryBackgroundColor={isDarkMode ? ColorDark.surfaceSurfaceContainerHighest : Color.surfaceSurfaceContainerHighest}
                                 buttonPrimaryMarginLeft={15}
                             />
