@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, StyleSheet, View, Image, ImageBackground, ScrollView, Pressable, TextInput } from "react-native";
 // import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
-import { FontFamily, Color, Padding, FontSize, Border } from "../GlobalStyles";
+import { FontFamily, Color, Padding, FontSize, Border } from "../../GlobalStyles";
 
 const SignUp = () => {
   const navigation = useNavigation();
@@ -11,84 +11,84 @@ const SignUp = () => {
     <ImageBackground
       style={styles.signUpBackground}
       resizeMode="cover"
-      source={require("../assets/backgroundSignIn.png")}
+      source={require("../../assets/backgroundSignIn.png")}
     ><ScrollView>
-      <View style={styles.vectorParent}>
-        <Image
-          style={{width: 80, height: 67}}
-          contentFit="cover"
-          source={require("../assets/vector9.png")}
-        />
-        <Text style={[styles.museart, styles.signUpTypo]}>Museart</Text>
-      </View>
-      <View style={styles.letStartParent}>
-        <Text style={[styles.letStart, styles.museart1Typo]}>Let start!</Text>
-        <Text style={[styles.createANew, styles.usernameTypo]}>
-          Create a new account
-        </Text>
-      </View>
-      <View style={styles.usernamecontainerParent}>
-        <View style={[styles.usernamecontainer, styles.signupbuttonSpaceBlock]}>
+        <View style={styles.vectorParent}>
           <Image
-            style={styles.usernamecontainerChild}
+            style={{ width: 80, height: 67 }}
             contentFit="cover"
-            source={require("../assets/group-191.png")}
+            source={require("../../assets/vector9.png")}
           />
-          <TextInput placeholder="Username" style={[styles.username, styles.usernameTypo]}/>
+          <Text style={[styles.museart, styles.signUpTypo]}>Museart</Text>
         </View>
-        <View style={[styles.passwordcontainer, styles.signupbuttonSpaceBlock]}>
-          <Image
-            style={styles.usernamecontainerChild}
-            contentFit="cover"
-            source={require("../assets/group-201.png")}
-          />
-          <TextInput placeholder="Password" secureTextEntry={true} style={[styles.username, styles.usernameTypo]}/>
+        <View style={styles.letStartParent}>
+          <Text style={[styles.letStart, styles.museart1Typo]}>Let start!</Text>
+          <Text style={[styles.createANew, styles.usernameTypo]}>
+            Create a new account
+          </Text>
         </View>
-        <View style={[styles.passwordcontainer, styles.signupbuttonSpaceBlock]}>
-          <Image
-            style={styles.usernamecontainerChild}
-            contentFit="cover"
-            source={require("../assets/group-201.png")}
-          />
-          <TextInput placeholder="Confirm password" secureTextEntry={true} style={[styles.username, styles.usernameTypo]}/>
-        </View>
-        <Pressable onPress={() => console.log("sign up account") } 
-                  style={styles.signupbutton}>
+        <View style={styles.usernamecontainerParent}>
+          <View style={[styles.usernamecontainer, styles.signupbuttonSpaceBlock]}>
+            <Image
+              style={styles.usernamecontainerChild}
+              contentFit="cover"
+              source={require("../../assets/group-191.png")}
+            />
+            <TextInput placeholder="Username" style={[styles.username, styles.usernameTypo]} />
+          </View>
+          <View style={[styles.passwordcontainer, styles.signupbuttonSpaceBlock]}>
+            <Image
+              style={styles.usernamecontainerChild}
+              contentFit="cover"
+              source={require("../../assets/group-201.png")}
+            />
+            <TextInput placeholder="Password" secureTextEntry={true} style={[styles.username, styles.usernameTypo]} />
+          </View>
+          <View style={[styles.passwordcontainer, styles.signupbuttonSpaceBlock]}>
+            <Image
+              style={styles.usernamecontainerChild}
+              contentFit="cover"
+              source={require("../../assets/group-201.png")}
+            />
+            <TextInput placeholder="Confirm password" secureTextEntry={true} style={[styles.username, styles.usernameTypo]} />
+          </View>
+          <Pressable onPress={() => console.log("sign up account")}
+            style={styles.signupbutton}>
             <Text style={[styles.signUp, styles.signUpTypo]}>Sign Up</Text>
-        </Pressable>
-        <View style={styles.alreadyHaveAccountParent}>
-            <Text style={styles.alreadyHaveAccount}>Already have account?</Text>
-          <Pressable
-            onPress={() => navigation.navigate("SignIn")}
-          >
-            <Text style={styles.signIn}>Sign in</Text>
           </Pressable>
+          <View style={styles.alreadyHaveAccountParent}>
+            <Text style={styles.alreadyHaveAccount}>Already have account?</Text>
+            <Pressable
+              onPress={() => navigation.navigate("SignIn")}
+            >
+              <Text style={styles.signIn}>Sign in</Text>
+            </Pressable>
+          </View>
         </View>
-      </View>
       </ScrollView>
       <View style={styles.ellipseParent}>
         <Image
           style={styles.frameLayout}
           contentFit="cover"
-          source={require("../assets/ellipse-5.png")}
+          source={require("../../assets/ellipse-5.png")}
         />
         <Image
           style={[styles.frameItem, styles.frameLayout]}
           contentFit="cover"
-          source={require("../assets/ellipse-6.png")}
+          source={require("../../assets/ellipse-6.png")}
         />
         <Image
           style={[styles.frameItem, styles.frameLayout]}
           contentFit="cover"
-          source={require("../assets/ellipse-6.png")}
+          source={require("../../assets/ellipse-6.png")}
         />
         <Image
           style={[styles.frameItem, styles.frameLayout]}
           contentFit="cover"
-          source={require("../assets/ellipse-6.png")}
+          source={require("../../assets/ellipse-6.png")}
         />
       </View>
-      </ImageBackground>
+    </ImageBackground>
   );
 };
 

@@ -1,27 +1,27 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, Text, Image } from "react-native";
-import { FontSize, FontFamily, Color, Border, Padding } from "../GlobalStyles";
+import { Border, FontSize, FontFamily, Color, Padding } from "../../GlobalStyles";
 
-const NotificationFailed = () => {
+const NotificationSuccess = () => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
-    <View style={styles.notificationfailed}>
-      <View style={styles.notificationfailedInner}>
+    <View style={styles.notificationsuccess}>
+      <View style={styles.notificationsuccessInner}>
         <Image
           style={styles.frameChild}
           contentFit="cover"
-          source={require("../assets/frame-67.png")}
+          source={require("../../assets/frame-67.png")}
         />
       </View>
       <Image
-        style={styles.notificationfailedChild}
+        style={styles.notificationsuccessChild}
         contentFit="cover"
-        source={require("../assets/group-24.png")}
+        source={require("../../assets/frame-97.png")}
       />
-      <Text style={[styles.failed, styles.failedFlexBox]}>Failed</Text>
-      <Text style={[styles.referenceSiteAboutLorem, styles.failedFlexBox]}>
+      <Text style={[styles.success, styles.successFlexBox]}>Success</Text>
+      <Text style={[styles.referenceSiteAboutLorem, styles.successFlexBox]}>
         Reference site about Lorem Ipsum, giving information on its origins, as
         well as a random Lipsum generator.
       </Text>
@@ -30,7 +30,7 @@ const NotificationFailed = () => {
 };
 
 const styles = StyleSheet.create({
-  failedFlexBox: {
+  successFlexBox: {
     textAlign: "center",
     marginTop: 15,
   },
@@ -39,22 +39,24 @@ const styles = StyleSheet.create({
     height: 25,
     overflow: "hidden",
   },
-  notificationfailedInner: {
+  notificationsuccessInner: {
     flexDirection: "row",
     justifyContent: "flex-end",
     alignSelf: "stretch",
     alignItems: "center",
   },
-  notificationfailedChild: {
+  notificationsuccessChild: {
+    borderRadius: Border.br_981xl,
     width: 100,
     height: 100,
     marginTop: 15,
+    overflow: "hidden",
   },
-  failed: {
+  success: {
     fontSize: FontSize.headline3Bold_size,
     fontWeight: "700",
     fontFamily: FontFamily.labelMediumBold,
-    color: Color.primaryPrimary,
+    color: Color.colorMediumseagreen_200,
   },
   referenceSiteAboutLorem: {
     fontSize: FontSize.labelLargeBold_size,
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     color: Color.primaryPrimaryFixed,
     alignSelf: "stretch",
   },
-  notificationfailed: {
+  notificationsuccess: {
     borderRadius: Border.br_3xs,
     backgroundColor: Color.surfaceSurfaceContainerHighest,
     shadowColor: "#d9cfbe",
@@ -83,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NotificationFailed;
+export default NotificationSuccess;

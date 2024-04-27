@@ -1,10 +1,10 @@
 import { View } from "react-native";
-import Dashboard from "../components/Dashboard";
-import ArticleComponent from "../components/ArticleComponent";
-import ProductShopping from "../components/ProductShopping";
-import ProductCash from "../components/ProductCart";
-import NotificationSuccess from "../components/NotificationSuccess";
-import NotificationFailed from "../components/NotificationFailed";
+import Dashboard from "../../components/header/Dashboard";
+import ArticleComponent from "../../components/ArticleComponent";
+import ProductShopping from "../../components/product/ProductShopping";
+import ProductCash from "../../components/product/ProductCart";
+import NotificationSuccess from "../../components/notification/NotificationSuccess";
+import NotificationFailed from "../../components/notification/NotificationFailed";
 
 const Articles = () => {
 

@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import { Padding, Color, ColorDark, FontSize, Border, FontFamily } from "../GlobalStyles";
-import ButtonPrimary from "./ButtonPrimary";
+import { Padding, Color, ColorDark, FontSize, Border, FontFamily } from "../../GlobalStyles";
+import ButtonPrimary from "../button/ButtonPrimary";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMove, toggleTab, toggleTheme } from "../store";
+import { toggleMove, toggleTab, toggleTheme } from "../../store";
 import { useEffect } from "react";
 
 const SettingsMenu = () => {
@@ -18,36 +18,36 @@ const SettingsMenu = () => {
   }, [Color.surface]);
 
   return (
-    <View style={[styles.settingsMenu, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/explore.png") : require("../assets/explore.png")} text="About" func = {() => {
+    <View style={[styles.settingsMenu, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/explore.png") : require("../../assets/explore.png")} text="About" func={() => {
         dispatch(toggleTheme());
-       }} />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/item.png") : require("../assets/navbaritem.png")} text="Setting" />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame14.png") : require("../assets/frame-14.png")} text="Cart" func = {() => {
+      }} />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/item.png") : require("../../assets/navbaritem.png")} text="Setting" />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame14.png") : require("../../assets/frame-14.png")} text="Cart" func={() => {
         navigation.navigate("Cart");
         dispatch(toggleTab("Cart"));
         dispatch(toggleMove(1));
-      }}  />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame15.png") : require("../assets/frame-141.png")} text="Feedback" func = {() => navigation.navigate("Payment")}/>
-      <View style={[styles.flexRow, styles.flexRowButton]}> 
+      }} />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" func={() => navigation.navigate("Payment")} />
+      <View style={[styles.flexRow, styles.flexRowButton]}>
         <ButtonPrimary text="Sign in"
-                        textSize={FontSize.labelLargeBold_size}
-                        textMargin={8}
-                        buttonPrimaryFlex={1} 
-                        />
-        <ButtonPrimary text="Sign up" 
-                       textSize={FontSize.labelLargeBold_size}
-                       buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}
-                       buttonPrimaryMarginLeft={15}
-                       buttonPrimaryFlex={1} 
-                       />
+          textSize={FontSize.labelLargeBold_size}
+          textMargin={8}
+          buttonPrimaryFlex={1}
+        />
+        <ButtonPrimary text="Sign up"
+          textSize={FontSize.labelLargeBold_size}
+          buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}
+          buttonPrimaryMarginLeft={15}
+          buttonPrimaryFlex={1}
+        />
       </View>
-      <View style={[styles.ellipseParent, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
-        <Pressable onPress={() =>{isDarkMode ? null : dispatch(toggleTheme())}}>
-          <Image style={{width: 25, height: 25}} source={isDarkMode ? require("../assets/ellipse-41.png") : require("../assets/ellipse-3.png")} />
+      <View style={[styles.ellipseParent, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
+        <Pressable onPress={() => { isDarkMode ? null : dispatch(toggleTheme()) }}>
+          <Image style={{ width: 25, height: 25 }} source={isDarkMode ? require("../../assets/ellipse-41.png") : require("../../assets/ellipse-3.png")} />
         </Pressable>
-        <Pressable onPress={() =>{!isDarkMode ? null : dispatch(toggleTheme())}}>
-          <Image style={{width: 25, height: 25}} source={!isDarkMode ? require("../assets/ellipse-41.png") : require("../assets/ellipse-3.png")} />
+        <Pressable onPress={() => { !isDarkMode ? null : dispatch(toggleTheme()) }}>
+          <Image style={{ width: 25, height: 25 }} source={!isDarkMode ? require("../../assets/ellipse-41.png") : require("../../assets/ellipse-3.png")} />
         </Pressable>
       </View>
     </View>
@@ -58,7 +58,7 @@ const MenuItem = ({ isDarkMode, imageSource, text, func }) => {
   return (
     <Pressable onPress={func} style={[styles.menuItem, styles.flexRow]}>
       <Image style={styles.menuItemImage} source={imageSource} />
-      <Text style={[styles.menuItemText, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>{text}</Text>
+      <Text style={[styles.menuItemText, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{text}</Text>
     </Pressable>
   );
 };
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   menuItem: {
     padding: 10,
     marginTop: 10,
-  
+
   },
   menuItemImage: {
     width: 25,

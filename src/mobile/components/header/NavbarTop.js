@@ -1,23 +1,23 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, Image, Pressable, Modal, SafeAreaView } from "react-native";
-import { Border, Color, ColorDark, Padding } from "../GlobalStyles";
+import { StyleSheet, View, Image, Pressable, Modal, SafeAreaView, Dimensions, StatusBar } from "react-native";
+import { Border, Color, ColorDark, Padding } from "../../GlobalStyles";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import SettingsMenu from "./SettingsMenu";
-import { toggleMove, toggleTab } from "../store";
+import { toggleMove, toggleTab } from "../../store";
 
 const NavbarTop = () => {
-  
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  
+
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
   const routes = useNavigationState(state => state.routes);
 
-  
+
   const onBackPress = () => {
     if (navigation.canGoBack()) navigation.goBack();
     else return;
@@ -36,16 +36,16 @@ const NavbarTop = () => {
 
   return (
     <SafeAreaView style={styles.navbartop}>
-      <Pressable onPress={onBackPress} style={[styles.iconContainer, isDarkMode ? {backgroundColor: ColorDark.primaryPrimary} : null]}>
+      <Pressable onPress={onBackPress} style={[styles.iconContainer, isDarkMode ? { backgroundColor: ColorDark.primaryPrimary } : null]}>
         <Image
           contentFit="cover"
-          source={require("../assets/vector.png")}
+          source={require("../../assets/vector.png")}
         />
       </Pressable>
-      <Pressable onPress={onMenuPress} style={[styles.iconContainer, isDarkMode ? {backgroundColor: ColorDark.primaryPrimary} : null]}>
+      <Pressable onPress={onMenuPress} style={[styles.iconContainer, isDarkMode ? { backgroundColor: ColorDark.primaryPrimary } : null]}>
         <Image
           contentFit="cover"
-          source={require("../assets/frame-45.png")}
+          source={require("../../assets/frame-45.png")}
         />
       </Pressable>
       <Modal
@@ -56,7 +56,7 @@ const NavbarTop = () => {
       >
         <Pressable style={{}} onPress={() => setIsModalVisible(false)}>
           <SafeAreaView>
-           <SettingsMenu />
+            <SettingsMenu />
           </SafeAreaView>
         </Pressable>
       </Modal>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     justifyContent: "space-between",
     flexDirection: "row",
-    marginTop: 50,
+    marginTop: StatusBar.currentHeight,
   },
 });
 

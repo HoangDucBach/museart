@@ -111,8 +111,11 @@ export class UserController implements IBaseController {
                 role,
                 createdAt: new Date(),
                 updatedAt: new Date()
-            });
-            res.status(201).json(newUser);
+            });            
+            const token = jwt.sign({
+                email: newUser.email,
+            }, process.env.SECRET_KEY as string, {expiresIn: '1h'});
+            res.status(201).json({"user":newUser, "token": token});
         } catch (error) {
             res.status(500).json({error: 'Error signing up', message: error});
         }
@@ -124,6 +127,9 @@ export class UserController implements IBaseController {
             const user = await User.findOne({where: {email}});
             if (!user) {
                 return res.status(404).json({message: 'User not found'});
+            }
+            if(password !== user.password){
+                return res.status(401).json({message: 'Invalid password'});
             }
             const token = jwt.sign({
                 id: user.id,
