@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Text, Image, StyleSheet, View, Pressable } from "react-native";
-import { FontSize, FontFamily, Color, Border, Padding } from "../GlobalStyles";
+import { FontSize, FontFamily, Color, Border, Padding } from "../../GlobalStyles";
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
@@ -47,7 +47,7 @@ const ButtonPrimary = ({
     buttonPrimaryPaddingHorizontal,
     buttonPrimaryPaddingVertical,
   ]);
-  
+
   const textLayoutStyle = useMemo(() => {
     return {
       ...getStyleValue("color", textColor),
@@ -55,7 +55,7 @@ const ButtonPrimary = ({
       ...getStyleValue("marginHorizontal", textMarginHorizontal),
       ...getStyleValue("marginVertical", textMarginVertical),
     };
-   }, [
+  }, [
     textColor,
     textSize,
     textMarginHorizontal,
@@ -63,8 +63,8 @@ const ButtonPrimary = ({
   ]);
 
   return (
-    <Pressable onPress = {onPressButton} style={[styles.buttonprimary, buttonPrimaryStyle]}>
-      {image !== "unset" ? <Image source={image}/> : null}
+    <Pressable onPress={onPressButton} style={[styles.buttonprimary, buttonPrimaryStyle]}>
+      {image !== "unset" ? <Image source={image} /> : null}
       <Text style={[styles.textLayout, textLayoutStyle]}>{text}</Text>
     </Pressable>
   );

@@ -7,15 +7,15 @@ import store from "./store";
 import { useFonts } from "expo-font";
 import { View, PanResponder, Animated } from "react-native";
 
-import SignIn from "./screens/SignIn";
-import SignUp from "./screens/SignUp";
-import Artworks from "./screens/Artworks";
-import Cart from "./screens/Cart";
-import Exhibitions from "./screens/Exhibitions";
-import Articles from "./screens/Articles";
-import Shopping from "./screens/Shopping";
-import Payment from "./screens/Payment";
-import NavbarBottom from "./components/NavbarBottom";
+import SignIn from "./screens/auth/SignIn";
+import SignUp from "./screens/auth/SignUp";
+import Artworks from "./screens/artworks/Artworks";
+import Cart from "./screens/shopping/Cart";
+import Exhibitions from "./screens/exhibitions/Exhibitions";
+import Articles from "./screens/articles/Articles";
+import Shopping from "./screens/shopping/Shopping";
+import Payment from "./screens/shopping/Payment";
+import NavbarBottom from "./components/footer/NavbarBottom";
 import { Dimensions } from "react-native";
 
 const App = () => {
