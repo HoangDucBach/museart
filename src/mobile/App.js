@@ -42,7 +42,6 @@ const App = () => {
         <NavigationContainer theme={DarkTheme}>
           {hideSplashScreen ? (
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Payment" component={Payment}/>
               <Stack.Screen
                 name="SignIn"
                 component={SignIn}
@@ -77,6 +76,10 @@ const App = () => {
                 name="Cart"
                 component={Cart}
                 options={{ headerShown: false }}
+              />
+              <Stack.Screen 
+              name="Payment" 
+              component={Payment}
               />
             </Stack.Navigator>
           ) : null}

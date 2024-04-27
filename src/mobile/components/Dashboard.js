@@ -23,14 +23,17 @@ const Dashboard = ({
         </View>
         <DashboardSearchEngine />
       </View>
-      <ScrollView style={{padding: 10, paddingBottom: 20, alignSelf: "stretch",}}>{children}</ScrollView>
+      <ScrollView style={{padding: 10, paddingBottom: 20, alignSelf: "stretch",}}>
+        {children}
+        <View style={{height: 70}}/>
+      </ScrollView>
     </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
   artworks: {
-    padding: Padding.p_3xs,
+    // padding: Padding.p_3xs,
     backgroundColor: Color.surfaceSurfaceContainer,
     justifyContent: "space-between",
     alignItems: "center",

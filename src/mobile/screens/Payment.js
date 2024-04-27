@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet, TextInput, Image } from "react-native";
-import { Color, Border, Padding, FontSize, FontFamily } from "../GlobalStyles";
+import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../GlobalStyles";
 import NavbarTop from "../components/NavbarTop";
-import SettingsMenu from "../components/SettingsMenu";
 import ButtonPrimary from "../components/ButtonPrimary";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleMove } from "../store";
 
 const Payment = ({
     numberOfProduct,
@@ -13,18 +14,22 @@ const Payment = ({
 }) => {
 
     const navigation = useNavigation();
+    const isDarkMode = useSelector(state => state.theme.isDarkMode);
+    const dispatch = useDispatch();
+
+    dispatch(toggleMove(-1));
 
     return (
-        <View style={[styles.paymentContainer]}>
+        <View style={[styles.paymentContainer, isDarkMode ? {backgroundColor: ColorDark.surfaceSurfaceContainer} : null]}>
             <NavbarTop/>
-            <View style={{padding: 10, flex: 1}}>
+            <View style={{padding: 10, justifyContent: "center", alignSelf: "stretch"}}>
                 <View style={styles.dashboardtitleFlexBox}>
-                    <Text style={styles.headline}>Payment</Text>
+                    <Text style={[styles.headline, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Payment</Text>
                 </View>
-                <View style={[styles.totalContainer]}>
+                <View style={[styles.totalContainer, isDarkMode ? {backgroundColor: ColorDark.surfaceSurfaceContainer} : null, isDarkMode ? {shadowColor: ColorDark.primaryShadow} : null]}>
                     <View style={{marginBottom: 15}}>
                         <View style={{marginBottom: 15}}>
-                            <Text style={[styles.headline, styles.headline1]}>Total</Text>
+                            <Text style={[styles.headline, styles.headline1, , isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Total</Text>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:"space-between"}}>
                             <Text style={styles.text1}>Number of products</Text>
@@ -37,60 +42,59 @@ const Payment = ({
                     </View>
                     <View style={{marginBottom: 15}}>
                         <View style={{marginBottom: 15}}>
-                            <Text style={[styles.headline, styles.headline1]}>Information</Text>
+                            <Text style={[styles.headline, styles.headline1, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Information</Text>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:"space-between"}}>
-                            <View style={[styles.textInContainer]}>
-                                <TextInput placeholder="Your Name" style={[styles.textLayout]}/>
+                            <View style={[styles.textInContainer, isDarkMode ? {backgroundColor: ColorDark.surfaceSurfaceContainerHighest} : null]}>
+                                <TextInput placeholder="Your Name" style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}/>
                             </View>                            
-                            <View style={[styles.textInContainer, {marginLeft: 15}]}>
-                                <TextInput placeholder="+84" style={[styles.textLayout]}/>
+                            <View style={[styles.textInContainer, isDarkMode ? {backgroundColor: ColorDark.surfaceSurfaceContainerHighest} : null, {marginLeft: 15}]}>
+                                <TextInput placeholder="+84" style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}/>
                             </View>
                         </View>
                     </View>
                     <View style={{marginBottom: 15}}>
                         <View style={{marginBottom: 15}}>
-                            <Text style={[styles.headline, styles.headline1]}>Address</Text>
+                            <Text style={[styles.headline, styles.headline1, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Address</Text>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:"space-between"}}>
-                            <View style={[styles.textInContainer]}>
-                                <TextInput placeholder="Your Wards" style={[styles.textLayout]}/>
+                            <View style={[styles.textInContainer, isDarkMode ? {backgroundColor: ColorDark.surfaceSurfaceContainerHighest} : null]}>
+                                <TextInput placeholder="Your Wards" style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}/>
                             </View>                            
-                            <View style={[styles.textInContainer, {marginLeft: 15}]}>
-                                <TextInput placeholder="+Your Province" style={[styles.textLayout]}/>
+                            <View style={[styles.textInContainer, isDarkMode ? {backgroundColor: ColorDark.surfaceSurfaceContainerHighest} : null, {marginLeft: 15}]}>
+                                <TextInput placeholder="+Your Province" style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}/>
                             </View>
                         </View>
                         <View style={{flexDirection: "row"}}>
-                            <View style={[styles.textInContainer, {marginTop: 15}]}>
+                            <View style={[styles.textInContainer, isDarkMode ? {backgroundColor: ColorDark.surfaceSurfaceContainerHighest} : null, {marginTop: 15}]}>
                                     <Image source={require("../assets/Frame 83.png")}/>
-                                    <TextInput placeholder="Your detail address" style={[styles.textLayout]}/>
+                                    <TextInput placeholder="Your detail address" style={[styles.textLayout, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}/>
                             </View>
                         </View>
                     </View>
                     <View style={{marginBottom: 15}}>
                         <View style={{marginBottom: 15}}>
-                            <Text style={[styles.headline, styles.headline1]}>Pay method</Text>
+                            <Text style={[styles.headline, styles.headline1, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>Pay method</Text>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:"flex-start"}}>
                             <ButtonPrimary
                                 image={require("../assets/frame.png")}
-                                buttonPrimaryBackgroundColor={Color.surfaceSurfaceContainerHighest}
+                                buttonPrimaryBackgroundColor={isDarkMode ? ColorDark.surfaceSurfaceContainerHighest : Color.surfaceSurfaceContainerHighest}
                                 />
                             <ButtonPrimary
                                 image={require("../assets/frame1.png")}
-                                buttonPrimaryBackgroundColor={Color.surfaceSurfaceContainerHighest}
+                                buttonPrimaryBackgroundColor={isDarkMode ? ColorDark.surfaceSurfaceContainerHighest : Color.surfaceSurfaceContainerHighest}
                                 buttonPrimaryMarginLeft={15}
                                 />
                             <ButtonPrimary
                                 image={require("../assets/frame2.png")}
-                                buttonPrimaryBackgroundColor={Color.surfaceSurfaceContainerHighest}
+                                buttonPrimaryBackgroundColor={isDarkMode ? ColorDark.surfaceSurfaceContainerHighest : Color.surfaceSurfaceContainerHighest}
                                 buttonPrimaryMarginLeft={15}
                                 />
                         </View>
                     </View>
-                    <View style={{flex: 1}}></View>
-                    <View style={{flex: 1, }}>
-                        <View style={{flex: 1, flexDirection: "row", justifyContent:"space-between"}}>
+                    <View style={{marginTop:40}}>
+                        <View style={{flexDirection: "row", justifyContent:"space-between", }}>
                         <ButtonPrimary
                             text={"Cancel"}
                             buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}
@@ -103,7 +107,6 @@ const Payment = ({
                             buttonPrimaryFlex={1}
                             buttonPrimaryMarginLeft={15}
                             />
-
                         </View>
                     </View>
                 </View>
@@ -115,7 +118,6 @@ const Payment = ({
 
 const styles = StyleSheet.create({
     paymentContainer: {
-        flex: 1,
         padding: 10,
         backgroundColor: Color.surfaceSurfaceContainer,
         width: "100%",
@@ -128,7 +130,6 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
     },
     totalContainer: {
-        flex: 1,
         padding: 10,
         marginTop: 15,
         backgroundColor: Color.surfaceSurfaceContainer,

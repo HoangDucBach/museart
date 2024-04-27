@@ -40,7 +40,9 @@ const NavbarBottom = () =>
       navigation.navigate(tab);
     }
   }
-
+  
+  if (move == 0) return null;
+  
   return (
     <Animated.View style={[styles.navbarbottom, {transform: [{ translateY: moveAnim }]}, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainer} : null]}>
       <Pressable onPress= {() => {handleTabPress("Artworks")}}

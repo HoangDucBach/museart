@@ -11,22 +11,29 @@ import {
   TextInput,
   ScrollView
 } from "react-native";
-// import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { FontFamily, Padding, Color, Border, FontSize } from "../GlobalStyles";
+import { useDispatch } from "react-redux";
+import { toggleMove, toggleTab } from "../store";
 
 const SignIn = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSignIn = () => {
     // Xử lý đăng nhập thành công
     setIsLoggedIn(true);
+    dispatch(toggleMove(1));
+    dispatch(toggleTab("Artworks"));
     // console.log(isLoggedIn);
   };
 
-  const handleGuess = () => setIsLoggedIn(true);
-
+  const handleGuess = () => {
+    setIsLoggedIn(true);
+    dispatch(toggleMove(1));
+    dispatch(toggleTab("Artworks"));
+  }
   return (
     <ImageBackground
       style={styles.signinBackground}

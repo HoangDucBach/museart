@@ -5,23 +5,28 @@ import { StyleSheet, View, Image, Pressable, Modal, SafeAreaView } from "react-n
 import { Border, Color, ColorDark, Padding } from "../GlobalStyles";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import SettingsMenu from "./SettingsMenu";
-import { toggleTab } from "../store";
+import { toggleMove, toggleTab } from "../store";
 
 const NavbarTop = () => {
   
-  const isDarkMode = useSelector(state => state.theme.isDarkMode);
-  const dispatch = useDispatch();
-
-  const routes = useNavigationState(state => state.routes);
-
-  dispatch(toggleTab(routes[routes.length - 1].name));
-
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const routes = useNavigationState(state => state.routes);
 
+  
   const onBackPress = () => {
     if (navigation.canGoBack()) navigation.goBack();
+    else return;
+
+    const previousTab = routes[routes.length - 2].name;
+    console.log(previousTab);
+    dispatch(toggleTab(previousTab));
+    if (previousTab == "SignIn" || previousTab == "SignUp" || previousTab == "Payment") dispatch(toggleMove(-1));
+    else dispatch(toggleMove(1));
   };
 
   const onMenuPress = () => {

@@ -5,7 +5,7 @@ import { Padding, Color, ColorDark, FontSize, Border, FontFamily } from "../Glob
 import ButtonPrimary from "./ButtonPrimary";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from "../store";
+import { toggleMove, toggleTab, toggleTheme } from "../store";
 import { useEffect } from "react";
 
 const SettingsMenu = () => {
@@ -23,8 +23,12 @@ const SettingsMenu = () => {
         dispatch(toggleTheme());
        }} />
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/item.png") : require("../assets/navbaritem.png")} text="Setting" />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame14.png") : require("../assets/frame-14.png")} text="Cart" func = {() => navigation.navigate("Cart")}/>
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame15.png") : require("../assets/frame-141.png")} text="Feedback" />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame14.png") : require("../assets/frame-14.png")} text="Cart" func = {() => {
+        navigation.navigate("Cart");
+        dispatch(toggleTab("Cart"));
+        dispatch(toggleMove(1));
+      }}  />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../assets/Frame15.png") : require("../assets/frame-141.png")} text="Feedback" func = {() => navigation.navigate("Payment")}/>
       <View style={[styles.flexRow, styles.flexRowButton]}> 
         <ButtonPrimary text="Sign in"
                         textSize={FontSize.labelLargeBold_size}
@@ -39,8 +43,12 @@ const SettingsMenu = () => {
                        />
       </View>
       <View style={[styles.ellipseParent, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHigh} : null]}>
-        <Image source={require("../assets/ellipse-3.png")} />
-        <Image source={require("../assets/ellipse-41.png")} />
+        <Pressable onPress={() =>{isDarkMode ? null : dispatch(toggleTheme())}}>
+          <Image style={{width: 25, height: 25}} source={isDarkMode ? require("../assets/ellipse-41.png") : require("../assets/ellipse-3.png")} />
+        </Pressable>
+        <Pressable onPress={() =>{!isDarkMode ? null : dispatch(toggleTheme())}}>
+          <Image style={{width: 25, height: 25}} source={!isDarkMode ? require("../assets/ellipse-41.png") : require("../assets/ellipse-3.png")} />
+        </Pressable>
       </View>
     </View>
   );
