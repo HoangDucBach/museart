@@ -19,7 +19,7 @@ const Artworks = () => {
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: (evt, gestureState) => {
         // console.log(gestureState.dy);
-        if (gestureState.dy > 10) dispatch(toggleMove(1));
+        if (gestureState.dy > 5) dispatch(toggleMove(1));
         else if (gestureState.dy < -5) dispatch(toggleMove(-1));
       }
     })
