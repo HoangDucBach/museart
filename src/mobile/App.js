@@ -25,7 +25,6 @@ const App = () => {
   // const[hideNavarBottom, setHideNavarBottom] = React.useState(false);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
-
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
   const [fontsLoaded, error] = useFonts({

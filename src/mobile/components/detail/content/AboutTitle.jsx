@@ -9,7 +9,7 @@ import {
   Border,
 } from "../../../GlobalStyles";
 
-const AboutTitle = ({ title, tagRoute, tagDetail }) => {
+const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
   return (
     <View style={styles.containerartworktitleParent}>
       <View style={styles.containerartworktitle}>
@@ -23,13 +23,19 @@ const AboutTitle = ({ title, tagRoute, tagDetail }) => {
           </View>
         </View>
       </View>
-      <View style={styles.vectorWrapper}>
-        <Image
-          style={styles.vectorIcon}
-          contentFit="cover"
-          source={require("../../../assets/vector3.png")}
-        />
-      </View>
+      {isPrice ? (
+        <View style={{ flex: 1 }}>
+          <Text style={[styles.text, styles.textTypo]}>${price}</Text>
+        </View>
+      ) : (
+        <View style={styles.vectorWrapper}>
+          <Image
+            style={styles.vectorIcon}
+            contentFit="cover"
+            source={require("../../../assets/vector3.png")}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -75,8 +81,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     flexDirection: "column",
-    width: (Dimensions.get("screen").width * 3) / 4,
     gap: 15,
+    width: "75%",
   },
   vectorIcon: {
     backgroundColor: Color.primaryPrimary,
@@ -89,13 +95,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: Padding.p_mini,
     paddingVertical: Padding.p_3xs,
     alignItems: "center",
-    flexDirection: "row",
   },
   containerartworktitleParent: {
     alignSelf: "stretch",
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+  },
+  text: {
+    fontSize: FontSize.bodyXlargeBold_size,
+    textAlign: "right",
+    color: Color.surfaceOnSurface,
+  },
+  textTypo: {
+    fontFamily: FontFamily.labelMediumBold,
+    fontWeight: "700",
   },
 });
 

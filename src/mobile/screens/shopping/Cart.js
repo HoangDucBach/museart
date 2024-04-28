@@ -11,12 +11,9 @@ const Cart = () => {
     return (
         <View>
             <Dashboard namePage="Cart">
-                <ProductCart title={"Product"} text={"text"} price={"12.20"} image={require("../../assets/favicon.png")} number={2}></ProductCart>
-                <ProductCart title={"Product"} text={"text"} price={"12.20"} image={require("../../assets/favicon.png")} number={2}></ProductCart>
-                <ProductCart title={"Product"} text={"text"} price={"12.20"} image={require("../../assets/favicon.png")} number={2}></ProductCart>
-                <ProductShopping title={"Product"} text={"text"} price={12.2} image={require("../../assets/favicon.png")}></ProductShopping>
-                <ProductShopping title={"Product"} text={"text"} price={12.2} image={require("../../assets/favicon.png")}></ProductShopping>
-                <ProductShopping title={"Product"} text={"text"} price={12.20} image={require("../../assets/favicon.png")}></ProductShopping>
+                <ProductCart title={"Product"} text={"text"} price={"12.20"} image={'https://fastly.picsum.photos/id/20/200/200.jpg?hmac=wHmtG3BEC6aOsGZU_Q2wnxVQq34B__t4x4LFw-sptM8'} number={2}></ProductCart>
+                <ProductCart title={"Product"} text={"text"} price={"12.20"} image={'https://fastly.picsum.photos/id/20/200/200.jpg?hmac=wHmtG3BEC6aOsGZU_Q2wnxVQq34B__t4x4LFw-sptM8'} number={2}></ProductCart>
+                <ProductCart title={"Product"} text={"text"} price={"12.20"} image={'https://fastly.picsum.photos/id/20/200/200.jpg?hmac=wHmtG3BEC6aOsGZU_Q2wnxVQq34B__t4x4LFw-sptM8'} number={2}></ProductCart>
 
             </Dashboard>
         </View>
