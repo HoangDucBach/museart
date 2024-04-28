@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import store from "./store";
 import { useFonts } from "expo-font";
-import { View, PanResponder, Animated } from "react-native";
 
 import SignIn from "./screens/auth/SignIn";
 import SignUp from "./screens/auth/SignUp";
@@ -21,8 +20,6 @@ import { Dimensions } from "react-native";
 const App = () => {
 
   // const[hideNavarBottom, setHideNavarBottom] = React.useState(false);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
-
 
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
@@ -84,9 +81,7 @@ const App = () => {
               />
             </Stack.Navigator>
           ) : null}
-          <Animated.View style={{ opacity: fadeAnim }}>
             <NavbarBottom />
-          </Animated.View>
         </NavigationContainer>
       </Provider>
     </>

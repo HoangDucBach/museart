@@ -17,7 +17,7 @@ const DashboardSearchEngine = () => {
         contentFit="cover"
         source={require("../../assets/vector1.png")}
       />
-      <TextInput placeholder="Search picture, product, . . ." style={[styles.searchPictureProduct, isDarkMode ? { color: "#534341" } : null]} />
+      <TextInput placeholder="Search picture, product, . . ." placeholderTextColor="#534341" style={[styles.searchPictureProduct, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
       <Pressable onPress={onFrame41Press}>
         <Image
           style={styles.dashboardsearchengineChild}
