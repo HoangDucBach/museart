@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -8,96 +9,117 @@ import {
   Image,
   Pressable,
   TextInput,
-  KeyboardAvoidingView,
   ScrollView
 } from "react-native";
-// import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
-import { FontFamily, Padding, Color, Border, FontSize } from "../GlobalStyles";
+import { FontFamily, Padding, Color, Border, FontSize } from "../../GlobalStyles";
+import { useDispatch } from "react-redux";
+import { toggleMove, toggleTab } from "../../store";
 
 const SignIn = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleSignIn = () => {
+    // Xử lý đăng nhập thành công
+    setIsLoggedIn(true);
+    dispatch(toggleMove(1));
+    dispatch(toggleTab("Artworks"));
+    // console.log(isLoggedIn);
+  };
+
+  const handleGuess = () => {
+    setIsLoggedIn(true);
+    dispatch(toggleMove(1));
+    dispatch(toggleTab("Artworks"));
+  }
   return (
     <ImageBackground
       style={styles.signinBackground}
-      resizeMode= "cover"
-      source={require("../assets/backgroundSignIn.png")}
+      resizeMode="cover"
+      source={require("../../assets/backgroundSignIn.png")}
     >
-      <ScrollView style={{zIndex: 2}}>
-      <SafeAreaView style={styles.vectorParent}>
-        <Image
-          style={styles.vectorIcon}
-          contentFit="cover"
-          source={require("../assets/vector8.png")}
-        />
-        <Text style={styles.museart}>Museart</Text>
-      </SafeAreaView>
-      <View style={styles.welcomeToOnlineMuseumParent}>
-        <Text style={[styles.signTypo1,styles.welcomeToOnline]}>
-          Welcome to online museum!
-        </Text>
-        <Text style={styles.signInTo}>
-          Sign in to explore all artworks from around the world.
-        </Text>
-      </View>
-      <View style={styles.usernamecontainerParent}>
-        <View style={styles.usernamecontainerFlexBox}>
+      <ScrollView style={{ zIndex: 2 }}>
+        <SafeAreaView style={styles.vectorParent}>
           <Image
-            style={styles.usernamecontainerChild}
+            style={styles.vectorIcon}
             contentFit="cover"
-            source={require("../assets/group-19.png")}
+            source={require("../../assets/vector8.png")}
           />
-          <TextInput placeholder ="Username"  style={styles.username}/>
-        </View>
-        <View
-          style={[styles.passwordcontainer, styles.usernamecontainerFlexBox]}
-        >
-          <Image
-            style={styles.usernamecontainerChild}
-            contentFit="cover"
-            source={require("../assets/group-20.png")}
-          />
-          <TextInput placeholder="Password" secureTextEntry={true} style={styles.username}/>
-        </View>
-        <Pressable onPress={() => navigation.navigate("Artworks")} 
-                  style={[styles.signinbutton, styles.signinbuttonSpaceBlock]}>
-            <Text style={[styles.signIn1, styles.signTypo]}>Sign in</Text>
-        </Pressable>
-        <Pressable onPress={() => navigation.navigate("Artworks")}
-                  style={[styles.guessbutton, styles.signinbuttonSpaceBlock]}>
-            <Text style={[styles.signIn1, styles.signTypo]}>Guess</Text>
-        </Pressable>
-        <View style={styles.dontHaveAccountParent}>
-          <Text style={[styles.dontHaveAccount, styles.signTypo]}>
-            Don’t have account?
+          <Text style={styles.museart}>Museart</Text>
+        </SafeAreaView>
+        <View style={styles.welcomeToOnlineMuseumParent}>
+          <Text style={[styles.signTypo1, styles.welcomeToOnline]}>
+            Welcome to online museum!
           </Text>
-          <Pressable onPress={() => navigation.navigate("SignUp")}>
-            <Text style={[styles.signUp, styles.signTypo]}>Sign up</Text>
-          </Pressable>
+          <Text style={styles.signInTo}>
+            Sign in to explore all artworks from around the world.
+          </Text>
         </View>
-      </View>
+        <View style={styles.usernamecontainerParent}>
+          <View style={styles.usernamecontainerFlexBox}>
+            <Image
+              style={styles.usernamecontainerChild}
+              contentFit="cover"
+              source={require("../../assets/group-19.png")}
+            />
+            <TextInput placeholder="Username" style={styles.username} />
+          </View>
+          <View
+            style={[styles.passwordcontainer, styles.usernamecontainerFlexBox]}
+          >
+            <Image
+              style={styles.usernamecontainerChild}
+              contentFit="cover"
+              source={require("../../assets/group-20.png")}
+            />
+            <TextInput placeholder="Password" secureTextEntry={true} style={styles.username} />
+          </View>
+          <Pressable onPress={() => {
+            handleSignIn();
+            if (isLoggedIn) navigation.navigate("Artworks");
+          }}
+            style={[styles.signinbutton, styles.signinbuttonSpaceBlock]}>
+            <Text style={[styles.signIn1, styles.signTypo]}>Sign in</Text>
+          </Pressable>
+          <Pressable onPress={() => {
+            handleGuess();
+            navigation.navigate("Artworks");
+          }}
+            style={[styles.guessbutton, styles.signinbuttonSpaceBlock]}>
+            <Text style={[styles.signIn1, styles.signTypo]}>Guess</Text>
+          </Pressable>
+          <View style={styles.dontHaveAccountParent}>
+            <Text style={[styles.dontHaveAccount, styles.signTypo]}>
+              Don’t have account?
+            </Text>
+            <Pressable onPress={() => navigation.navigate("SignUp")}>
+              <Text style={[styles.signUp, styles.signTypo]}>Sign up</Text>
+            </Pressable>
+          </View>
+        </View>
       </ScrollView>
       <View style={styles.ellipseParent}>
         <Image
           style={styles.frameLayout}
           contentFit="cover"
-          source={require("../assets/ellipse-5.png")}
+          source={require("../../assets/ellipse-5.png")}
         />
         <Image
           style={[styles.frameItem, styles.frameLayout]}
           contentFit="cover"
-          source={require("../assets/ellipse-6.png")}
+          source={require("../../assets/ellipse-6.png")}
         />
         <Image
           style={[styles.frameItem, styles.frameLayout]}
           contentFit="cover"
-          source={require("../assets/ellipse-6.png")}
+          source={require("../../assets/ellipse-6.png")}
         />
         <Image
           style={[styles.frameItem, styles.frameLayout]}
           contentFit="cover"
-          source={require("../assets/ellipse-6.png")}
+          source={require("../../assets/ellipse-6.png")}
         />
       </View>
     </ImageBackground>

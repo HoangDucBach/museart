@@ -1,30 +1,44 @@
 {
   "expo": {
-    "name": "demo",
-    "slug": "demo",
+    "name": "Museart",
+    "slug": "museart",    
+    "scheme": "museart",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/museum.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Roboto-Medium.ttf", 
+          "./assets/fonts/PlayfairDisplay-Medium.ttf", 
+          "./assets/fonts/PlayfairDisplay-Regular.ttf", 
+          "./assets/fonts/PlayfairDisplay-Bold.ttf"]
+        }
+      ]
+    ],
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/frame-101.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#D00000"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "jsEngine": "jsc"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/frame-101.png",
+        "backgroundColor": "#D00000"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "jsEngine": "hermes"
   }
 }
