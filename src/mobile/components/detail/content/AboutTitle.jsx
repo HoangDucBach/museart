@@ -1,32 +1,34 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Dimensions } from "react-native";
 import { Image } from "expo-image";
-import { Padding, FontSize, FontFamily, Color, Border } from "../../../GlobalStyles";
+import {
+  Padding,
+  FontSize,
+  FontFamily,
+  Color,
+  Border,
+} from "../../../GlobalStyles";
 
-const AboutTitle = () => {
+const AboutTitle = ({ title, tagRoute, tagDetail }) => {
   return (
     <View style={styles.containerartworktitleParent}>
       <View style={styles.containerartworktitle}>
-        <View style={styles.artworktitle}>
-          <Text style={styles.aboutOfTitle}>About of title of picture</Text>
-        </View>
+        <Text style={styles.aboutOfTitle}>{title}</Text>
         <View style={styles.tagstype}>
           <View style={[styles.artworkWrapper, styles.wrapperSpaceBlock]}>
-            <Text style={styles.artwork}>Artwork</Text>
+            <Text style={styles.artwork}>{tagRoute}</Text>
           </View>
           <View style={[styles.artWrapper, styles.wrapperSpaceBlock]}>
-            <Text style={styles.artwork}>Art</Text>
+            <Text style={styles.artwork}>{tagDetail}</Text>
           </View>
         </View>
       </View>
-      <View style={styles.wrapperSpaceBlock}>
-        <View style={styles.vectorWrapper}>
-          <Image
-            style={styles.vectorIcon}
-            contentFit="cover"
-            source={require("../../../assets/vector3.png")}
-          />
-        </View>
+      <View style={styles.vectorWrapper}>
+        <Image
+          style={styles.vectorIcon}
+          contentFit="cover"
+          source={require("../../../assets/vector3.png")}
+        />
       </View>
     </View>
   );
@@ -36,7 +38,6 @@ const styles = StyleSheet.create({
   wrapperSpaceBlock: {
     padding: Padding.p_3xs,
     flexDirection: "row",
-    
   },
   aboutOfTitle: {
     fontSize: FontSize.headline5Bold_size,
@@ -44,9 +45,6 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.labelSmallBold,
     color: Color.surfaceOnSurface,
     textAlign: "left",
-  },
-  artworktitle: {
-    alignItems: "left",
   },
   artwork: {
     fontSize: FontSize.typographyLabelSmall_size,
@@ -62,7 +60,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   artWrapper: {
-    marginLeft: 15,
     backgroundColor: Color.colorDarkslategray,
     borderRadius: Border.br_81xl,
     padding: Padding.p_3xs,
@@ -70,15 +67,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tagstype: {
-    marginTop: 15,
     flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 15,
   },
   containerartworktitle: {
-    width: 381,
-    height: 85,
     justifyContent: "center",
+    alignItems: "flex-start",
+    flexDirection: "column",
+    width: (Dimensions.get("screen").width * 3) / 4,
+    gap: 15,
   },
-  vectorIcon: {    
+  vectorIcon: {
     backgroundColor: Color.primaryPrimary,
     width: 20,
     height: 20,
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
   vectorWrapper: {
     borderRadius: Border.br_3xs,
     backgroundColor: Color.primaryPrimary,
-    height: 45,
     paddingHorizontal: Padding.p_mini,
     paddingVertical: Padding.p_3xs,
     alignItems: "center",

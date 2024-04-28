@@ -16,6 +16,8 @@ import Shopping from "./screens/shopping/Shopping";
 import Payment from "./screens/shopping/Payment";
 import NavbarBottom from "./components/footer/NavbarBottom";
 import { Dimensions } from "react-native";
+import ArticleDetail from "./screens/articles/ArticleDetail";
+import ProductDetail from "./screens/shopping/ProductDetail";
 
 const App = () => {
 
@@ -79,6 +81,8 @@ const App = () => {
                 name="Payment"
                 component={Payment}
               />
+              <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
+              <Stack.Screen name="ProductDetail" component={ProductDetail} />
             </Stack.Navigator>
           ) : null}
             <NavbarBottom />

@@ -1,24 +1,28 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import { View, StyleSheet, Text, Pressable, TouchableOpacity } from "react-native";
 import { Padding, Color, ColorDark, FontFamily, Border, FontSize } from "../GlobalStyles";
 import ButtonPrimary from "./button/ButtonPrimary";
+import { useNavigation } from "@react-navigation/native";
 
 const ArticleComponent = ({
     article,
     date,
     text,
+    id
 }) => {
     const isDarkMode = useSelector(state => state.theme.isDarkMode);
+    const navigation = useNavigation();
 
     return (
         <View style={{ padding: 10 }}>
             <Text style={[styles.username, styles.usernameTypo, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]}>{article}</Text>
             <Text style={[styles.ddmmyyyy, styles.usernameTypo, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]}>{date}</Text>
-            <Text style={[styles.text, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{text}</Text>
-            <Pressable style={{ marginTop: 5 }}>
+            <Text numberOfLines={3} style={[styles.text, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{text}</Text>
+            <TouchableOpacity onPress={() =>
+                navigation.navigate('ArticleDetail', { ID: id })} style={{ marginTop: 5 }}>
                 <Text style={[styles.readMore, isDarkMode ? { color: ColorDark.primaryPrimary } : null]}>Read more</Text>
-            </Pressable>
+            </TouchableOpacity>
             <View
                 style={{
                     borderBottomColor: isDarkMode ? "white" : "black",
