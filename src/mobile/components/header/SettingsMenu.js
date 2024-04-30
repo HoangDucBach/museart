@@ -26,7 +26,6 @@ const SettingsMenu = () => {
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame14.png") : require("../../assets/frame-14.png")} text="Cart" func={() => {
         navigation.navigate("Cart");
         dispatch(toggleTab("Cart"));
-        dispatch(toggleMove(1));
       }} />
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" func={() => navigation.navigate("Payment")} />
       <View style={[styles.flexRow, styles.flexRowButton]}>
