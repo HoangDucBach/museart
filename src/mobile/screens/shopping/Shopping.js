@@ -27,12 +27,7 @@ const Shopping = () => {
 
 
     return (
-<<<<<<< HEAD
-
-        <View style={{flex: 1}}>
-=======
-        <View>
->>>>>>> fa7c1d8d70080112f3ca4730aeab1f9320981926
+        <View style={{ flex: 1 }}>
             {isLoading ? (
                 <ActivityIndicator />
             ) : (

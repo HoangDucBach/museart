@@ -23,7 +23,7 @@ const FrameComponent = ({
 }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
-  const frameScale =  useMemo(() => {
+  const frameScale = useMemo(() => {
     return {
       ...getStyleValue("flex", frameFlex),
       ...getStyleValue("aspectRatio", frameAspectRatio)
@@ -34,10 +34,10 @@ const FrameComponent = ({
   return (
     <Pressable style={[styles.frameWrapper, frameScale]} onPress={onFramePressablePress}>
       <ImageBackground
-        source = {{ uri: frameImage}}
+        source={{ uri: frameImage }}
         height={height}
         resizeMode="cover"
-        style={{flex: 1}}
+        style={{ flex: 1 }}
       >
         <View style={styles.titleParent}>
           <Text style={[styles.title, styles.titleFlexBox]}>{title}</Text>
