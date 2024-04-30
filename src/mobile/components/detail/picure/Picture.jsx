@@ -1,20 +1,27 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, ImageBackground } from "react-native";
 import { Image } from "expo-image";
 import BoardExtraInfoArtwork from "./BoardExtraInfoArtwork";
 import { Border, Color, Padding } from "../../../GlobalStyles";
 
-const Picture = () => {
+const Picture = ({ imagePath, commentAmount, likeAmount, date }) => {
   return (
-    <View style={styles.picture}>
+    <ImageBackground
+      source={{ uri: imagePath }}
+      resizeMode="cover"
+      style={styles.picture}
+    >
       <BoardExtraInfoArtwork
+        commentAmount={commentAmount}
+        likeAmount={likeAmount}
+        date={date}
       />
       <Image
         style={styles.fullscreenpictureicon}
         contentFit="cover"
         source={require("../../../assets/fullscreenpictureicon.png")}
       />
-    </View>
+    </ImageBackground>
   );
 };
 

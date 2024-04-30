@@ -33,12 +33,14 @@ const SettingsMenu = () => {
           textSize={FontSize.labelLargeBold_size}
           textMargin={8}
           buttonPrimaryFlex={1}
+          onPressButton={() => { navigation.navigate("SignIn") }}
         />
         <ButtonPrimary text="Sign up"
           textSize={FontSize.labelLargeBold_size}
           buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}
           buttonPrimaryMarginLeft={15}
           buttonPrimaryFlex={1}
+          onPressButton={() => { navigation.navigate("SignUp") }}
         />
       </View>
       <View style={[styles.ellipseParent, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>

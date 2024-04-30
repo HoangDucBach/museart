@@ -1,27 +1,31 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Color, ColorDark, Border, FontFamily, FontSize, Padding } from "../../GlobalStyles";
 import ButtonPrimary from "../button/ButtonPrimary";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const ProductShopping = ({
   title,
   text,
   price,
   image,
+  id
 }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const navigation = useNavigation();
 
   return (
-    <View style={[styles.frameParent, styles.frameParentFlexBox, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
+    <TouchableOpacity onPress={() =>
+      navigation.navigate('ProductDetail', { ID: id })} style={[styles.frameParent, styles.frameParentFlexBox, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
       <View>
         <Image style={[styles.componentChild, styles.frameParentLayout]}
           contentFit={"contain"}
-          source={image} />
+          source={{ uri: image }} />
       </View>
       <View style={[styles.frameGroup]}>
         <View style={{ justifyContent: "space-between" }}>
-          <Text style={[styles.product, styles.buyNowTypo, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{title}</Text>
+          <Text numberOfLines={3} style={[styles.product, styles.buyNowTypo, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{title}</Text>
           <Text style={[styles.product1, styles.textTypo, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]}>{text}</Text>
           <Text style={[styles.text, styles.textTypo, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>${price}</Text>
         </View>
@@ -33,6 +37,7 @@ const ProductShopping = ({
                 buttonPrimaryPaddingVerticalVertical={10}
                 buttonPrimaryBorderWidth={2}
                 buttonPrimaryPaddingHorizontal={15}
+                onPressButton={() => { navigation.navigate('Payment', { Amount: 1, Price: price }) }}
               />
             </View>
             <View>
@@ -41,12 +46,13 @@ const ProductShopping = ({
                 buttonPrimaryPaddingVerticalVertical={10}
                 buttonPrimaryPaddingHorizontal={15}
                 buttonPrimaryBorderWidth={2}
+                onPressButton={() => { navigation.navigate('Cart') }}
                 image={require("../../assets/vector2.png")} />
             </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

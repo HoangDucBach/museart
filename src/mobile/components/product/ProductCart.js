@@ -19,7 +19,7 @@ const ProductCash = ({
         <Image
           style={[styles.componentChild, styles.frameParentLayout]}
           contentFit={"contain"}
-          source={image}
+          source={{ uri: image }}
         />
       </View>
       <View style={[styles.frameGroup]}>

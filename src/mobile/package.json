@@ -24,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
     "react-native-loading-spinner-overlay": "^3.0.1",
+    "react-native-render-html": "^6.3.4",
     "react-native-svg": "14.1.0",
     "react-native-video": "^5.2.1",
     "react-native-web": "~0.19.6",

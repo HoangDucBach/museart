@@ -43,7 +43,7 @@ const ArticleDetail = () => {
                 <ActivityIndicator />
             ) : (
                 <View style={styles.body}>
-                    <AboutTitle title={article.title} tagRoute="Article" tagDetail="Document" />
+                    <AboutTitle title={article.title} tagRoute="Article" tagDetail="Document" isPrice={false} />
                     <BoardExtraInfoArtwork commentAmount={"api chưa có"} likeAmount={123} date={"d/m/y"} />
                     <ScrollView>
                         <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock]}>{article.copy}</Text>
