@@ -23,7 +23,7 @@ const Dashboard = ({
         </View>
         <DashboardSearchEngine />
       </View>
-      <ScrollView style={{ padding: 10, paddingBottom: 20, alignSelf: "stretch", }}>
+      <ScrollView style={{ padding: 10, paddingBottom: 20, alignSelf: "stretch"}} contentContainerStyle={{flexGrow: 1}}>
         {children}
         <View style={{ height: 70 }} />
       </ScrollView>
@@ -34,6 +34,7 @@ const Dashboard = ({
 const styles = StyleSheet.create({
   artworks: {
     // padding: Padding.p_3xs,
+    flex: 1,
     backgroundColor: Color.surfaceSurfaceContainer,
     justifyContent: "space-between",
     alignItems: "center",

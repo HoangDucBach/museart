@@ -25,7 +25,7 @@ const NavbarTop = () => {
     const previousTab = routes[routes.length - 2].name;
     console.log(previousTab);
     dispatch(toggleTab(previousTab));
-    if (previousTab == "SignIn" || previousTab == "SignUp" || previousTab == "Payment") dispatch(toggleMove(-1));
+    if (previousTab == "SignIn" || previousTab == "SignUp" || previousTab == "Payment" || previousTab == "Cart") dispatch(toggleMove(-1));
     else dispatch(toggleMove(1));
   };
 

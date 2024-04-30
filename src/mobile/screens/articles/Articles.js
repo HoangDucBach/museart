@@ -17,6 +17,7 @@ const Articles = () => {
     const getArticles = async () => {
         try {
             const response = await axios.get(`${baseUrl}/api/articles`);
+            console.log(response.data);
             setArticles(response.data);
         } catch (error) {
             console.error(error);
@@ -30,7 +31,7 @@ const Articles = () => {
     }, []);
 
     return (
-        <View>
+        <View style={{flex: 1}}>
             {isLoading ? (
                 <ActivityIndicator />
             ) : (

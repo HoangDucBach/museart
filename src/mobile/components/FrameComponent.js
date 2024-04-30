@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
-import { Text, StyleSheet, View, Pressable } from "react-native";
+import { Text, StyleSheet, View, Pressable, Image } from "react-native";
 import { Color, FontSize, FontFamily, Border, Padding } from "../GlobalStyles";
+import { ImageBackground } from "react-native";
 
 
 const getStyleValue = (key, value) => {
@@ -14,6 +15,11 @@ const FrameComponent = ({
   onFramePressablePress,
   frameFlex,
   frameAspectRatio,
+  frameImage,
+  height,
+  title,
+  text,
+
 }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
@@ -27,10 +33,17 @@ const FrameComponent = ({
 
   return (
     <Pressable style={[styles.frameWrapper, frameScale]} onPress={onFramePressablePress}>
-      <View style={styles.titleParent}>
-        <Text style={[styles.title, styles.titleFlexBox]}>Title</Text>
-        <Text style={[styles.title1, styles.titleFlexBox]}>Title</Text>
-      </View>
+      <ImageBackground
+        source = {{ uri: frameImage}}
+        height={height}
+        resizeMode="cover"
+        style={{flex: 1}}
+      >
+        <View style={styles.titleParent}>
+          <Text style={[styles.title, styles.titleFlexBox]}>{title}</Text>
+          <Text style={[styles.title1, styles.titleFlexBox]} numberOfLines={2}>{text}</Text>
+        </View>
+      </ImageBackground>
     </Pressable>
   );
 };
@@ -46,14 +59,16 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.labelMediumBold,
   },
   title1: {
-    fontSize: FontSize.labelMediumBold_size,
+    fontSize: FontSize.labelSmallRegular_size,
     fontWeight: "300",
     fontFamily: FontFamily.labelLargeMedium,
-    marginTop: 5,
+    // marginTop: 5,
   },
   titleParent: {
+    flex: 1,
+    margin: 10,
     alignSelf: "stretch",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     overflow: "hidden",
   },
   frameWrapper: {
@@ -61,7 +76,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_3xs,
     backgroundColor: Color.colorMediumseagreen_200,
     justifyContent: "flex-end",
-    padding: Padding.p_3xs,
+    // padding: Padding.p_3xs,
     margin: 5,
     overflow: "hidden",
   },
