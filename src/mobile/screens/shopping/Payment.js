@@ -25,7 +25,7 @@ const Payment = () => {
                 <View style={styles.dashboardtitleFlexBox}>
                     <Text style={[styles.headline, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>Payment</Text>
                 </View>
-                <View style={[styles.totalContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null, isDarkMode ? { shadowColor: ColorDark.primaryShadow } : null]}>
+                <View style={[styles.totalContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null, isDarkMode ? { shadowColor: ColorDark.primaryShadow } : null]}>
                     <View style={{ marginBottom: 15 }}>
                         <View style={{ marginBottom: 15 }}>
                             <Text style={[styles.headline, styles.headline1, , isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>Total</Text>
@@ -45,10 +45,10 @@ const Payment = () => {
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <View style={[styles.textInContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]}>
-                                <TextInput placeholder="Your Name" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
+                                <TextInput placeholder="Your Name" placeholderTextColor="#534341" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
                             </View>
                             <View style={[styles.textInContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null, { marginLeft: 15 }]}>
-                                <TextInput placeholder="+84" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
+                                <TextInput placeholder="+84" placeholderTextColor="#534341" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
                             </View>
                         </View>
                     </View>
@@ -58,16 +58,16 @@ const Payment = () => {
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <View style={[styles.textInContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]}>
-                                <TextInput placeholder="Your Wards" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
+                                <TextInput placeholder="Your Wards" placeholderTextColor="#534341" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
                             </View>
                             <View style={[styles.textInContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null, { marginLeft: 15 }]}>
-                                <TextInput placeholder="+Your Province" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
+                                <TextInput placeholder="+Your Province" placeholderTextColor="#534341" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
                             </View>
                         </View>
                         <View style={{ flexDirection: "row" }}>
                             <View style={[styles.textInContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null, { marginTop: 15 }]}>
                                 <Image source={require("../../assets/frame-83.png")} />
-                                <TextInput placeholder="Your detail address" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
+                                <TextInput placeholder="Your detail address" placeholderTextColor="#534341" style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
                             </View>
                         </View>
                     </View>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     totalContainer: {
         padding: 10,
         marginTop: 15,
-        backgroundColor: Color.surfaceSurfaceContainer,
+        backgroundColor: Color.surfaceSurfaceContainerHigh,
         shadowRadius: 20,
         elevation: 20,
         padding: Padding.p_3xs,

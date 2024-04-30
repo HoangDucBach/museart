@@ -19,7 +19,7 @@ const SettingsMenu = () => {
 
   return (
     <View style={[styles.settingsMenu, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/explore.png") : require("../../assets/explore.png")} text="About" func={() => {
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text="About" func={() => {
         dispatch(toggleTheme());
       }} />
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/item.png") : require("../../assets/navbaritem.png")} text="Setting" />

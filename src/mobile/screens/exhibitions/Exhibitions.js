@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, Padding, FontSize, FontFamily } from "../../GlobalStyles";
@@ -7,34 +7,72 @@ import SettingsMenu from "../../components/header/SettingsMenu";
 import Dashboard from "../../components/header/Dashboard";
 import Comment from "../../components/Comment";
 import FrameComponent from "../../components/FrameComponent";
+import { ActivityIndicator } from "react-native";
+import axios from "axios";
+import { baseUrl } from "../../services/api";
 
 const Exhibitions = () => {
   const navigation = useNavigation();
+  const [isLoading, setLoading] = useState(true);
+  const [exhibitions, setExhibitions] = useState([]);
+
+  const getExhibitions = async () => {
+      try {
+          const response = await axios.get(`${baseUrl}/api/exhibitions`);
+          response.data.map((item) => console.log(item));
+          setExhibitions(response.data);
+      } catch (error) {
+          console.error(error);
+      } finally {
+          setLoading(false);
+      }
+  };
+
+  const renderFrameRow = () => {
+    const frameRows = [];
+    let currentRow = [];
+    exhibitions.map((item, index) => {
+      currentRow.push(
+        <FrameComponent key={item.detail.id}
+                        id={item.detail.id}
+                        frameImage={item.detail.image_url}
+                        // frameAspectRatio={Math.round(item.detail.thumbnail.width/item.detail.thumbnail.height * 10) / 10}
+                        height={200}
+                        index={index}
+                        title={item.detail.title}
+                        // text={item.detail.thumbnail.alt_text}                        
+                        />
+      );
+      if (currentRow.length === 3 || index === exhibitions.length - 1) {
+        frameRows.push(
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            {currentRow}
+          </View>
+        );
+        currentRow = [];
+      }
+    });
+    return (
+      <View>
+        {frameRows}
+      </View>
+    )
+  };
+  
+  
+  useEffect(() => {
+      getExhibitions();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
-      <Dashboard namePage={"Exhibitions"}>
-        {/* <SettingsMenu style={{paddingTop: 10}}/> */}
-        <View style={{ justifyContent: "space-around", flexDirection: "row", }}>
-          <FrameComponent />
-          <FrameComponent frameFlex={1.3} frameAspectRatio={1} />
-          <FrameComponent frameFlex={1.3} frameAspectRatio={1} />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <FrameComponent frameAspectRatio={1.5} />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <FrameComponent />
-          <FrameComponent frameFlex={2} frameAspectRatio={1} />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <FrameComponent frameFlex={2} frameAspectRatio={2} />
-          <FrameComponent />
-        </View>
-        <Comment userName={"Luong"} date={"20/04/2024"} text={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived "} />
-        <Comment userName={"Luong"} date={"20/04/2024"} text={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived "} />
-        <Comment userName={"Luong"} date={"20/04/2024"} text={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived "} />
-      </Dashboard>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Dashboard namePage={"Dashboard"}>
+          { renderFrameRow() }
+        </Dashboard>
+      )}
     </View>
   );
 };
