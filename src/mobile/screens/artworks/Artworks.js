@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Text, StyleSheet, View, PanResponder, SafeAreaView } from "react-native";
+import React, { useRef, useState, useEffect } from "react";
+import { Text, StyleSheet, View, PanResponder, SafeAreaView, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, Padding, FontSize, FontFamily } from "../../GlobalStyles";
 import Dashboard from "../../components/header/Dashboard";
@@ -9,6 +9,9 @@ import AboutTitle from "../../components/detail/content/AboutTitle";
 import BoardExtraInfoArtwork from "../../components/detail/picure/BoardExtraInfoArtwork";
 import { useDispatch } from "react-redux";
 import { toggleMove } from "../../store";
+import axios from "axios";
+import { baseUrl } from "../../services/api";
+import { ActivityIndicator } from "react-native";
 
 const Artworks = () => {
   const navigation = useNavigation();
@@ -25,27 +28,66 @@ const Artworks = () => {
     })
   ).current;
 
+  const [isLoading, setLoading] = useState(true);
+  const [artworks, setArtworks] = useState([]);
+
+  const getArtworks = async () => {
+      try {
+          const response = await axios.get(`${baseUrl}/api/artworks`);
+          // response.data.map((item) => console.log(item));
+          setArtworks(response.data);
+      } catch (error) {
+          console.error(error);
+      } finally {
+          setLoading(false);
+      }
+  };
+
+  const renderFrameRow = () => {
+    const frameRows = [];
+    let currentRow = [];
+    artworks.map((item, index) => {
+      currentRow.push(
+        <FrameComponent key={item.detail.id}
+                        id={item.detail.id}
+                        frameImage={`https://www.artic.edu/iiif/2/${item.detail.image_id}/full/843,/0/default.jpg`}
+                        frameAspectRatio={Math.round(item.detail.thumbnail.width/item.detail.thumbnail.height * 10) / 10}
+                        height={200}
+                        index={index}
+                        title={item.detail.title}
+                        text={item.detail.thumbnail.alt_text}                        
+                        />
+      );
+      if (currentRow.length === 3 || index === artworks.length - 1) {
+        frameRows.push(
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            {currentRow}
+          </View>
+        );
+        currentRow = [];
+      }
+    });
+    return (
+      <View>
+        {frameRows}
+      </View>
+    )
+  };
+  
+  
+  useEffect(() => {
+      getArtworks();
+  }, []);
+  
   return (
     <View style={{ flex: 1 }} {...panResponder.panHandlers}>
-      <Dashboard namePage={"Dashboard"}>
-        <View style={{ justifyContent: "space-around", flexDirection: "row", }}>
-          <FrameComponent />
-          <FrameComponent frameFlex={1.3} frameAspectRatio={1} />
-          <FrameComponent frameFlex={1.3} frameAspectRatio={1} />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <FrameComponent frameAspectRatio={1.5} />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <FrameComponent />
-          <FrameComponent frameFlex={2} frameAspectRatio={1} />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <FrameComponent frameFlex={2} frameAspectRatio={2} />
-          <FrameComponent />
-        </View>
-        <Comment userName={"Luong"} date={"20/04/2024"} text={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived "} />
-      </Dashboard>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Dashboard namePage={"Dashboard"}>
+          { renderFrameRow() }
+        </Dashboard>
+      )}
     </View>
   );
 };
