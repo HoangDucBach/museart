@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet, TextInput, Image } from "react-native";
 import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../../GlobalStyles";
@@ -7,17 +7,16 @@ import ButtonPrimary from "../../components/button/ButtonPrimary";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleMove } from "../../store";
 
-const Payment = ({
-    numberOfProduct,
-    totalAmount,
-
-}) => {
+const Payment = () => {
 
     const navigation = useNavigation();
     const isDarkMode = useSelector(state => state.theme.isDarkMode);
     const dispatch = useDispatch();
 
     dispatch(toggleMove(-1));
+
+    const route = useRoute();
+    const { Amount, Price } = route.params;
 
     return (
         <View style={[styles.paymentContainer, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]}>
@@ -33,11 +32,11 @@ const Payment = ({
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={styles.text1}>Number of products</Text>
-                            <Text style={[styles.text1, { color: Color.surfaceOnSurface }]}>{numberOfProduct}</Text>
+                            <Text style={[styles.text1, { color: Color.surfaceOnSurface }]}>{Amount}</Text>
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={styles.text2}>Total</Text>
-                            <Text style={[styles.text2, { color: Color.surfaceOnSurface }]}>{totalAmount}</Text>
+                            <Text style={[styles.text2, { color: Color.surfaceOnSurface }]}>${Price}</Text>
                         </View>
                     </View>
                     <View style={{ marginBottom: 15 }}>
