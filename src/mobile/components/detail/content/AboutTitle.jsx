@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+    marginTop: 15,
   },
   text: {
     fontSize: FontSize.bodyXlargeBold_size,

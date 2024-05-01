@@ -1,9 +1,15 @@
 import * as React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import { Padding, Color, FontFamily, FontSize, Border } from "../../../GlobalStyles";
+import {
+  Padding,
+  Color,
+  FontFamily,
+  FontSize,
+  Border,
+} from "../../../GlobalStyles";
 
-const Video = () => {
+const Video = ({ title }) => {
   return (
     <View style={styles.VideoFlexBox}>
       <Text style={styles.videoTypo}>Video</Text>
@@ -13,11 +19,9 @@ const Video = () => {
           styles.frameWrapperSpaceBlock,
         ]}
       >
-        <Text style={[styles.aboutOfTitle, styles.videoTypo]}>
-          About of title of picture
-        </Text>
+        <Text style={[styles.aboutOfTitle, styles.videoTypo]}>{title}</Text>
         <Text style={[styles.aboutOfTitle1, styles.frameSpaceBlock]}>
-          About of title of picture
+          {title}
         </Text>
         {/*
         //Video
@@ -81,7 +85,7 @@ const Video = () => {
         </View>
       */}
       </View>
-    </View>    
+    </View>
   );
 };
 
@@ -98,7 +102,6 @@ const styles = StyleSheet.create({
     fontSize: FontSize.titleMediumBold_size,
   },
   frameSpaceBlock: {
-    marginTop: 10,
     alignSelf: "stretch",
   },
   frameItemLayout: {
@@ -117,7 +120,6 @@ const styles = StyleSheet.create({
   aboutOfTitle1: {
     fontSize: FontSize.labelLargeBold_size,
     fontFamily: FontFamily.labelMediumRegular,
-    marginTop: 10,
     textAlign: "left",
     color: Color.surfaceOnSurface,
   },
@@ -156,7 +158,6 @@ const styles = StyleSheet.create({
     backgroundColor: Color.surfaceSurfaceContainerHigh,
     paddingHorizontal: Padding.p_6xl,
     borderRadius: Border.br_xl,
-    marginTop: 15,
     justifyContent: "center",
     alignSelf: "stretch",
   },

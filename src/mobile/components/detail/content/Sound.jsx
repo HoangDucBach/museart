@@ -1,19 +1,23 @@
 import * as React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import { Padding, Color, FontFamily, FontSize, Border } from "../../../GlobalStyles";
+import {
+  Padding,
+  Color,
+  FontFamily,
+  FontSize,
+  Border,
+} from "../../../GlobalStyles";
 
-const Sound = () => {
+const Sound = ({ title }) => {
   return (
     <View style={[styles.Sound, styles.SoundSpaceBlock]}>
       <Text style={styles.soundTypo}>Sound</Text>
       <View
         style={[styles.aboutOfTitleOfPictureParent, styles.frameWrapperFlexBox]}
       >
-        <Text style={[styles.aboutOfTitle, styles.soundTypo]}>
-          About of title of picture
-        </Text>
-        <Text style={styles.aboutOfTitle1}>About of title of picture</Text>
+        <Text style={[styles.aboutOfTitle, styles.soundTypo]}>{title}</Text>
+        <Text style={styles.aboutOfTitle1}>{title}</Text>
         {/*
         //Play video/sound
         // Load the module
@@ -76,7 +80,6 @@ const Sound = () => {
 
 const styles = StyleSheet.create({
   SoundSpaceBlock: {
-    marginTop: 15,
     justifyContent: "center",
   },
   frameWrapperFlexBox: {
@@ -139,7 +142,6 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xl,
     backgroundColor: Color.surfaceSurfaceContainerHigh,
     paddingHorizontal: Padding.p_6xl,
-    marginTop: 15,
     justifyContent: "center",
   },
   Sound: {
