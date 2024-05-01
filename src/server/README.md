@@ -29,8 +29,8 @@ Xác thực người dùng
 
 ```json
 {
-  "username": "admin",
-  "password": "admin"
+  "email": "admin@gmail.com",
+  "password": "admin123"
 }
 ```
 

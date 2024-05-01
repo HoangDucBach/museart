@@ -1,10 +1,32 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { Color, FontSize, FontFamily, Border, Padding } from "../GlobalStyles";
 
-const FrameComponent1 = ({ onFramePressablePress }) => {
+
+const getStyleValue = (key, value) => {
+  if (value === undefined) return;
+  return { [key]: value === "unset" ? undefined : value };
+};
+
+const FrameComponent = ({
+  onFramePressablePress,
+  frameFlex,
+  frameAspectRatio,
+}) => {
+  const isDarkMode = useSelector(state => state.theme.isDarkMode);
+
+  const frameScale =  useMemo(() => {
+    return {
+      ...getStyleValue("flex", frameFlex),
+      ...getStyleValue("aspectRatio", frameAspectRatio)
+    };
+  }, [frameFlex, frameAspectRatio]
+  );
+
   return (
-    <Pressable style={styles.frameWrapper} onPress={onFramePressablePress}>
+    <Pressable style={[styles.frameWrapper, frameScale]} onPress={onFramePressablePress}>
       <View style={styles.titleParent}>
         <Text style={[styles.title, styles.titleFlexBox]}>Title</Text>
         <Text style={[styles.title1, styles.titleFlexBox]}>Title</Text>
@@ -38,11 +60,11 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: Border.br_3xs,
     backgroundColor: Color.colorMediumseagreen_200,
-    height: 113,
     justifyContent: "flex-end",
     padding: Padding.p_3xs,
+    margin: 5,
     overflow: "hidden",
   },
 });
 
-export default FrameComponent1;
+export default FrameComponent;
