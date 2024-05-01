@@ -5,7 +5,6 @@ import { Color, Border, Padding, FontSize, FontFamily } from "../../GlobalStyles
 import ButtonPrimary from "../../components/button/ButtonPrimary";
 import SettingsMenu from "../../components/header/SettingsMenu";
 import Dashboard from "../../components/header/Dashboard";
-import Comment from "../../components/Comment";
 import FrameComponent from "../../components/FrameComponent";
 import { ActivityIndicator } from "react-native";
 import axios from "axios";
@@ -17,15 +16,15 @@ const Exhibitions = () => {
   const [exhibitions, setExhibitions] = useState([]);
 
   const getExhibitions = async () => {
-      try {
-          const response = await axios.get(`${baseUrl}/api/exhibitions`);
-          response.data.map((item) => console.log(item));
-          setExhibitions(response.data);
-      } catch (error) {
-          console.error(error);
-      } finally {
-          setLoading(false);
-      }
+    try {
+      const response = await axios.get(`${baseUrl}/api/exhibitions`);
+      response.data.map((item) => console.log(item));
+      setExhibitions(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const renderFrameRow = () => {
@@ -34,14 +33,15 @@ const Exhibitions = () => {
     exhibitions.map((item, index) => {
       currentRow.push(
         <FrameComponent key={item.detail.id}
-                        id={item.detail.id}
-                        frameImage={item.detail.image_url}
-                        // frameAspectRatio={Math.round(item.detail.thumbnail.width/item.detail.thumbnail.height * 10) / 10}
-                        height={200}
-                        index={index}
-                        title={item.detail.title}
-                        // text={item.detail.thumbnail.alt_text}                        
-                        />
+          onFramePressablePress={() => { navigation.navigate('ExhibitionDetail', { ID: item.detail.id }) }}
+          id={item.detail.id}
+          frameImage={item.detail.image_url}
+          // frameAspectRatio={Math.round(item.detail.thumbnail.width/item.detail.thumbnail.height * 10) / 10}
+          height={200}
+          index={index}
+          title={item.detail.title}
+        // text={item.detail.thumbnail.alt_text}                        
+        />
       );
       if (currentRow.length === 3 || index === exhibitions.length - 1) {
         frameRows.push(
@@ -58,10 +58,10 @@ const Exhibitions = () => {
       </View>
     )
   };
-  
-  
+
+
   useEffect(() => {
-      getExhibitions();
+    getExhibitions();
   }, []);
 
   return (
@@ -70,7 +70,7 @@ const Exhibitions = () => {
         <ActivityIndicator />
       ) : (
         <Dashboard namePage={"Dashboard"}>
-          { renderFrameRow() }
+          {renderFrameRow()}
         </Dashboard>
       )}
     </View>
