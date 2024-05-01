@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import {User} from '../models/user.model';
+import {Cart, User} from '../models/user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {config} from "dotenv-flow";
@@ -140,4 +140,66 @@ export class UserController implements IBaseController {
     }
 }
 
+export class CartController implements IBaseController {
+    async get(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const cartId = req.params.id;
+        Cart.findByPk(cartId).then(cart => {
+            if (cart) {
+                res.status(200).json(cart);
+            } else {
+                res.status(404).json({message: 'Cart not found'});
+            }
+        });
+    }
+    async getAll(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        Cart.findAll().then(carts => {
+            res.status(200).json(carts);
+        });
+    }
+    async create(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const {userId, productIds, total, address, payMethod} = req.body;
+        try {
+            const newCart = await Cart.create({
+                userId,
+                productIds,
+                total,
+                address,
+                payMethod,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            });
+            res.status(201).json(newCart);
+        } catch (error) {
+            res.status(500).json({error: 'Error creating cart'});
+        }
+    }
+    async update(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const cartId = req.params.id;
+        const {userId, productIds, total, address, payMethod} = req.body;
+        Cart.findByPk(cartId).then(cart => {
+            if (cart) {
+                cart.update({userId, productIds, total, address, payMethod}).then(() => {
+                    res.status(200).json({message: 'Cart updated successfully'});
+                });
+            } else {
+                res.status(404).json({message: 'Cart not found'});
+            }
+        });
+    }
+    async delete(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const cartId = req.params.id;
+        Cart.findByPk(cartId).then(cart => {
+            if (cart) {
+                cart.destroy().then(() => {
+                    res.status(200).json({message: 'Cart deleted successfully'});
+                });
+            } else {
+                res.status(404).json({message: 'Cart not found'});
+            }
+        });
+    }
+
+
+}
+export const CartControllerInstance = new CartController();
 export const UserControllerInstance = new UserController();

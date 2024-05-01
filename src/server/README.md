@@ -136,7 +136,31 @@ Example:
 
 * Yêu cầu phải có header `Authorization` với giá trị là token của user
 * Yêu cầu phải có role là `admin`
-k 
+
+## Endpoints
+
+`/user/carts`<br>
+
+* `GET /user/carts`: Lấy thông tin giỏ hàng của user
+* `POST /user/carts`: Thêm sản phẩm vào giỏ hàng
+* `PUT /user/carts`: Cập nhập thông tin giỏ hàng
+* `DELETE /user/carts`: Xóa sản phẩm khỏi giỏ hàng
+
+
+```json
+{
+  "userId": 1,
+  "productIds": ["prod1", "prod2"],
+  "total": 100.00,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "Anystate",
+    "zip": "12345"
+  },
+  "payMethod": "Credit Card"
+}
+```
 
 ## Errors
 
