@@ -5,6 +5,7 @@ import {
     ArtworkControllerInstance,
     ExhibitionControllerInstance, ProductControllerInstance
 } from "../controllers/api.controller";
+import {CartControllerInstance} from "../controllers/user.controller";
 
 export const apiRouter = express.Router();
 // apiRouter.route("/*")
@@ -28,3 +29,5 @@ apiRouter.get('/products', (ProductControllerInstance.getAll));
 apiRouter.get('/products/:id', (ProductControllerInstance.get));
 apiRouter.put('/products/:id', authenticateAdmin, ProductControllerInstance.update);
 apiRouter.delete('/products/:id', authenticateAdmin, ProductControllerInstance.delete);
+
+
