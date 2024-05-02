@@ -111,11 +111,11 @@ export class UserController implements IBaseController {
                 role,
                 createdAt: new Date(),
                 updatedAt: new Date()
-            });            
+            });
             const token = jwt.sign({
                 email: newUser.email,
             }, process.env.SECRET_KEY as string, {expiresIn: '1h'});
-            res.status(201).json({"user":newUser, "token": token});
+            res.status(201).json({"user": newUser, "token": token});
         } catch (error) {
             res.status(500).json({error: 'Error signing up', message: error});
         }
@@ -128,7 +128,7 @@ export class UserController implements IBaseController {
             if (!user) {
                 return res.status(404).json({message: 'User not found'});
             }
-            if(password !== user.password){
+            if (password !== user.password) {
                 return res.status(401).json({message: 'Invalid password'});
             }
             const token = jwt.sign({
@@ -154,11 +154,13 @@ export class CartController implements IBaseController {
             }
         });
     }
+
     async getAll(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
         Cart.findAll().then(carts => {
             res.status(200).json(carts);
         });
     }
+
     async create(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
         const {userId, productIds, total, address, payMethod} = req.body;
         try {
@@ -176,6 +178,7 @@ export class CartController implements IBaseController {
             res.status(500).json({error: 'Error creating cart'});
         }
     }
+
     async update(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
         const cartId = req.params.id;
         const {userId, productIds, total, address, payMethod} = req.body;
@@ -189,6 +192,7 @@ export class CartController implements IBaseController {
             }
         });
     }
+
     async delete(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
         const cartId = req.params.id;
         Cart.findByPk(cartId).then(cart => {
@@ -202,7 +206,68 @@ export class CartController implements IBaseController {
         });
     }
 
+    async addProduct(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const cartId = req.params.id;
+        const productId = req.body.productId
+        Cart.findByPk(cartId).then(cart => {
+            if (cart) {
+                cart.productIds.push(productId);
+                cart.update({productIds: cart.productIds}).then(() => {
+                    res.status(200).json({message: 'Product added to cart successfully'});
+                });
+            } else {
+                res.status(404).json({message: 'Cart not found'});
+            }
+        });
+    }
+
+    async removeProduct(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const cartId = req.params.id;
+        const productId = req.body.productId
+        Cart.findByPk(cartId).then(cart => {
+            if (cart) {
+                cart.productIds = cart.productIds.filter((id: string) => id !== productId);
+                cart.update({productIds: cart.productIds}).then(() => {
+                    res.status(200).json({message: 'Product removed from cart successfully'});
+                });
+            } else {
+                res.status(404).json({message: 'Cart not found'});
+            }
+        });
+    }
+
+    async increaseProductQuantity(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const cartId = req.params.id;
+        const productId = req.body.productId
+        Cart.findByPk(cartId).then(cart => {
+            if (cart) {
+                cart.productIds.push(productId);
+                cart.update({productIds: cart.productIds}).then(() => {
+                    res.status(200).json({message: 'Product quantity increased successfully'});
+                });
+            } else {
+                res.status(404).json({message: 'Cart not found'});
+            }
+        });
+    }
+
+    async decreaseProductQuantity(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
+        const cartId = req.params.id;
+        const productId = req.body.productId
+        Cart.findByPk(cartId).then(cart => {
+            if (cart) {
+                cart.productIds.push(productId);
+                cart.update({productIds: cart.productIds}).then(() => {
+                    res.status(200).json({message: 'Product quantity decreased successfully'});
+                });
+            } else {
+                res.status(404).json({message: 'Cart not found'});
+            }
+        });
+    }
+
 
 }
+
 export const CartControllerInstance = new CartController();
 export const UserControllerInstance = new UserController();
