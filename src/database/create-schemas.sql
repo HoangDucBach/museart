@@ -47,5 +47,24 @@ CREATE TABLE IF NOT EXISTS users(
 
 
 
+-- Version 2.0
+CREATE TABLE IF NOT EXISTS comments
+(
+    id          SERIAL PRIMARY KEY,
+    user_id     UUID REFERENCES users (id) ON DELETE CASCADE,
+    comment     TEXT,
+    created_at  TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at  TIMESTAMP WITH TIME ZONE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS status
+(
+    id            integer PRIMARY KEY,
+    type          VARCHAR(255) NOT NULL,
+    number_of_likes INTEGER,
+    comment_ids    INTEGER[],
+    created_at    TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at    TIMESTAMP WITH TIME ZONE NOT NULL
+)
 
 
