@@ -53,7 +53,6 @@ export const ColorDark = {
   export const FontFamily = {
       typographyLabelLarge: "PlayfairDisplay-Regular",
       labelMediumBold: "PlayfairDisplay-Bold",
-      robotoMedium: "Roboto-Medium",
       labelLargeMedium: "PlayfairDisplay-Medium",
     };
     /* font sizes */

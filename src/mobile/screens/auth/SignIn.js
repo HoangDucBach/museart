@@ -50,7 +50,7 @@ const SignIn = () => {
           <Text style={styles.museart}>Museart</Text>
         </SafeAreaView>
         <View style={styles.welcomeToOnlineMuseumParent}>
-          <Text style={[styles.signTypo1, styles.welcomeToOnline]}>
+          <Text style={[styles.welcomeToOnline]}>
             Welcome to online museum!
           </Text>
           <Text style={styles.signInTo}>
@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: Color.colorWhite,
     alignSelf: "stretch",
+    fontFamily: FontFamily.labelMediumBold,
   },
   signInTo: {
     fontSize: FontSize.headline3Bold_size,
@@ -258,7 +259,6 @@ const styles = StyleSheet.create({
   signinBackground: {
     width: "100%",
     height: "100%",
-    justifyContent: "space-between",
     overflow: "hidden",
   },
 });

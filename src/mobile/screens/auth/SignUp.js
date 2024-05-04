@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     color: Color.colorWhite,
     alignSelf: "stretch",
     fontSize: FontSize.titleMediumBold_size,
+    fontFamily: FontFamily.labelMediumBold,
   },
   signUpTypo: {
     textAlign: "center",
