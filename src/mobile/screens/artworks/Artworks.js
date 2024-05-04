@@ -3,7 +3,6 @@ import { Text, StyleSheet, View, PanResponder, SafeAreaView, Image } from "react
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, Padding, FontSize, FontFamily } from "../../GlobalStyles";
 import Dashboard from "../../components/header/Dashboard";
-import Comment from "../../components/Comment";
 import FrameComponent from "../../components/FrameComponent";
 import AboutTitle from "../../components/detail/content/AboutTitle";
 import BoardExtraInfoArtwork from "../../components/detail/picure/BoardExtraInfoArtwork";
@@ -32,15 +31,15 @@ const Artworks = () => {
   const [artworks, setArtworks] = useState([]);
 
   const getArtworks = async () => {
-      try {
-          const response = await axios.get(`${baseUrl}/api/artworks`);
-          // response.data.map((item) => console.log(item));
-          setArtworks(response.data);
-      } catch (error) {
-          console.error(error);
-      } finally {
-          setLoading(false);
-      }
+    try {
+      const response = await axios.get(`${baseUrl}/api/artworks`);
+      // response.data.map((item) => console.log(item));
+      setArtworks(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const renderFrameRow = () => {
@@ -49,14 +48,14 @@ const Artworks = () => {
     artworks.map((item, index) => {
       currentRow.push(
         <FrameComponent key={item.detail.id}
-                        id={item.detail.id}
-                        frameImage={`https://www.artic.edu/iiif/2/${item.detail.image_id}/full/843,/0/default.jpg`}
-                        frameAspectRatio={Math.round(item.detail.thumbnail.width/item.detail.thumbnail.height * 10) / 10}
-                        height={200}
-                        index={index}
-                        title={item.detail.title}
-                        text={item.detail.thumbnail.alt_text}                        
-                        />
+          onFramePressablePress={() => { navigation.navigate('ArtworkDetail', { ID: item.detail.id }) }}
+          frameImage={`https://www.artic.edu/iiif/2/${item.detail.image_id}/full/843,/0/default.jpg`}
+          frameAspectRatio={Math.round(item.detail.thumbnail.width / item.detail.thumbnail.height * 10) / 10}
+          height={200}
+          index={index}
+          title={item.detail.artwork_type_title}
+          text={item.detail.thumbnail.alt_text}
+        />
       );
       if (currentRow.length === 3 || index === artworks.length - 1) {
         frameRows.push(
@@ -73,19 +72,19 @@ const Artworks = () => {
       </View>
     )
   };
-  
-  
+
+
   useEffect(() => {
-      getArtworks();
+    getArtworks();
   }, []);
-  
+
   return (
     <View style={{ flex: 1 }} {...panResponder.panHandlers}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <Dashboard namePage={"Dashboard"}>
-          { renderFrameRow() }
+          {renderFrameRow()}
         </Dashboard>
       )}
     </View>

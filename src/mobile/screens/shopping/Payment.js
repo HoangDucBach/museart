@@ -100,6 +100,7 @@ const Payment = () => {
                                 buttonPrimaryPaddingHorizontal={15}
                                 buttonPrimaryPaddingVertical={10}
                                 buttonPrimaryFlex={1}
+                                onPressButton={() => navigation.goBack()}
                             />
                             <ButtonPrimary
                                 text={"Pay now"}

@@ -27,7 +27,7 @@ const Shopping = () => {
 
 
     return (
-        <View>
+        <View style={{ flex: 1 }}>
             {isLoading ? (
                 <ActivityIndicator />
             ) : (

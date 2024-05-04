@@ -18,6 +18,8 @@ import NavbarBottom from "./components/footer/NavbarBottom";
 import { Dimensions } from "react-native";
 import ArticleDetail from "./screens/articles/ArticleDetail";
 import ProductDetail from "./screens/shopping/ProductDetail";
+import ArtworkDetail from "./screens/artworks/ArtworkDetail";
+import ExhibitionDetail from "./screens/exhibitions/ExhibitionDetail";
 
 const App = () => {
 
@@ -83,9 +85,11 @@ const App = () => {
               />
               <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
               <Stack.Screen name="ProductDetail" component={ProductDetail} />
+              <Stack.Screen name="ArtworkDetail" component={ArtworkDetail} />
+              <Stack.Screen name="ExhibitionDetail" component={ExhibitionDetail} />
             </Stack.Navigator>
           ) : null}
-            <NavbarBottom />
+          <NavbarBottom />
         </NavigationContainer>
       </Provider>
     </>

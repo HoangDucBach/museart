@@ -12,53 +12,20 @@ import FrameComponent from "./FrameButton";
 
 const AboutArtist = ({ imagePath }) => {
   return (
-    <View style={{ padding: 10 }}>
+    <View
+      style={[styles.aboutArtistContainer, styles.tagartistofartworkFlexBox]}
+    >
+      <Image
+        style={styles.aboutTheArtistChild}
+        contentFit="cover"
+        source={{
+          uri: "https://fastly.picsum.photos/id/391/200/300.jpg?hmac=3xP-y2PRN2E0__aPOCp1sja7XrimKgLQAMiSaNd0Cko",
+        }}
+      />
       <View
-        style={[styles.aboutArtistContainer, styles.tagartistofartworkFlexBox]}
+        style={[styles.tagartistofartwork, styles.tagartistofartworkFlexBox]}
       >
-        <Image
-          style={styles.aboutTheArtistChild}
-          contentFit="cover"
-          source={{
-            uri: "https://fastly.picsum.photos/id/391/200/300.jpg?hmac=3xP-y2PRN2E0__aPOCp1sja7XrimKgLQAMiSaNd0Cko",
-          }}
-        />
-        <View
-          style={[styles.tagartistofartwork, styles.tagartistofartworkFlexBox]}
-        >
-          <Text style={styles.aboutArtist}>About the artist</Text>
-        </View>
-      </View>
-      <View
-        style={[
-          styles.containerfullinformationofartw,
-          styles.descriptioncontainerFlexBox,
-        ]}
-      >
-        <FrameComponent
-          field="Date"
-          value="1683-1686"
-          propAlignSelf="stretch"
-          propColor="#231919"
-        />
-        <FrameComponent
-          field="Museum"
-          value="Chicago"
-          propAlignSelf="stretch"
-          propColor="#101010"
-        />
-        <FrameComponent
-          field="Size"
-          value="6679 x 6577"
-          propAlignSelf="stretch"
-          propColor="#231919"
-        />
-        <FrameComponent
-          field="Place of Origin"
-          value="England"
-          propAlignSelf="stretch"
-          propColor="#231919"
-        />
+        <Text style={styles.aboutArtist}>About the artist</Text>
       </View>
     </View>
   );
@@ -71,6 +38,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   aboutTheArtistChild: {
+    borderRadius: 150 / 2,
+    overflow: "hidden",
     width: 75,
     height: 75,
   },
@@ -90,7 +59,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     // width: Dimensions.get('window').width,
     justifyContent: "center",
-    marginVertical: 15,
+    marginTop: 15,
   },
 });
 
