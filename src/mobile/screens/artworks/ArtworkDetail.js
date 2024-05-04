@@ -22,7 +22,8 @@ const ArtworkDetail = () => {
 
     const getArtwork = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/api/artworks/${ID}`);
+            console.log(`${baseUrl}/api/v1/artworks/${ID}`);
+            const response = await axios.get(`${baseUrl}/api/v1/artworks/${ID}`);
             setArtwork(response.data[0].detail);
             console.log(ID);
             console.log(artwork);
