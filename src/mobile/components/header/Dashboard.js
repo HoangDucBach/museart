@@ -1,28 +1,28 @@
 import * as React from "react";
-import {useSelector} from "react-redux";
-import {Text, StyleSheet, View, SafeAreaView, ScrollView} from "react-native";
+import { useSelector } from "react-redux";
+import { Text, StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
 import NavbarTop from "./NavbarTop";
 import DashboardSearchEngine from "./DashboardSearchEngine";
-import {Color, Border, Padding, FontSize, FontFamily, ColorDark} from "../../GlobalStyles";
+import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../../GlobalStyles";
 
 const Dashboard = ({
-                       namePage,
-                       children,
+    namePage,
+    children,
 
-                   }) => {
+}) => {
     const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
     return (
         // style={[styles.artworks, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]}
-        <SafeAreaView className={'w-screen p-4'}>
+        <SafeAreaView className={'w-screen'}>
             {/* <View style={{paddingHorizontal: 10}}> */}
-            <NavbarTop/>
+            <NavbarTop />
             {/* </View> */}
             <View style={styles.body}>
                 <View style={styles.dashboardtitleFlexBox}>
                     <Text className={'text-white text-xl font-playfairBold'}>{namePage}</Text>
                 </View>
-                <DashboardSearchEngine/>
+                <DashboardSearchEngine />
             </View>
             <ScrollView contentContainerStyle={{}} className={'w-full'}>
                 {children}

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { createContext, useId, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { isLoading } from "expo-font";
-import { baseUrl } from "../services/api";
+import { localhost } from "../services/api";
 
 export const AuthContext = createContext();
 
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     const signup = async (username, email, password, role) => {
         setLoading(true);
 
-        await axios.post(`${baseUrl}/auth/signup`, {
+        await axios.post(`${localhost}/auth/signup`, {
             username, email, password, role
         }).then(res => {
             let userInfo = res.data;
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const signin = async (email, password) => {
         setLoading(true);
 
-        await axios.post(`${baseUrl}/auth/signin`, {
+        await axios.post(`${localhost}/auth/signin`, {
             email,
             password,
         }).then(res => {

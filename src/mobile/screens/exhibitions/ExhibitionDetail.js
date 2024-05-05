@@ -22,8 +22,8 @@ const ExhibitionDetail = () => {
 
     const getExhibition = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/api/exhibitions/${ID}`);
-            setexhibition(response.data[0].detail);
+            const response = await axios.get(`${baseUrl}/exhibitions/${ID}`);
+            setexhibition(response.data.data);
             console.log(ID);
             console.log(exhibition);
         } catch (error) {

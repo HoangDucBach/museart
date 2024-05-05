@@ -1,16 +1,16 @@
-import React, {useRef, useState, useEffect} from "react";
-import {Text, StyleSheet, View, PanResponder, SafeAreaView, Image, FlatList, ScrollView} from "react-native";
-import {useNavigation} from "@react-navigation/native";
-import {Color, Border, Padding, FontSize, FontFamily} from "../../GlobalStyles";
+import React, { useRef, useState, useEffect } from "react";
+import { Text, StyleSheet, View, PanResponder, SafeAreaView, Image, FlatList, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Color, Border, Padding, FontSize, FontFamily } from "../../GlobalStyles";
 import Dashboard from "../../components/header/Dashboard";
 import FrameComponent from "../../components/FrameComponent";
 import AboutTitle from "../../components/detail/content/AboutTitle";
 import BoardExtraInfoArtwork from "../../components/detail/picure/BoardExtraInfoArtwork";
-import {useDispatch} from "react-redux";
-import {toggleMove} from "../../store";
+import { useDispatch } from "react-redux";
+import { toggleMove } from "../../store";
 import axios from "axios";
-import {baseUrl} from "../../services/api";
-import {ActivityIndicator} from "react-native";
+import { baseUrl } from "../../services/api";
+import { ActivityIndicator } from "react-native";
 
 const Artworks = () => {
     const navigation = useNavigation();
@@ -34,7 +34,7 @@ const Artworks = () => {
 
     const getArtworks = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/api/v1/artworks`);
+            const response = await axios.get(`${baseUrl}/artworks?page=${page}`);
             setArtworks([...artworks, ...response.data.data]);
         } catch (error) {
             console.error(error);
@@ -45,7 +45,6 @@ const Artworks = () => {
     const loadMore = () => {
         setPage(page + 1);
     }
-
     useEffect(() => {
         getArtworks();
     }, [page]);
@@ -83,15 +82,15 @@ const Artworks = () => {
     //     )
     // };
 
-    const renderItem = ({item}) => {
+    const renderItem = ({ item }) => {
         return (
             <FrameComponent key={item.id}
-                            onFramePressablePress={() => {
-                                navigation.navigate('ArtworkDetail', {ID: item.id})
-                            }}
-                            frameImage={`https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`}
-                            title={item.artwork_type_title}
-                            text={item.thumbnail?.alt_text}
+                onFramePressablePress={() => {
+                    navigation.navigate('ArtworkDetail', { ID: item.id })
+                }}
+                frameImage={`https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`}
+                title={item.artwork_type_title}
+                text={item.thumbnail?.alt_text}
             />
         )
     }
@@ -100,7 +99,7 @@ const Artworks = () => {
     return (
         <View style={{}} className={'w-screen box-border'} {...panResponder.panHandlers}>
             {isLoading ? (
-                <ActivityIndicator/>
+                <ActivityIndicator />
             ) : (
                 <Dashboard namePage={"Dashboard"}>
                     <SafeAreaView
@@ -138,101 +137,6 @@ const Artworks = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    artworks: {
-        backgroundColor: Color.surfaceSurfaceContainer,
-        width: "100%",
-        height: "100%",
-        justifyContent: "space-between",
-        alignItems: "center",
-        overflow: "scroll",
-    },
-    dashboardtitleFlexBox: {
-        flexDirection: "row",
-        alignSelf: "stretch",
-    },
-    dashboard: {
-        fontSize: FontSize.headline5Bold_size,
-        color: Color.surfaceOnSurface,
-        textAlign: "left",
-        fontFamily: FontFamily.labelMediumBold,
-        fontWeight: "700",
-        flex: 1,
-    },
-    instanceParent: {
-        flexWrap: "wrap",
-        overflow: "hidden",
-        flexDirection: "row",
-        flex: 1,
-    },
-    titleParentFlexBox: {
-        justifyContent: "center",
-        alignSelf: "stretch",
-        overflow: "hidden",
-    },
-    frameWrapperSpaceBlock: {
-        marginLeft: 10,
-        justifyContent: "flex-end",
-        backgroundColor: Color.colorGray_100,
-        borderRadius: Border.br_3xs,
-        padding: Padding.p_3xs,
-        overflow: "hidden",
-    },
-    titleClr: {
-        color: Color.primaryOnPrimary,
-        textAlign: "left",
-    },
-    frameWrapperLayout: {
-        height: 282,
-        marginLeft: 10,
-        justifyContent: "flex-end",
-        backgroundColor: Color.colorGray_100,
-        borderRadius: Border.br_3xs,
-        padding: Padding.p_3xs,
-        overflow: "hidden",
-    },
-    title: {
-        fontSize: FontSize.titleMediumBold_size,
-        fontFamily: FontFamily.labelMediumBold,
-        fontWeight: "700",
-        color: Color.primaryOnPrimary,
-    },
-    title1: {
-        fontSize: FontSize.labelMediumBold_size,
-        fontWeight: "300",
-        fontFamily: FontFamily.labelLargeMedium,
-        marginTop: 5,
-    },
-    frameWrapper: {
-        height: 113,
-        width: 128,
-    },
-    frameView: {
-        width: 371,
-        height: 258,
-    },
-    frameWrapper1: {
-        width: 128,
-    },
-    frameWrapper2: {
-        width: 233,
-    },
-    frameWrapper3: {
-        height: 124,
-        width: 128,
-    },
-    dashboardmain: {
-        marginTop: 15,
-        alignItems: "center",
-        flex: 1,
-        justifyContent: "center",
-    },
-    body: {
-        alignSelf: "stretch",
-        padding: Padding.p_3xs,
-        alignItems: "center",
-        overflow: "hidden",
-    },
-});
+const styles = StyleSheet.create({});
 
 export default Artworks;
