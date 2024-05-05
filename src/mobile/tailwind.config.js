@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./App.{js,jsx,ts,tsx}", "./screens/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}", "./layouts/**/*.{js,jsx,ts,tsx}", "./styles/**/*.{js,jsx,ts,tsx}", "./public/index.html","./src/**/*.{js,jsx,ts,tsx}", "./src/**/**/*.{js,jsx,ts,tsx}"],
-        theme: {
+    content: ["./App.{js,jsx,ts,tsx}",
+        "./screens/**/*.{js,ts,jsx,tsx}",
+        "./pages/**/*.{js,ts,jsx,tsx}",
+        "./components/**/*.{js,ts,jsx,tsx}"
+    ],
+    theme: {
         extend: {
             fontFamily: {
                 playfair: ['PlayfairDisplay-Regular', 'serif'],
@@ -42,11 +46,11 @@ module.exports = {
                     light: '#EFE8DC',
                     dark: '#3f3f3f',
                 },
-              onSurface: {
-                DEFAULT: '#827775',
-                light: '#827775',
-                dark: '#F5F2EC',
-              },
+                onSurface: {
+                    DEFAULT: '#827775',
+                    light: '#827775',
+                    dark: '#F5F2EC',
+                },
             }
         },
     },

@@ -13,7 +13,7 @@ const Dashboard = ({
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
-    <SafeAreaView style={[styles.artworks, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]}>
+    <SafeAreaView style={[styles.artworks, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]} className={'w-screen p-4'}>
       {/* <View style={{paddingHorizontal: 10}}> */}
       <NavbarTop />
       {/* </View> */}
@@ -23,7 +23,7 @@ const Dashboard = ({
         </View>
         <DashboardSearchEngine />
       </View>
-      <ScrollView style={{ padding: 10, paddingBottom: 20, alignSelf: "stretch"}} contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView  contentContainerStyle={{flexGrow: 1}} className={'w-full'}>
         {children}
         <View style={{ height: 70 }} />
       </ScrollView>
