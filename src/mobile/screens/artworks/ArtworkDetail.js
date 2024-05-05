@@ -24,9 +24,7 @@ const ArtworkDetail = () => {
         try {
             console.log(`${baseUrl}/api/v1/artworks/${ID}`);
             const response = await axios.get(`${baseUrl}/api/v1/artworks/${ID}`);
-            setArtwork(response.data[0].detail);
-            console.log(ID);
-            console.log(artwork);
+            setArtwork(response.data.data);
         } catch (error) {
             //console.log(artwork);
             console.error(error);
@@ -40,19 +38,19 @@ const ArtworkDetail = () => {
     }, []);
 
     return (
-        <View style={styles.artworkContainer}>
+        <View className={'font-playfair bg-surface'}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
                 <ScrollView style={styles.body}>
-                    <Picture altText={artwork.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
-                    <AboutTitle title={artwork.artwork_type_title} tagRoute={"Artwork"} tagDetail={"Art"} isPrice={false} />
+                    <Picture altText={artwork?.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork?.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
+                    <AboutTitle title={artwork?.artwork_type_title} tagRoute={"Artwork"} tagDetail={"Art"} isPrice={false} />
                     <AboutArtist />
                     <View>
-                        <FrameButton field="Title" value={artwork.artwork_type_title} propColor="#231919" />
-                        <FrameButton field="Date" value={`${artwork.date_start}-${artwork.date_end}`} propColor="#101010" />
-                        <FrameButton field="Place of Origin" value={artwork.place_of_origin} propColor="#231919" />
+                        <FrameButton field="Title" value={artwork?.artwork_type_title} propColor="#231919" />
+                        <FrameButton field="Date" value={`${artwork?.date_start}-${artwork?.date_end}`} propColor="#101010" />
+                        <FrameButton field="Place of Origin" value={artwork?.place_of_origin} propColor="#231919" />
                         <FrameButton
                             field="Dimensions"
                             value={artwork.dimensions}

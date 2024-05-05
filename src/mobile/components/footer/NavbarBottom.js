@@ -50,7 +50,7 @@ const NavbarBottom = () => {
           contentFit="cover"
           source={isDarkMode ? require("../../assets/artworkDark.png") : require("../../assets/artworkicon.png")}
         />
-        {selectedTab == "Artworks" && <Text style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>Artworks</Text>}
+        {selectedTab == "Artworks" && <Text className={'pl-1 text-white font-playfairBold'}>Artworks</Text>}
       </Pressable>
       <Pressable onPress={() => { handleTabPress("Exhibitions") }}
         style={[styles.navbaritemFlexBox, selectedTab == "Exhibitions" && [styles.navbaritem, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]]}>
@@ -59,7 +59,7 @@ const NavbarBottom = () => {
           contentFit="cover"
           source={isDarkMode ? require("../../assets/Frame32.png") : require("../../assets/frame-32.png")}
         />
-        {selectedTab == "Exhibitions" && <Text style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>Exhibitions</Text>}
+        {selectedTab == "Exhibitions" && <Text className={'pl-1 text-white font-playfairBold'}>Exhibitions</Text>}
       </Pressable>
       <Pressable onPress={() => { handleTabPress("Articles") }}
         style={[styles.navbaritemFlexBox, selectedTab == "Articles" && [styles.navbaritem, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]]}>
@@ -68,7 +68,7 @@ const NavbarBottom = () => {
           contentFit="cover"
           source={isDarkMode ? require("../../assets/Frame33.png") : require("../../assets/articleicon.png")}
         />
-        {selectedTab == "Articles" && <Text style={[styles.textLayout, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>Articles</Text>}
+        {selectedTab == "Articles" && <Text className={'pl-1 text-white font-playfairBold'}>Articles</Text>}
       </Pressable>
       <Pressable onPress={() => { handleTabPress("Shopping") }}
         style={[styles.navbaritemFlexBox, selectedTab == "Shopping" && [styles.navbaritem, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]]}>
@@ -77,7 +77,7 @@ const NavbarBottom = () => {
           contentFit="cover"
           source={isDarkMode ? require("../../assets/Frame34.png") : require("../../assets/shoppingicon.png")}
         />
-        {selectedTab == "Shopping" && <Text style={[styles.textLayout, , isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>Shopping</Text>}
+        {selectedTab == "Shopping" && <Text className={'pl-1 text-white font-playfairBold'}>Shopping</Text>}
       </Pressable>
     </Animated.View>
   );

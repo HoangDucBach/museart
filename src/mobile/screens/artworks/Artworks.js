@@ -98,26 +98,40 @@ const Artworks = () => {
 
 
     return (
-        <View style={{flex: 1}} {...panResponder.panHandlers}>
+        <View style={{}} className={'w-screen box-border'} {...panResponder.panHandlers}>
             {isLoading ? (
                 <ActivityIndicator/>
             ) : (
                 <Dashboard namePage={"Dashboard"}>
-                    <ScrollView
-                        horizontal
-                        className={'w-full text-center'}
+                    <SafeAreaView
+                        horizonta={false}
+                        className={'w-full text-center flex'}
                     >
                         <FlatList
                             key={'_'}
-                            numColumns={2}
+                            numColumns={1}
                             data={artworks}
                             renderItem={renderItem}
                             keyExtractor={(item, index) => index.toString()}
                             onEndReached={loadMore}
                             onEndReachedThreshold={5}
-                            className={'w-screen text-center p-4'}
+                            className={'w-full text-center box-border p-4'}
+                            // contentContainerStyle={{
+                            //     display: 'grid',
+                            //     gridTemplateColumns: 'repeat(auto-fill, var(--card_width))',
+                            //     gridAutoRows: 'var(--row_increment)',
+                            //     justifyContent: 'center'
+                            // }}
+                            contentContainerStyle={{
+                                display: 'flex',
+                                gap: 16,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                width: '100%',
+                            }}
+                            scrollEnabled={false}
                         />
-                    </ScrollView>
+                    </SafeAreaView>
                 </Dashboard>
             )}
         </View>

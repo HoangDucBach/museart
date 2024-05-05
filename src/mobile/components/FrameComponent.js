@@ -33,18 +33,17 @@ const FrameComponent = ({
 
     return (
         // style={[styles.frameWrapper]}
-        <Pressable className={'w-full h-fit'} onPress={onFramePressablePress}>
-            <ImageBackground
+        <Pressable className={'w-screen flex flex-col gap-4 items-center justify-center'}
+                   onPress={onFramePressablePress}>
+            <Image
                 source={{uri: frameImage}}
-                resizeMode="cover"
-                className={'max-w-full h-max'}
-            >
-                <View style={styles.titleParent}>
-                    <Text style={[styles.title, styles.titleFlexBox]} className={'w-full'}>{title}</Text>
-                    <Text style={[styles.title1, styles.titleFlexBox]} numberOfLines={2}
-                          className={'w-full'}>{text}</Text>
-                </View>
-            </ImageBackground>
+                style={{width: '100%', height: 'auto', aspectRatio: 1, borderRadius: 16}}
+
+            />
+            <View style={styles.titleParent}>
+                <Text className={'w-full text-white font-playfairBold break-words'}>{title}</Text>
+                <Text className={'w-full text-white font-playfair break-words'}>{text}</Text>
+            </View>
         </Pressable>
     );
 };
