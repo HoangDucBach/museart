@@ -1,1 +1,2 @@
-export const baseUrl = 'http://192.168.1.6:8000';
+export const baseUrl = 'https://api.artic.edu/api/v1';
+export const localhost = 'http://localhost:8000';

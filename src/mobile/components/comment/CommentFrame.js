@@ -1,27 +1,27 @@
 import * as React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useSelector } from "react-redux";
-import { Padding, Color, ColorDark, FontFamily, Border, FontSize } from "../GlobalStyles";
+import { Padding, Color, ColorDark, FontFamily, Border, FontSize } from "../../GlobalStyles";
 
-const Comment = ({
-    userName,
-    date,
-    text,
+const CommentFrame = ({
+  userName,
+  date,
+  text,
 }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
     // <View style={{}}>
-      <View style={[styles.frameParent, styles.usercommentSpaceBlock, isDarkMode ?  {backgroundColor: ColorDark.surfaceSurfaceContainerHighest} : null]}>
-        <View style={styles.usernameParent}>
-          <Text style={[styles.username, styles.usernameTypo, isDarkMode ? {color: ColorDark.surfaceOnSurfaceVarient} : null]}>{userName}</Text>
-          <Text style={[styles.ddmmyyyy, styles.usernameTypo, isDarkMode ? {color: ColorDark.primaryPrimary} : null]}>{date}</Text>
-        </View>
-        <Text
-          style={[styles.text, isDarkMode ? {color: ColorDark.surfaceOnSurface} : null]}>    
-            {text}
-          </Text>
+    <View style={[styles.frameParent, styles.usercommentSpaceBlock, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]}>
+      <View style={styles.usernameParent}>
+        <Text style={[styles.username, styles.usernameTypo, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]}>{userName}</Text>
+        <Text style={[styles.ddmmyyyy, styles.usernameTypo, isDarkMode ? { color: ColorDark.primaryPrimary } : null]}>{date}</Text>
       </View>
+      <Text
+        style={[styles.text, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>
+        {text}
+      </Text>
+    </View>
     // </View>
   );
 };
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Comment;
+export default CommentFrame;

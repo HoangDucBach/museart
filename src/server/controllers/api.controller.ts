@@ -3,6 +3,9 @@ import {Article, Artwork, Exhibition, Product, Sound} from "../models/api.model"
 import {createQueryCondition} from "../models/helper.model";
 import {IArgumentsController, IBaseController} from "./base.controller";
 
+/**
+ * @deprecated use root api  instead
+ */
 export class ArtworkController implements IBaseController {
     create(req: Request, res: Response, next: NextFunction): Promise<void> {
         throw new Error("Method not implemented.");
@@ -69,6 +72,9 @@ export class ArtworkController implements IBaseController {
     }
 }
 
+/**
+ * @deprecated use root api  instead
+ */
 export class ExhibitionController implements IBaseController {
     async create(req: Request, res: Response, next: NextFunction): Promise<void> {
         return Promise.resolve(undefined);
@@ -131,6 +137,9 @@ export class ExhibitionController implements IBaseController {
     }
 }
 
+/**
+ * @deprecated use root api  instead
+ */
 export class ArticleController implements IBaseController {
     async get(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
@@ -192,6 +201,9 @@ export class ArticleController implements IBaseController {
     }
 }
 
+/**
+ * @deprecated use root api  instead
+ */
 export class ProductController implements IBaseController {
     async get(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {

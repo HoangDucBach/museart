@@ -23,7 +23,7 @@ export const Color = {
   primaryPrimaryFixed: "#868686",
   surfaceOutline: "#857371",
   colorGray_100: "#262626",
-  surfaceOnSurface: "#231919",
+  surfaceOnSurface: "#ffffff",
   colorGray_200: "#1c1b14",
   colorGray_300: "#101010",
   colorGray_400: "rgba(12, 12, 12, 0.8)",
@@ -53,7 +53,6 @@ export const ColorDark = {
   export const FontFamily = {
       typographyLabelLarge: "PlayfairDisplay-Regular",
       labelMediumBold: "PlayfairDisplay-Bold",
-      robotoMedium: "Roboto-Medium",
       labelLargeMedium: "PlayfairDisplay-Medium",
     };
     /* font sizes */

@@ -7,6 +7,9 @@ import {
 } from "../controllers/api.controller";
 import {CartControllerInstance} from "../controllers/user.controller";
 
+/**
+ * @deprecated Use root api instead
+ */
 export const apiRouter = express.Router();
 // apiRouter.route("/*")
 //     .get(authenticateToken);

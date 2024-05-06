@@ -13,7 +13,7 @@ const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
   return (
     <View style={styles.containerartworktitleParent}>
       <View style={styles.containerartworktitle}>
-        <Text style={styles.aboutOfTitle}>{title}</Text>
+        <Text className={'text-white text-2xl font-playfairBold'}>{title}</Text>
         <View style={styles.tagstype}>
           <View style={[styles.artworkWrapper, styles.wrapperSpaceBlock]}>
             <Text style={styles.artwork}>{tagRoute}</Text>
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+    marginTop: 15,
   },
   text: {
     fontSize: FontSize.bodyXlargeBold_size,

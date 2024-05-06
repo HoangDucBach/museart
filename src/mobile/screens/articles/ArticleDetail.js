@@ -20,8 +20,8 @@ const ArticleDetail = () => {
 
     const getArticle = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/api/articles/${ID}`);
-            setArticle(response.data[0].detail);
+            const response = await axios.get(`${baseUrl}/articles/${ID}`);
+            setArticle(response.data.data);
             console.log(ID);
             console.log(article);
         } catch (error) {
