@@ -6,9 +6,12 @@ import ButtonPrimary from "../button/ButtonPrimary";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleMove, toggleTab, toggleTheme } from "../../store";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const SettingsMenu = () => {
+  const { logout, userToken } = useContext(AuthContext);
+
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   const navigation = useNavigation();
@@ -28,21 +31,31 @@ const SettingsMenu = () => {
         dispatch(toggleTab("Cart"));
       }} />
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" func={() => navigation.navigate("Payment")} />
-      <View style={[styles.flexRow, styles.flexRowButton]}>
-        <ButtonPrimary text="Sign in"
-          textSize={FontSize.labelLargeBold_size}
-          textMargin={8}
-          buttonPrimaryFlex={1}
-          onPressButton={() => { navigation.navigate("SignIn") }}
-        />
-        <ButtonPrimary text="Sign up"
-          textSize={FontSize.labelLargeBold_size}
-          buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}
-          buttonPrimaryMarginLeft={15}
-          buttonPrimaryFlex={1}
-          onPressButton={() => { navigation.navigate("SignUp") }}
-        />
-      </View>
+      {userToken == null ?
+        <View style={[styles.flexRow, styles.flexRowButton]}>
+          <ButtonPrimary text="Sign in"
+            textSize={FontSize.labelLargeBold_size}
+            textMargin={8}
+            buttonPrimaryFlex={1}
+            onPressButton={() => { navigation.navigate("SignIn") }}
+          />
+          <ButtonPrimary text="Sign up"
+            textSize={FontSize.labelLargeBold_size}
+            buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}
+            buttonPrimaryMarginLeft={15}
+            buttonPrimaryFlex={1}
+            onPressButton={() => { navigation.navigate("SignUp") }}
+          />
+        </View> :
+        <View style={[styles.flexRow, styles.flexRowButton]}>
+          <ButtonPrimary text="Logout"
+            textSize={FontSize.labelLargeBold_size}
+            textMargin={8}
+            buttonPrimaryFlex={1}
+            onPressButton={() => { logout() }}
+          />
+        </View>
+      }
       <View style={[styles.ellipseParent, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
         <Pressable onPress={() => { isDarkMode ? null : dispatch(toggleTheme()) }}>
           <Image style={{ width: 25, height: 25 }} source={isDarkMode ? require("../../assets/ellipse-41.png") : require("../../assets/ellipse-3.png")} />
