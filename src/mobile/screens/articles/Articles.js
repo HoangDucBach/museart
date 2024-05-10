@@ -35,7 +35,7 @@ const Articles = () => {
     }, [page]);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View className={'flex-1 pb-60'}>
             {isLoading ? (
                 <ActivityIndicator />
             ) : (

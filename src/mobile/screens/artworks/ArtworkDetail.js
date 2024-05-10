@@ -38,7 +38,7 @@ const ArtworkDetail = () => {
     }, []);
 
     return (
-        <View className={'font-playfair bg-surface'}>
+        <View style={styles.artworkContainer}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
@@ -92,10 +92,6 @@ const ArtworkDetail = () => {
 };
 
 const styles = StyleSheet.create({
-    contentSpaceBlock: {
-        marginTop: 15,
-        alignSelf: "stretch",
-    },
     descriptioncontainerFlexBox: {
         justifyContent: "center",
         marginTop: 15,
@@ -105,33 +101,13 @@ const styles = StyleSheet.create({
         textAlign: "left",
         color: Color.surfaceOnSurface,
     },
-    containerfullinformationofartw: {
-        alignItems: "center",
-    },
-    description: {
-        fontSize: FontSize.titleMediumBold_size,
-        fontWeight: "700",
-        fontFamily: FontFamily.labelMediumBold,
-    },
     loremIpsumIsSimply: {
         fontSize: FontSize.labelLargeBold_size,
         fontFamily: FontFamily.typographyLabelLarge,
         alignSelf: "stretch",
     },
-    content: {
-        paddingHorizontal: Padding.p_3xs,
-        paddingTop: Padding.p_31xl,
-        paddingBottom: Padding.p_3xs,
-        flex: 1,
-    },
-    dashboardMain: {
-        padding: Padding.p_3xs,
-        alignSelf: "stretch",
-        alignItems: "center",
-    },
     artworkContainer: {
         paddingHorizontal: Padding.p_3xs,
-        borderRadius: Border.br_18xl,
         backgroundColor: Color.surfaceSurfaceContainer,
         borderStyle: "solid",
         borderColor: Color.colorBlack,
@@ -144,7 +120,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch",
-        marginBottom: 80
     },
 });
 

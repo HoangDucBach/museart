@@ -137,6 +137,4 @@ const Artworks = () => {
     );
 };
 
-const styles = StyleSheet.create({});
-
 export default Artworks;

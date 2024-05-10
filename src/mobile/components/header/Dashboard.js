@@ -32,25 +32,10 @@ const Dashboard = ({
 };
 
 const styles = StyleSheet.create({
-    artworks: {
-        // padding: Padding.p_3xs,
-        flex: 1,
-        backgroundColor: Color.surfaceSurfaceContainer,
-        justifyContent: "space-between",
-        alignItems: "center",
-        overflow: "scroll",
-    },
     dashboardtitleFlexBox: {
         flexDirection: "row",
         alignSelf: "flex-start",
         paddingLeft: 10,
-    },
-    dashboard: {
-        fontSize: FontSize.headline5Bold_size,
-        color: Color.surfaceOnSurface,
-        textAlign: "left",
-        fontFamily: FontFamily.labelMediumBold,
-        fontWeight: "700",
     },
     body: {
         alignSelf: "stretch",

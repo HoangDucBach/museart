@@ -61,46 +61,39 @@ const Exhibitions = () => {
   }
 
   return (
-    <View style={{}} className={'w-screen box-border'} {...panResponder.panHandlers}>
+    <View style={{}} className={'flex-1'} {...panResponder.panHandlers}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <Dashboard namePage={"Dashboard"}>
-          <SafeAreaView
-            horizonta={false}
-            className={'w-full text-center flex'}
-          >
-            <FlatList
-              key={'_'}
-              numColumns={1}
-              data={exhibitions}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => index.toString()}
-              onEndReached={loadMore}
-              onEndReachedThreshold={5}
-              className={'w-full text-center box-border p-4'}
-              // contentContainerStyle={{
-              //     display: 'grid',
-              //     gridTemplateColumns: 'repeat(auto-fill, var(--card_width))',
-              //     gridAutoRows: 'var(--row_increment)',
-              //     justifyContent: 'center'
-              // }}
-              contentContainerStyle={{
-                display: 'flex',
-                gap: 16,
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-              }}
-              scrollEnabled={false}
-            />
-          </SafeAreaView>
+          <FlatList
+            key={'_'}
+            numColumns={1}
+            data={exhibitions}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            //onEndReached={loadMore}
+            onEndReachedThreshold={5}
+            className={'flex-1 p-4 pb-60'}
+            // contentContainerStyle={{
+            //     display: 'grid',
+            //     gridTemplateColumns: 'repeat(auto-fill, var(--card_width))',
+            //     gridAutoRows: 'var(--row_increment)',
+            //     justifyContent: 'center'
+            // }}
+            contentContainerStyle={{
+              display: 'flex',
+              gap: 16,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+            }}
+            scrollEnabled={false}
+          />
         </Dashboard>
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Exhibitions;
