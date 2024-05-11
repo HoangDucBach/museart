@@ -1,8 +1,8 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit"; 
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const themeSlice = createSlice({
     name: "theme",
-    initialState: { isDarkMode: false },
+    initialState: { isDarkMode: true },
     reducers: {
         toggleTheme: state => {
             state.isDarkMode = !state.isDarkMode;
@@ -12,7 +12,7 @@ const themeSlice = createSlice({
 
 const tabSlice = createSlice({
     name: "tab",
-    initialState: {tab: "nothing"},
+    initialState: { tab: "nothing" },
     reducers: {
         toggleTab: (state, action) => {
             state.tab = action.payload
@@ -22,7 +22,7 @@ const tabSlice = createSlice({
 
 const gestureSlice = createSlice({
     name: "gesture",
-    initialState: {move: 0},
+    initialState: { move: 0 },
     reducers: {
         toggleMove: (state, action) => {
             state.move = action.payload

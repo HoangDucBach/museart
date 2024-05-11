@@ -1,31 +1,89 @@
-const Stack = createNativeStackNavigator();
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import { useFonts } from "expo-font";
 
 import SignIn from "./screens/auth/SignIn";
 import SignUp from "./screens/auth/SignUp";
-import Artworks from "./screens/artworks/Artworks";
 import Cart from "./screens/shopping/Cart";
-import Exhibitions from "./screens/exhibitions/Exhibitions";
-import Articles from "./screens/articles/Articles";
-import Shopping from "./screens/shopping/Shopping";
 import Payment from "./screens/shopping/Payment";
-import NavbarBottom from "./components/footer/NavbarBottom";
-import { Dimensions } from "react-native";
-import ArticleDetail from "./screens/articles/ArticleDetail";
-import ProductDetail from "./screens/shopping/ProductDetail";
-import ArtworkDetail from "./screens/artworks/ArtworkDetail";
-import ExhibitionDetail from "./screens/exhibitions/ExhibitionDetail";
+import { ActivityIndicator, Dimensions, View } from "react-native";
+import { AuthContext } from "./context/authContext";
+import HomeTabs from "./navigation/HomeTabs";
+import RequireAuthentication from "./navigation/RequireAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { localhost } from "./services/api";
+import axios from "axios";
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const [userToken, setUserToken] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState(null);
 
-  // const[hideNavarBottom, setHideNavarBottom] = React.useState(false);
+  const signup = async (username, email, password, role) => {
+    setLoading(true);
+    await axios.post(`${localhost}/auth/signup`, {
+      username, email, password, role
+    }).then(res => {
+      let userInfo = res.data;
+      setUserInfo(userInfo);
+      AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+      setUserToken(userInfo.token);
+      AsyncStorage.setItem('userToken', userInfo.token);
+      console.log(res.data);
+    }).catch(e => {
+      console.log(`sign up error: ${e}`);
+    });
+    setLoading(false);
+  }
 
-  const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
+  const signin = (email, password) => {
+    setLoading(true);
+    axios.post(`${localhost}/auth/signin`, {
+      email, password
+    }).then(res => {
+      let userInfo = res.data;
+      setUserInfo(userInfo);
+      AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+      setUserToken(userInfo.token);
+      AsyncStorage.setItem('userToken', userInfo.token);
+      console.log(res.data);
+    }).catch(e => {
+      setLoading(false);
+      console.log(`sign in error: ${e}`);
+    });
+    setLoading(false);
+  }
+
+  const logout = () => {
+    setLoading(true);
+    setUserToken(null);
+    AsyncStorage.removeItem('userInfo');
+    AsyncStorage.removeItem('userToken');
+    setLoading(false);
+  }
+
+  const isLoggedIn = async () => {
+    try {
+      setLoading(true);
+      let userInfo = await AsyncStorage.getItem('userInfo');
+      let userToken = await AsyncStorage.getItem('userToken');
+      userInfo = JSON.parse(userInfo);
+      if (userInfo) {
+        setUserInfo(userInfo);
+        setUserToken(userToken);
+      }
+      setLoading(false);
+    } catch (e) {
+      console.log(`isLoggedIn error: ${e}`);
+    }
+  }
+
+  useEffect(() => { isLoggedIn }, []);
 
   const [fontsLoaded, error] = useFonts({
     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
@@ -39,60 +97,31 @@ const App = () => {
   } else console.log("Fonts loaded");
 
   return (
-    <>
-      <Provider store={store}>
-        <NavigationContainer theme={DarkTheme}>
-          {hideSplashScreen ? (
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen
-                name="SignIn"
-                component={SignIn}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="SignUp"
-                component={SignUp}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Artworks"
-                component={Artworks}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Exhibitions"
-                component={Exhibitions}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Articles"
-                component={Articles}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Shopping"
-                component={Shopping}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Cart"
-                component={Cart}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Payment"
-                component={Payment}
-              />
-              <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
-              <Stack.Screen name="ProductDetail" component={ProductDetail} />
-              <Stack.Screen name="ArtworkDetail" component={ArtworkDetail} />
-              <Stack.Screen name="ExhibitionDetail" component={ExhibitionDetail} />
-            </Stack.Navigator>
-          ) : null}
-          <NavbarBottom />
-        </NavigationContainer>
-      </Provider>
-    </>
+    <AuthContext.Provider value={{ signin, signup, logout, isLoading, userInfo, userToken }}>
+      <NavigationContainer theme={DarkTheme}>
+        <Provider store={store}>
+          <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={userToken != null ? "Home" : "SignIn"}>
+            <Stack.Screen name="Home" component={HomeTabs} />
+            <Stack.Screen
+              name="SignIn"
+              component={SignIn}
+            />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUp}
+            />
+            <Stack.Screen
+              name="Cart"
+              component={RequireAuthentication(Cart, userToken)}
+            />
+            <Stack.Screen
+              name="Payment"
+              component={RequireAuthentication(Payment, userToken)}
+            />
+          </Stack.Navigator>
+        </Provider>
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 };
 export default App;

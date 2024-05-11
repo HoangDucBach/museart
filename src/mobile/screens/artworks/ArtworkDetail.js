@@ -22,10 +22,9 @@ const ArtworkDetail = () => {
 
     const getArtwork = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/api/artworks/${ID}`);
-            setArtwork(response.data[0].detail);
-            console.log(ID);
-            console.log(artwork);
+            console.log(`${baseUrl}/api/v1/artworks/${ID}`);
+            const response = await axios.get(`${baseUrl}/artworks/${ID}`);
+            setArtwork(response.data.data);
         } catch (error) {
             //console.log(artwork);
             console.error(error);
@@ -45,13 +44,13 @@ const ArtworkDetail = () => {
                 <ActivityIndicator />
             ) : (
                 <ScrollView style={styles.body}>
-                    <Picture altText={artwork.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
-                    <AboutTitle title={artwork.artwork_type_title} tagRoute={"Artwork"} tagDetail={"Art"} isPrice={false} />
+                    <Picture altText={artwork?.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork?.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
+                    <AboutTitle title={artwork?.artwork_type_title} tagRoute={"Artwork"} tagDetail={"Art"} isPrice={false} />
                     <AboutArtist />
                     <View>
-                        <FrameButton field="Title" value={artwork.artwork_type_title} propColor="#231919" />
-                        <FrameButton field="Date" value={`${artwork.date_start}-${artwork.date_end}`} propColor="#101010" />
-                        <FrameButton field="Place of Origin" value={artwork.place_of_origin} propColor="#231919" />
+                        <FrameButton field="Title" value={artwork?.artwork_type_title} propColor="#231919" />
+                        <FrameButton field="Date" value={`${artwork?.date_start}-${artwork?.date_end}`} propColor="#101010" />
+                        <FrameButton field="Place of Origin" value={artwork?.place_of_origin} propColor="#231919" />
                         <FrameButton
                             field="Dimensions"
                             value={artwork.dimensions}
@@ -93,10 +92,6 @@ const ArtworkDetail = () => {
 };
 
 const styles = StyleSheet.create({
-    contentSpaceBlock: {
-        marginTop: 15,
-        alignSelf: "stretch",
-    },
     descriptioncontainerFlexBox: {
         justifyContent: "center",
         marginTop: 15,
@@ -106,33 +101,13 @@ const styles = StyleSheet.create({
         textAlign: "left",
         color: Color.surfaceOnSurface,
     },
-    containerfullinformationofartw: {
-        alignItems: "center",
-    },
-    description: {
-        fontSize: FontSize.titleMediumBold_size,
-        fontWeight: "700",
-        fontFamily: FontFamily.labelMediumBold,
-    },
     loremIpsumIsSimply: {
         fontSize: FontSize.labelLargeBold_size,
         fontFamily: FontFamily.typographyLabelLarge,
         alignSelf: "stretch",
     },
-    content: {
-        paddingHorizontal: Padding.p_3xs,
-        paddingTop: Padding.p_31xl,
-        paddingBottom: Padding.p_3xs,
-        flex: 1,
-    },
-    dashboardMain: {
-        padding: Padding.p_3xs,
-        alignSelf: "stretch",
-        alignItems: "center",
-    },
     artworkContainer: {
         paddingHorizontal: Padding.p_3xs,
-        borderRadius: Border.br_18xl,
         backgroundColor: Color.surfaceSurfaceContainer,
         borderStyle: "solid",
         borderColor: Color.colorBlack,
@@ -145,7 +120,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch",
-        marginBottom: 80
     },
 });
 

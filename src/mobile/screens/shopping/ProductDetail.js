@@ -21,8 +21,8 @@ const ProductDetail = () => {
 
     const getProduct = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/api/products/${ID}`);
-            setProduct(response.data[0].detail);
+            const response = await axios.get(`${baseUrl}/products/${ID}`);
+            setProduct(response.data.data);
             console.log(ID);
             console.log(product);
         } catch (error) {
@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch",
-        marginBottom: 80
     },
     textTypo: {
         fontFamily: FontFamily.labelMediumBold,

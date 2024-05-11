@@ -1,226 +1,165 @@
 import * as React from "react";
+import { useState, useContext } from "react";
 import { Text, StyleSheet, View, Image, ImageBackground, ScrollView, Pressable, TextInput } from "react-native";
 // import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { FontFamily, Color, Padding, FontSize, Border } from "../../GlobalStyles";
+import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../../context/authContext";
 
 const SignUp = () => {
-  const navigation = useNavigation();
+    const navigation = useNavigation();
+    const { signup } = useContext(AuthContext);
+    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
 
-  return (
-    <ImageBackground
-      style={styles.signUpBackground}
-      resizeMode="cover"
-      source={require("../../assets/backgroundSignIn.png")}
-    ><ScrollView>
-        <View style={styles.vectorParent}>
-          <Image
-            style={{ width: 80, height: 67 }}
-            contentFit="cover"
-            source={require("../../assets/vector9.png")}
-          />
-          <Text style={[styles.museart, styles.signUpTypo]}>Museart</Text>
-        </View>
-        <View style={styles.letStartParent}>
-          <Text style={[styles.letStart, styles.museart1Typo]}>Let start!</Text>
-          <Text style={[styles.createANew, styles.usernameTypo]}>
-            Create a new account
-          </Text>
-        </View>
-        <View style={styles.usernamecontainerParent}>
-          <View style={[styles.usernamecontainer, styles.signupbuttonSpaceBlock]}>
-            <Image
-              style={styles.usernamecontainerChild}
-              contentFit="cover"
-              source={require("../../assets/group-191.png")}
-            />
-            <TextInput placeholder="Username" style={[styles.username, styles.usernameTypo]} />
-          </View>
-          <View style={[styles.passwordcontainer, styles.signupbuttonSpaceBlock]}>
-            <Image
-              style={styles.usernamecontainerChild}
-              contentFit="cover"
-              source={require("../../assets/group-201.png")}
-            />
-            <TextInput placeholder="Password" secureTextEntry={true} style={[styles.username, styles.usernameTypo]} />
-          </View>
-          <View style={[styles.passwordcontainer, styles.signupbuttonSpaceBlock]}>
-            <Image
-              style={styles.usernamecontainerChild}
-              contentFit="cover"
-              source={require("../../assets/group-201.png")}
-            />
-            <TextInput placeholder="Confirm password" secureTextEntry={true} style={[styles.username, styles.usernameTypo]} />
-          </View>
-          <Pressable onPress={() => console.log("sign up account")}
-            style={styles.signupbutton}>
-            <Text style={[styles.signUp, styles.signUpTypo]}>Sign Up</Text>
-          </Pressable>
-          <View style={styles.alreadyHaveAccountParent}>
-            <Text style={styles.alreadyHaveAccount}>Already have account?</Text>
-            <Pressable
-              onPress={() => navigation.navigate("SignIn")}
-            >
-              <Text style={styles.signIn}>Sign in</Text>
-            </Pressable>
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.ellipseParent}>
-        <Image
-          style={styles.frameLayout}
-          contentFit="cover"
-          source={require("../../assets/ellipse-5.png")}
-        />
-        <Image
-          style={[styles.frameItem, styles.frameLayout]}
-          contentFit="cover"
-          source={require("../../assets/ellipse-6.png")}
-        />
-        <Image
-          style={[styles.frameItem, styles.frameLayout]}
-          contentFit="cover"
-          source={require("../../assets/ellipse-6.png")}
-        />
-        <Image
-          style={[styles.frameItem, styles.frameLayout]}
-          contentFit="cover"
-          source={require("../../assets/ellipse-6.png")}
-        />
-      </View>
-    </ImageBackground>
-  );
+    return (
+        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'p-4 max-h-screen'}>
+            <ScrollView>
+                <View style={styles.vectorParent}>
+                    <Image
+                        style={{ width: 80, height: 67 }}
+                        contentFit="cover"
+                        source={require("../../assets/vector9.png")}
+                    />
+                    <Text style={[styles.museart]} className={'text-center'}>Museart</Text>
+                </View>
+                <View className={'flex flex-col gap-4'}>
+                    <Text className={'text-2xl text-white w-full font-playfairBold'}>Let start!</Text>
+                    <Text className={'text-white text-xl font-playfair'}>
+                        Create a new account
+                    </Text>
+                </View>
+                <View className={'flex flex-col gap-4 mt-4'}>
+                    <View
+                        className={'flex flex-row p-4 bg-surfaceContainer-dark rounded-2xl focus:outline-none'}
+                    >
+                        <Image
+                            style={styles.usernamecontainerChild}
+                            contentFit="cover"
+                            source={require("../../assets/group-191.png")}
+                        />
+                        <TextInput placeholder="Username"
+                            value={username}
+                            onChangeText={text => setUsername(text)}
+                            className={'text-white font-playfair w-full'}
+                            placeholderTextColor={'white'} />
+                    </View>
+                    <View
+                        className={'flex flex-row p-4 bg-surfaceContainer-dark rounded-2xl focus:outline-none'}
+                    >
+                        <Image
+                            style={styles.usernamecontainerChild}
+                            contentFit="cover"
+                            source={require("../../assets/group-191.png")}
+                        />
+                        <TextInput placeholder="Email"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
+                            className={'text-white font-playfair w-full'}
+                            placeholderTextColor={'white'} />
+                    </View>
+                    <View
+                        className={'flex flex-row p-4 bg-surfaceContainer-dark rounded-2xl focus:outline-none'}
+                    >
+                        <Image
+                            style={styles.usernamecontainerChild}
+                            contentFit="cover"
+                            source={require("../../assets/group-201.png")}
+                        />
+                        <TextInput placeholder="Password"
+                            value={password}
+                            onChangeText={text => setPassword(text)}
+                            secureTextEntry={true}
+                            className={'text-white font-playfair w-full'} placeholderTextColor={'white'} />
+                    </View>
+                    <Pressable onPress={() => {
+                        signup(username, email, password, 'user');
+                        navigation.navigate("Home");
+                    }}
+
+                        className={'p-4 rounded-2xl bg-primary'}
+                    >
+                        <Text className={'text-white text-center font-playfairBold'}>Sign Up</Text>
+                    </Pressable>
+                    <View
+                        className={'flex flex-row items-center justify-center'}
+                    >
+                        <Text style={styles.alreadyHaveAccount}>Already have account?</Text>
+                        <Pressable
+                            onPress={() => navigation.navigate("SignIn")}
+                        >
+                            <Text
+                                className={'text-white font-playfairBold'}
+                            >Sign in</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.ellipseParent}>
+                <Image
+                    style={styles.frameLayout}
+                    contentFit="cover"
+                    source={require("../../assets/ellipse-5.png")}
+                />
+                <Image
+                    style={[styles.frameItem, styles.frameLayout]}
+                    contentFit="cover"
+                    source={require("../../assets/ellipse-6.png")}
+                />
+                <Image
+                    style={[styles.frameItem, styles.frameLayout]}
+                    contentFit="cover"
+                    source={require("../../assets/ellipse-6.png")}
+                />
+                <Image
+                    style={[styles.frameItem, styles.frameLayout]}
+                    contentFit="cover"
+                    source={require("../../assets/ellipse-6.png")}
+                />
+            </View>
+        </LinearGradient>
+    );
 };
 
 const styles = StyleSheet.create({
-  signUpBackground: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "space-between",
-    overflow: "hidden",
-  },
-  vectorParent: {
-    marginTop: 50,
-    height: 138,
-    alignSelf: "stretch",
-    alignItems: "center",
-    flex: 1,
-  },
-  museart: {
-    marginTop: 15,
-    color: Color.colorWhite,
-    alignSelf: "stretch",
-    fontSize: FontSize.titleMediumBold_size,
-  },
-  signUpTypo: {
-    textAlign: "center",
-    fontFamily: FontFamily.labelMediumBold,
-    fontWeight: "700",
-  },
-  letStartParent: {
-    alignSelf: "stretch",
-    marginLeft: 10,
-    flex: 2,
-  },
-  letStart: {
-    fontSize: FontSize.headline2Bold_size,
-  },
-  museart1Typo: {
-    textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.labelMediumBold,
-    fontWeight: "700",
-    alignSelf: "stretch",
-  },
-  createANew: {
-    fontSize: FontSize.headline3Bold_size,
-    marginTop: 15,
-    color: Color.colorWhite,
-    alignSelf: "stretch",
-  },
-  usernameTypo: {
-    fontFamily: FontFamily.typographyLabelLarge,
-    textAlign: "left",
-  },
-  usernamecontainerParent: {
-    alignSelf: "stretch",
-    alignItems: "center",
-    paddingTop: 20,
-    margin: 10,
-    flex: 3,
-  },
-  signupbuttonSpaceBlock: {
-    padding: Padding.p_mini,
-    alignItems: "center",
-  },
-  usernamecontainer: {
-    flexDirection: "row",
-    backgroundColor: Color.surfaceSurfaceContainerHighest,
-    borderRadius: Border.br_81xl,
-    padding: Padding.p_mini,
-    alignSelf: "stretch",
-    overflow: "hidden",
-  },
-  usernamecontainerChild: {
-    width: 25,
-    height: 25,
-  },
-  passwordcontainer: {
-    flexDirection: "row",
-    backgroundColor: Color.surfaceSurfaceContainerHighest,
-    borderRadius: Border.br_81xl,
-    padding: Padding.p_mini,
-    alignSelf: "stretch",
-    overflow: "hidden",
-    marginTop: 15,
-  },
-  username: {
-    fontSize: FontSize.labelMediumBold_size,
-    color: Color.surfaceOnSurfaceVarient,
-    marginLeft: 5,
-    flex: 1,
-  },
-  signupbutton: {
-    borderRadius: Border.br_3xs,
-    backgroundColor: Color.primaryPrimary,
-    padding: Padding.p_mini,
-    marginTop: 15,
-    alignItems: "center",
-    alignSelf: "stretch",
-  },
-  signUp: {
-    fontSize: FontSize.labelLargeBold_size,
-    color: Color.primaryOnPrimary,
-  },
-  alreadyHaveAccountParent: {
-    justifyContent: "center",
-    flexDirection: "row",
-    marginTop: 15,
-  },
-  alreadyHaveAccount: {
-    fontFamily: FontFamily.typographyLabelLarge,
-    fontSize: FontSize.labelLargeBold_size,
-    color: Color.colorWhite,
-    marginRight: 10,
-  },
-  signIn: {
-    color: Color.colorWhite,
-    fontFamily: FontFamily.labelMediumBold,
-    fontSize: FontSize.labelLargeBold_size,
-    fontWeight: "700",
-  },
-  frameLayout: {
-    height: 15,
-    width: 15,
-  },
-  ellipseParent: {
-    flexDirection: "row",
-    alignSelf: "center",
-    bottom: 20,
-  },
-  frameItem: {
-    marginLeft: 15,
-  },
+    vectorParent: {
+        marginTop: 50,
+        height: 138,
+        alignSelf: "stretch",
+        alignItems: "center",
+        flex: 1,
+    },
+    museart: {
+        marginTop: 15,
+        color: Color.colorWhite,
+        alignSelf: "stretch",
+        fontSize: FontSize.titleMediumBold_size,
+        fontFamily: FontFamily.labelMediumBold,
+    },
+    usernamecontainerChild: {
+        width: 25,
+        height: 25,
+    },
+    alreadyHaveAccount: {
+        fontFamily: FontFamily.typographyLabelLarge,
+        fontSize: FontSize.labelLargeBold_size,
+        color: Color.colorWhite,
+        marginRight: 10,
+    },
+    frameLayout: {
+        height: 15,
+        width: 15,
+    },
+    ellipseParent: {
+        flexDirection: "row",
+        alignSelf: "center",
+        bottom: 20,
+    },
+    frameItem: {
+        marginLeft: 15,
+    },
 });
 
 export default SignUp;
