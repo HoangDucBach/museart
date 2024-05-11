@@ -1,20 +1,20 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, Modal, TouchableOpacity } from "react-native";
 import { FontSize, FontFamily, Color, Border, Padding } from "../../GlobalStyles";
 
-const NotificationFailed = () => {
+const NotificationFailed = ({ children }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
   return (
     <View style={styles.notificationfailed}>
-      <View style={styles.notificationfailedInner}>
+      <TouchableOpacity style={styles.notificationfailedInner}>
         <Image
           style={styles.frameChild}
           contentFit="cover"
           source={require("../../assets/frame-67.png")}
         />
-      </View>
+      </TouchableOpacity>
       <Image
         style={styles.notificationfailedChild}
         contentFit="cover"
@@ -22,8 +22,7 @@ const NotificationFailed = () => {
       />
       <Text style={[styles.failed, styles.failedFlexBox]}>Failed</Text>
       <Text style={[styles.referenceSiteAboutLorem, styles.failedFlexBox]}>
-        Reference site about Lorem Ipsum, giving information on its origins, as
-        well as a random Lipsum generator.
+        {children}
       </Text>
     </View>
   );
@@ -64,6 +63,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   notificationfailed: {
+    position: "absolute",
     borderRadius: Border.br_3xs,
     backgroundColor: Color.surfaceSurfaceContainerHighest,
     shadowColor: "#d9cfbe",
