@@ -116,7 +116,13 @@ export class UserController implements IBaseController {
             const token = jwt.sign({
                 email: newUser.email,
             }, process.env.SECRET_KEY as string, {expiresIn: '1h'});
-            res.status(201).json({"user": newUser, "token": token});
+            res.status(201).json({"user": {
+                "id": newUser.id,
+                "name": newUser.username,
+                "email": newUser.email,
+                "password": newUser.password,
+                "role": newUser.role
+            }, "token": token});
         } catch (error) {
             res.status(500).json({error: 'Error signing up', message: error});
         }
@@ -136,7 +142,14 @@ export class UserController implements IBaseController {
                 id: user.id,
                 email: user.email,
             }, process.env.SECRET_KEY as string, {expiresIn: '1h'});
-            res.json({token});
+            res.json({"user": {
+                "id": user.id,
+                "name": user.username,
+                "email": user.email,
+                "password": user.password,
+                "role": user.role
+            },
+            "token": token});
         } catch (error) {
             res.status(500).json({error: 'Error signing in', message: error});
             console.log(error);

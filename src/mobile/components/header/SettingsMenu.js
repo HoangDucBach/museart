@@ -10,7 +10,7 @@ import { useEffect, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const SettingsMenu = () => {
-  const { logout, userToken } = useContext(AuthContext);
+  const { logout, userToken, userInfo } = useContext(AuthContext);
 
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
 
@@ -31,6 +31,9 @@ const SettingsMenu = () => {
         dispatch(toggleTab("Cart"));
       }} />
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" func={() => navigation.navigate("Payment")} />
+      {userToken != null &&
+        <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text={userInfo.user.email} />
+      }
       {userToken == null ?
         <View style={[styles.flexRow, styles.flexRowButton]}>
           <ButtonPrimary text="Sign in"

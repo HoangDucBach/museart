@@ -1,12 +1,18 @@
 import * as React from "react";
+import { useState, useContext } from "react";
 import { Text, StyleSheet, View, Image, ImageBackground, ScrollView, Pressable, TextInput } from "react-native";
 // import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { FontFamily, Color, Padding, FontSize, Border } from "../../GlobalStyles";
 import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../../context/authContext";
 
 const SignUp = () => {
     const navigation = useNavigation();
+    const { signup } = useContext(AuthContext);
+    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
 
     return (
         <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'p-4 max-h-screen'}>
@@ -34,7 +40,24 @@ const SignUp = () => {
                             contentFit="cover"
                             source={require("../../assets/group-191.png")}
                         />
-                        <TextInput placeholder="Username" className={'text-white font-playfair w-full'}
+                        <TextInput placeholder="Username"
+                            value={username}
+                            onChangeText={text => setUsername(text)}
+                            className={'text-white font-playfair w-full'}
+                            placeholderTextColor={'white'} />
+                    </View>
+                    <View
+                        className={'flex flex-row p-4 bg-surfaceContainer-dark rounded-2xl focus:outline-none'}
+                    >
+                        <Image
+                            style={styles.usernamecontainerChild}
+                            contentFit="cover"
+                            source={require("../../assets/group-191.png")}
+                        />
+                        <TextInput placeholder="Email"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
+                            className={'text-white font-playfair w-full'}
                             placeholderTextColor={'white'} />
                     </View>
                     <View
@@ -45,29 +68,23 @@ const SignUp = () => {
                             contentFit="cover"
                             source={require("../../assets/group-201.png")}
                         />
-                        <TextInput placeholder="Password" secureTextEntry={true}
+                        <TextInput placeholder="Password"
+                            value={password}
+                            onChangeText={text => setPassword(text)}
+                            secureTextEntry={true}
                             className={'text-white font-playfair w-full'} placeholderTextColor={'white'} />
                     </View>
-                    <View
-                        className={'flex flex-row p-4 bg-surfaceContainer-dark rounded-2xl focus:outline-none'}
-                    >
-                        <Image
-                            style={styles.usernamecontainerChild}
-                            contentFit="cover"
-                            source={require("../../assets/group-201.png")}
-                        />
-
-                        <TextInput placeholder="Confirm password" secureTextEntry={true}
-                            className={'text-white font-playfair w-full'} placeholderTextColor={'white'} />
-                    </View>
-                    <Pressable onPress={() => { }}
+                    <Pressable onPress={() => {
+                        signup(username, email, password, 'user');
+                        navigation.navigate("Home");
+                    }}
 
                         className={'p-4 rounded-2xl bg-primary'}
                     >
                         <Text className={'text-white text-center font-playfairBold'}>Sign Up</Text>
                     </Pressable>
                     <View
-                        className={'flex flex-row gap-4 items-center'}
+                        className={'flex flex-row items-center justify-center'}
                     >
                         <Text style={styles.alreadyHaveAccount}>Already have account?</Text>
                         <Pressable

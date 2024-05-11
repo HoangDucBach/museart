@@ -21,7 +21,6 @@ import { AuthContext } from "../../context/authContext";
 const SignIn = () => {
     const navigation = useNavigation();
     const isDarkMode = useSelector(state => state.theme.isDarkMode);
-
     const { signin } = useContext(AuthContext);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
@@ -74,12 +73,15 @@ const SignIn = () => {
                             secureTextEntry={true} className={'text-white font-playfair w-full'} placeholderTextColor={'white'} />
                     </View>
                     <Pressable
-                        onPress={() => { signin() }}
+                        onPress={() => {
+                            signin(email, password);
+                            navigation.navigate("Home");
+                        }}
                         className={'p-4 rounded-xl bg-primary'}
                     >
                         <Text className={'text-white text-center font-playfairBold'}>Sign in</Text>
                     </Pressable>
-                    <Pressable onPress={() => { navigation.navigate("Artworks") }}
+                    <Pressable onPress={() => { navigation.navigate("Home") }}
                         className={'p-4 rounded-2xl bg-secondary/50'}
                     >
                         <Text className={'text-white text-center font-playfairBold'}>Guest</Text>
