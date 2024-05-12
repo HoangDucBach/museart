@@ -36,9 +36,35 @@ const Exhibitions = () => {
     setTimeout(() => setLoading(false), 1000);
   };
 
-  useEffect(() => {
-    getExhibitions();
-  }, [page]);
+  const loadMore = (p) => setPage(p);
+
+  const renderPaginationButtons = () => {
+    const maxButtonsToShow = 5;
+    let startPage = Math.max(1, page - Math.floor(maxButtonsToShow / 2));
+    let endPage = Math.min(totalPages, startPage + maxButtonsToShow - 1);
+
+    if (endPage - startPage + 1 < maxButtonsToShow) {
+      startPage = Math.max(1, endPage - maxButtonsToShow + 1);
+    }
+
+    const buttons = [];
+
+    for (let i = startPage; i <= endPage; i++) {
+      buttons.push(
+        <TouchableOpacity
+          key={i}
+          onPress={() => loadMore(i)}
+          style={[
+            styles.paginationButton,
+            i === page ? styles.activeButton : null,
+          ]}>
+          <Text style={{ color: 'white' }}>{i}</Text>
+        </TouchableOpacity>,
+      );
+    }
+
+    return buttons;
+  };
 
   const renderItem = ({ item }) => {
     return (
@@ -52,34 +78,28 @@ const Exhibitions = () => {
     )
   }
 
+  useEffect(() => {
+    getExhibitions();
+  }, [page]);
+
   return (
     <View className={'flex-1'}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <Dashboard namePage={"Dashboard"}>
-          <MyFlatList
-            data={exhibitions}
-            renderItem={renderItem}
-            isLoading={isLoading}
-            handleLoading={handleLoading}
-            totalPages={totalPages}
-            page={page} />
+          <MyFlatList data={exhibitions} renderItem={renderItem}
+            isLoading={isLoading} handleLoading={handleLoading}
+            renderPaginationButtons={renderPaginationButtons} />
         </Dashboard>
       )}
     </View>
   );
 };
 
+export default Exhibitions;
 
 const styles = StyleSheet.create({
-  paginationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 8,
-    backgroundColor: 'transparent',
-  },
   paginationButton: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -96,5 +116,3 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
 });
-
-export default Exhibitions;
