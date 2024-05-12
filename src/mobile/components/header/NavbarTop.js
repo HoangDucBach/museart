@@ -37,7 +37,8 @@ const NavbarTop = () => {
         visible={isModalVisible}
         transparent={true}
       >
-        <TouchableOpacity onPressOut={() => setIsModalVisible(false)} >
+        <TouchableOpacity onPressOut={() => setIsModalVisible(false)}
+          style={{ flex: 1 }}>
           <SettingsMenu />
         </TouchableOpacity>
       </Modal>
