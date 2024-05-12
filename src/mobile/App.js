@@ -9,7 +9,7 @@ import SignIn from "./screens/auth/SignIn";
 import SignUp from "./screens/auth/SignUp";
 import Cart from "./screens/shopping/Cart";
 import Payment from "./screens/shopping/Payment";
-import { ActivityIndicator, Dimensions, View } from "react-native";
+import { ActivityIndicator, Dimensions, StatusBar, View } from "react-native";
 import { AuthContext } from "./context/authContext";
 import HomeTabs from "./navigation/HomeTabs";
 import RequireAuthentication from "./navigation/RequireAuth";
@@ -21,42 +21,47 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [userToken, setUserToken] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
   const signup = async (username, email, password, role) => {
     setLoading(true);
-    await axios.post(`${localhost}/auth/signup`, {
-      username, email, password, role
-    }).then(res => {
+    try {
+      const res = await axios.post(`${localhost}/auth/signup`, {
+        username, email, password, role
+      });
       let userInfo = res.data;
       setUserInfo(userInfo);
       AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
       setUserToken(userInfo.token);
       AsyncStorage.setItem('userToken', userInfo.token);
       console.log(res.data);
-    }).catch(e => {
+      setLoading(false);
+    } catch (e) {
       console.log(`sign up error: ${e}`);
-    });
-    setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const signin = (email, password) => {
+  const signin = async (email, password) => {
     setLoading(true);
-    axios.post(`${localhost}/auth/signin`, {
-      email, password
-    }).then(res => {
+    try {
+      const res = await axios.post(`${localhost}/auth/signin`, {
+        email, password
+      });
       let userInfo = res.data;
       setUserInfo(userInfo);
       AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
       setUserToken(userInfo.token);
       AsyncStorage.setItem('userToken', userInfo.token);
-      console.log(res.data);
-    }).catch(e => {
-      setLoading(false);
+      console.log(userInfo);
+      console.log(userToken);
+    } catch (e) {
       console.log(`sign in error: ${e}`);
-    });
-    setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const logout = () => {
@@ -67,23 +72,7 @@ const App = () => {
     setLoading(false);
   }
 
-  const isLoggedIn = async () => {
-    try {
-      setLoading(true);
-      let userInfo = await AsyncStorage.getItem('userInfo');
-      let userToken = await AsyncStorage.getItem('userToken');
-      userInfo = JSON.parse(userInfo);
-      if (userInfo) {
-        setUserInfo(userInfo);
-        setUserToken(userToken);
-      }
-      setLoading(false);
-    } catch (e) {
-      console.log(`isLoggedIn error: ${e}`);
-    }
-  }
-
-  useEffect(() => { isLoggedIn }, []);
+  useEffect(() => { signin; signup; }, []);
 
   const [fontsLoaded, error] = useFonts({
     "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
@@ -96,10 +85,13 @@ const App = () => {
     return null;
   } else console.log("Fonts loaded");
 
+  console.log(userToken);
+
   return (
     <AuthContext.Provider value={{ signin, signup, logout, isLoading, userInfo, userToken }}>
       <NavigationContainer theme={DarkTheme}>
         <Provider store={store}>
+          <StatusBar />
           <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={userToken != null ? "Home" : "SignIn"}>
             <Stack.Screen name="Home" component={HomeTabs} />
             <Stack.Screen

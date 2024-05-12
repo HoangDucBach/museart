@@ -9,7 +9,7 @@ import { AuthContext } from "../../context/authContext";
 
 const SignUp = () => {
     const navigation = useNavigation();
-    const { signup } = useContext(AuthContext);
+    const { signup, userInfo } = useContext(AuthContext);
     const [username, setUsername] = useState(null);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
@@ -76,7 +76,12 @@ const SignUp = () => {
                     </View>
                     <Pressable onPress={() => {
                         signup(username, email, password, 'user');
-                        navigation.navigate("Home");
+                        if (userInfo != null) {
+                            navigation.reset({
+                                index: 0,
+                                routes: [{ name: 'Home' }],
+                            });
+                        }
                     }}
 
                         className={'p-4 rounded-2xl bg-primary'}
