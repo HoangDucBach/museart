@@ -16,18 +16,38 @@ import {FontFamily, Padding, Color, Border, FontSize} from "../../GlobalStyles";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleMove, toggleTab} from "../../store";
 import {LinearGradient} from "expo-linear-gradient";
+import axios from "axios";
+import { localhost } from "../../services/api";
 
 const SignIn = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    
     const isDarkMode = useSelector(state => state.theme.isDarkMode);
-    const handleSignIn = () => {
-        // Xử lý đăng nhập thành công
-        setIsLoggedIn(true);
-        dispatch(toggleMove(1));
-        dispatch(toggleTab("Artworks"));
+    const handleSignIn = async () => {
+        var payload = {
+            email: `${email}`,
+            password: `${password}`,
+        }
+        console.log(payload);
+        try{
+            const res = await axios.post(`${localhost}/auth/signin`, payload);
+            console.log(res);
+            if (res.status === 200) {
+                // Xử lý đăng nhập thành công
+                setIsLoggedIn(true);
+                dispatch(toggleMove(1));
+                dispatch(toggleTab("Artworks"));
+                navigation.navigate("Artworks");
+            } else {
+                console.log("Login failed !!!");
+            }
+        } catch(error) {
+            console.log(error);
+        }
         // console.log(isLoggedIn);
     };
 
@@ -37,7 +57,7 @@ const SignIn = () => {
         dispatch(toggleTab("Artworks"));
     }
     return (
-        <LinearGradient colors={['#BE0303', '#1c1a1a','#000000']} className={'p-4 max-h-screen'}>
+        <LinearGradient colors={['#BE0303', '#1c1a1a','#000000']} className={'flex-1 p-4 max-h-screen'}>
             <ScrollView style={{zIndex: 2}}>
                 <SafeAreaView style={styles.vectorParent}>
                     <Image
@@ -64,7 +84,7 @@ const SignIn = () => {
                             contentFit="cover"
                             source={require("../../assets/group-19.png")}
                         />
-                        <TextInput placeholder="Username" className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
+                        <TextInput placeholder="Username" onChangeText={(text) => setEmail(text)} className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
                     </View>
                     <View
                         className={'flex flex-row p-4 bg-surfaceContainer-dark rounded-2xl focus:outline-none'}
@@ -74,12 +94,15 @@ const SignIn = () => {
                             contentFit="cover"
                             source={require("../../assets/group-20.png")}
                         />
-                        <TextInput placeholder="Password" secureTextEntry={true} className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
+                        <TextInput placeholder="Password" secureTextEntry={true} onChangeText={(text) => setPassword(text)} className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
                     </View>
                     <Pressable
-                        onPress={() => {
-                            handleSignIn();
-                            if (isLoggedIn) navigation.navigate("Artworks");
+                        onPress={ async () => {
+                            await handleSignIn();
+                            console.log(isLoggedIn);
+                            if (isLoggedIn) {
+                                setIsLoggedIn(false);
+                            }
                         }}
                         className={'p-4 rounded-xl bg-primary'}
                     >

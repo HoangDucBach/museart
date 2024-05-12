@@ -4,12 +4,40 @@ import {Text, StyleSheet, View, Image, ImageBackground, ScrollView, Pressable, T
 import {useNavigation} from "@react-navigation/native";
 import {FontFamily, Color, Padding, FontSize, Border} from "../../GlobalStyles";
 import {LinearGradient} from "expo-linear-gradient";
+import axios from "axios";
+import { baseUrl, localhost } from "../../services/api";
+import { useState } from "react";
 
 const SignUp = () => {
     const navigation = useNavigation();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+
+    const handleSignUp = async () => {
+        if (password !== confirmPassword) {
+            console.log("confirm password incorrect")
+            return;
+        }
+        var payload = {
+            username: `${email}`,
+            email: `${email}`,
+            password: `${password}`,
+            role: "",
+        }
+        try {
+            const res = await axios.post(`${localhost}/auth/signup`, payload);
+            if (res.status === 200) {
+                console.log("SignUp successfully");
+            }
+        } catch(error) {
+            console.log(error);
+        }
+    }
 
     return (
-        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'p-4 max-h-screen'}>
+        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'flex-1 p-4 max-h-screen'}>
             <ScrollView>
                 <View style={styles.vectorParent}>
                     <Image
@@ -34,7 +62,7 @@ const SignUp = () => {
                             contentFit="cover"
                             source={require("../../assets/group-191.png")}
                         />
-                        <TextInput placeholder="Username" className={'text-white font-playfair w-full'}
+                        <TextInput placeholder="Username" onChangeText={ text => setEmail(text) } className={'text-white font-playfair w-full'}
                                    placeholderTextColor={'white'}/>
                     </View>
                     <View
@@ -45,7 +73,7 @@ const SignUp = () => {
                             contentFit="cover"
                             source={require("../../assets/group-201.png")}
                         />
-                        <TextInput placeholder="Password" secureTextEntry={true}
+                        <TextInput placeholder="Password" onChangeText={ text => setPassword(text) } secureTextEntry={true}
                                    className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
                     </View>
                     <View
@@ -57,11 +85,10 @@ const SignUp = () => {
                             source={require("../../assets/group-201.png")}
                         />
 
-                        <TextInput placeholder="Confirm password" secureTextEntry={true}
+                        <TextInput placeholder="Confirm password" onChangeText={ text => setConfirmPassword(text) } secureTextEntry={true}
                                    className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
                     </View>
-                    <Pressable onPress={() => console.log("sign up account")}
-
+                    <Pressable onPress={ () => handleSignUp() }
                                className={'p-4 rounded-2xl bg-primary'}
                     >
                         <Text className={'text-white text-center font-playfairBold'}>Sign Up</Text>
