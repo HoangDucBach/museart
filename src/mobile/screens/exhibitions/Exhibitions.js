@@ -1,49 +1,41 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Text, StyleSheet, View, SafeAreaView, FlatList, PanResponder } from "react-native";
+import { Text, StyleSheet, View, SafeAreaView, FlatList, PanResponder, TouchableOpacity, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Color, Border, Padding, FontSize, FontFamily } from "../../GlobalStyles";
-import ButtonPrimary from "../../components/button/ButtonPrimary";
-import SettingsMenu from "../../components/header/SettingsMenu";
 import Dashboard from "../../components/header/Dashboard";
 import FrameComponent from "../../components/FrameComponent";
 import { ActivityIndicator } from "react-native";
 import axios from "axios";
 import { baseUrl } from "../../services/api";
-import { useDispatch } from "react-redux";
-import { toggleMove } from "../../store";
+import MyFlatList from "../../components/MyFlatList";
 
 const Exhibitions = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => {
-        // console.log(gestureState.dy);
-        if (gestureState.dy > 5) dispatch(toggleMove(1));
-        else if (gestureState.dy < -5) dispatch(toggleMove(-1));
-      }
-    })
-  ).current;
-
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [exhibitions, setExhibitions] = useState([]);
+  //pagination
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalpages] = useState(0);
 
   const getExhibitions = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${baseUrl}/exhibitions?page=${page}`);
       setExhibitions(response.data.data);
+      setTotalpages(response.data.pagination.total_pages);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
   };
-  const loadMore = () => {
-    setPage(page + 1);
-  }
+
+  const handleLoading = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 1000);
+  };
+
   useEffect(() => {
     getExhibitions();
   }, [page]);
@@ -61,39 +53,48 @@ const Exhibitions = () => {
   }
 
   return (
-    <View style={{}} className={'flex-1'} {...panResponder.panHandlers}>
+    <View className={'flex-1'}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <Dashboard namePage={"Dashboard"}>
-          <FlatList
-            key={'_'}
-            numColumns={1}
+          <MyFlatList
             data={exhibitions}
             renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            //onEndReached={loadMore}
-            onEndReachedThreshold={5}
-            className={'flex-1 p-4 pb-60'}
-            // contentContainerStyle={{
-            //     display: 'grid',
-            //     gridTemplateColumns: 'repeat(auto-fill, var(--card_width))',
-            //     gridAutoRows: 'var(--row_increment)',
-            //     justifyContent: 'center'
-            // }}
-            contentContainerStyle={{
-              display: 'flex',
-              gap: 16,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '100%',
-            }}
-            scrollEnabled={false}
-          />
+            isLoading={isLoading}
+            handleLoading={handleLoading}
+            totalPages={totalPages}
+            page={page} />
         </Dashboard>
       )}
     </View>
   );
 };
+
+
+const styles = StyleSheet.create({
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 8,
+    backgroundColor: 'transparent',
+  },
+  paginationButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginHorizontal: 4,
+    backgroundColor: 'gray',
+  },
+  activeButton: {
+    backgroundColor: '#22c55d',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+});
 
 export default Exhibitions;
