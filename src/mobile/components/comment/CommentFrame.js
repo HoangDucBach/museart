@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
   frameParent: {
     borderRadius: Border.br_3xs,
     backgroundColor: Color.surfaceSurfaceContainerHighest,
-    marginHorizontal: 5,
     marginVertical: 10,
     alignSelf: "stretch",
   },

@@ -1,12 +1,47 @@
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { FlatList, Image, Modal, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
 import CommentFrame from './CommentFrame';
+import { localhost } from '../../services/api';
+import axios from 'axios';
 
 const Comment = ({ modalVisible, }) => {
+    const [isLoading, setLoading] = useState(false);
+    const [comments, setComments] = useState(null);
+    const [openInput, setOpenInput] = useState(false);
+
+    const getComments = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get(`${localhost}/user/comments`);
+            setComments(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleLoading = () => {
+        setLoading(true);
+        setTimeout(() => setLoading(false), 1000);
+    };
+
+    const renderItem = ({ item }) => {
+        return (
+            <CommentFrame key={item.id} userName={'username'} date={item.updatedAt.slice(0, 10)} text={item.comment} />
+
+        )
+    }
+
+    useEffect(() => {
+        getComments();
+    }, []);
+
     return (
         <View style={styles.frameParent}>
-            <View style={[styles.frameGroup, styles.frameGroupFlexBox]}>
+            <View style={styles.frameGroupFlexBox}>
                 <TouchableOpacity onPress={modalVisible}>
                     <Image
                         style={styles.frameChild}
@@ -15,7 +50,10 @@ const Comment = ({ modalVisible, }) => {
                     />
                 </TouchableOpacity>
                 <Text style={[styles.comment, styles.commentTypo]}>Comment</Text>
-                <TouchableOpacity onPress={() => { console.log("add comment"); }}>
+                <TouchableOpacity onPress={() => {
+                    setOpenInput(true);
+                    console.log("add comment");
+                }}>
                     <Image
                         style={styles.frameChild}
                         contentFit="cover"
@@ -23,12 +61,27 @@ const Comment = ({ modalVisible, }) => {
                     />
                 </TouchableOpacity>
             </View>
-            <ScrollView>
-                <CommentFrame userName={'username'} date={'username'} text={`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived `} />
-                <CommentFrame userName={'username'} date={'username'} text={`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived `} />
-                <CommentFrame userName={'username'} date={'username'} text={`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived `} />
-                <CommentFrame userName={'username'} date={'username'} text={`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived `} />
-            </ScrollView>
+            <Modal
+                visible={openInput}
+                transparent={true}
+            >
+                <TouchableOpacity onPressOut={() => { setOpenInput(false) }}
+                    style={{ justifyContent: "center", alignSelf: "center", alignItems: "center", flex: 1 }}>
+                    <View style={{ backgroundColor: "white", }}>
+                        <TextInput
+                            placeholder="Write your comment here"
+                        />
+                    </View>
+                </TouchableOpacity>
+            </Modal>
+            <FlatList
+                data={comments}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                refreshControl={
+                    <RefreshControl refreshing={isLoading} onRefresh={handleLoading} />
+                }
+            />
         </View>
     );
 };
@@ -53,23 +106,13 @@ const styles = StyleSheet.create({
         fontSize: FontSize.bodyXlargeBold_size,
         color: Color.surfaceOnSurface,
     },
-    frameGroup: {
-        alignItems: "center",
-    },
     frameParent: {
-        shadowColor: "#d9cfbe",
-        shadowOffset: {
-            width: 2,
-            height: 2,
-        },
-        shadowRadius: 20,
-        elevation: 20,
-        shadowOpacity: 1,
-        borderTopLeftRadius: Border.br_xl,
-        borderTopRightRadius: Border.br_xl,
         backgroundColor: Color.surfaceSurfaceContainerHigh,
         padding: Padding.p_xl,
-        overflow: "hidden",
+        height: "100%",
+        width: "100%",
+        alignSelf: "center",
+        justifyContent: "center",
     },
 });
 

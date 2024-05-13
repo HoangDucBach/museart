@@ -85,7 +85,7 @@ const App = () => {
     return null;
   } else console.log("Fonts loaded");
 
-  console.log(userToken);
+  console.log(`userToken: ${userToken}`);
 
   return (
     <AuthContext.Provider value={{ signin, signup, logout, isLoading, userInfo, userToken }}>
