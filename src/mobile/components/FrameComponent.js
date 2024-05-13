@@ -20,7 +20,7 @@ const FrameComponent = ({
             onPress={onFramePressablePress}>
             <Image
                 source={{ uri: frameImage }}
-                style={{ width: '100%', height: 'auto', aspectRatio: 1, borderRadius: 16 }}
+                style={{ width: '95%', height: 'auto', aspectRatio: 1, borderRadius: 16 }}
 
             />
             <View style={styles.titleParent}>

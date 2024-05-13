@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { Text, StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
+import { Text, StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
 import NavbarTop from "./NavbarTop";
 import DashboardSearchEngine from "./DashboardSearchEngine";
 import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../../GlobalStyles";
@@ -14,7 +14,7 @@ const Dashboard = ({
 
     return (
         // style={[styles.artworks, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]}
-        <SafeAreaView className={'w-screen'}>
+        <SafeAreaView className={'w-screen flex-1'}>
             {/* <View style={{paddingHorizontal: 10}}> */}
             <NavbarTop />
             {/* </View> */}
@@ -24,9 +24,9 @@ const Dashboard = ({
                 </View>
                 <DashboardSearchEngine />
             </View>
-            <ScrollView contentContainerStyle={{}} className={'w-full'}>
+            <SafeAreaView className={'w-full flex-1'}>
                 {children}
-            </ScrollView>
+            </SafeAreaView>
         </SafeAreaView>
     );
 };

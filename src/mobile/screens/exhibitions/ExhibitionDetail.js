@@ -1,7 +1,7 @@
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { baseUrl } from '../../services/api';
 import Picture from '../../components/detail/picure/Picture';
@@ -12,8 +12,10 @@ import Button from '../../components/detail/content/Button';
 import Video from '../../components/detail/content/Video';
 import Sound from '../../components/detail/content/Sound';
 import NavbarTop from '../../components/header/NavbarTop';
+import FrameComponent from '../../components/FrameComponent';
 
 const ExhibitionDetail = () => {
+    const navigation = useNavigation();
     const route = useRoute();
     const { ID } = route.params;
 
@@ -25,7 +27,6 @@ const ExhibitionDetail = () => {
             const response = await axios.get(`${baseUrl}/exhibitions/${ID}`);
             setexhibition(response.data.data);
             console.log(ID);
-            console.log(exhibition);
         } catch (error) {
             //console.log(exhibition);
             console.error(error);
@@ -51,20 +52,41 @@ const ExhibitionDetail = () => {
                     <View>
                         <FrameButton field="AIC start time" value={exhibition.aic_start_at} propColor="#231919" />
                         <FrameButton field="AIC end time" value={exhibition.aic_end_at} propColor="#231919" />
+                        <FrameButton field="Status" value={exhibition.status} propColor="#231919" />
+                        <FrameButton field="Gallery" value={exhibition.gallery_title} propColor="#231919" />
+                        <FrameButton field="Source Updated At" value={exhibition.source_updated_at.slice(0, 10)} propColor="#231919" />
                     </View>
                     <Button />
-                    <View style={styles.descriptioncontainerFlexBox}>
-                        <Text style={[styles.description, styles.descriptionFlexBox]}>
-                            Description
-                        </Text>
-                        <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
-                        >
-
-                        </Text>
-                    </View>
-                    <Video title={exhibition.title} />
-                    <Sound title={exhibition.title} />
+                    {exhibition.short_description != null &&
+                        <View style={styles.descriptioncontainerFlexBox}>
+                            <Text style={[styles.description, styles.descriptionFlexBox]}>
+                                Description
+                            </Text>
+                            <Text
+                                style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            >
+                                {exhibition.short_description}
+                            </Text>
+                        </View>
+                    }
+                    {
+                        <View style={styles.descriptioncontainerFlexBox}>
+                            <Text style={[styles.description, styles.descriptionFlexBox]}>
+                                Artworks
+                            </Text>
+                            <View>
+                                {exhibition.artwork_ids.map((item, index) => {
+                                    return (
+                                        <TouchableHighlight underlayColor={'gray'} onPress={() => {
+                                            navigation.navigate('ArtworkDetail', { ID: item });
+                                        }}>
+                                            <Text style={[styles.descriptionFlexBox]}>{exhibition.artwork_titles[index]}</Text>
+                                        </TouchableHighlight>
+                                    );
+                                })}
+                            </View>
+                        </View>
+                    }
                 </ScrollView>
             )}
         </View>

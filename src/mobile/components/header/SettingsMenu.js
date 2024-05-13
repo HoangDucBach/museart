@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Switch } from "react-native";
 import { Padding, Color, ColorDark, FontSize, Border, FontFamily } from "../../GlobalStyles";
 import ButtonPrimary from "../button/ButtonPrimary";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleMove, toggleTab, toggleTheme } from "../../store";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const SettingsMenu = () => {
@@ -16,21 +16,19 @@ const SettingsMenu = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(Color.surface);
-  }, [Color.surface]);
+
+  const toggleSwitch = () => {
+    dispatch(toggleTheme());
+  };
 
   return (
     <View style={[styles.settingsMenu, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text="About" func={() => {
-        dispatch(toggleTheme());
-      }} />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text="About" />
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/item.png") : require("../../assets/navbaritem.png")} text="Setting" />
       <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame14.png") : require("../../assets/frame-14.png")} text="Cart" func={() => {
         navigation.navigate("Cart");
-        dispatch(toggleTab("Cart"));
       }} />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" func={() => navigation.navigate("Payment")} />
+      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" />
       {userToken != null &&
         <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text={userInfo.user.email} />
       }
@@ -59,13 +57,14 @@ const SettingsMenu = () => {
           />
         </View>
       }
-      <View style={[styles.ellipseParent, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
-        <Pressable onPress={() => { isDarkMode ? null : dispatch(toggleTheme()) }}>
-          <Image style={{ width: 25, height: 25 }} source={isDarkMode ? require("../../assets/ellipse-41.png") : require("../../assets/ellipse-3.png")} />
-        </Pressable>
-        <Pressable onPress={() => { !isDarkMode ? null : dispatch(toggleTheme()) }}>
-          <Image style={{ width: 25, height: 25 }} source={!isDarkMode ? require("../../assets/ellipse-41.png") : require("../../assets/ellipse-3.png")} />
-        </Pressable>
+      <View style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }} >
+        <Switch
+          trackColor={{ false: '#81b0ff', true: '#767577' }}
+          thumbColor={isDarkMode ? '#f4f3f4' : '#f5dd4b'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isDarkMode}
+        />
       </View>
     </View>
   );

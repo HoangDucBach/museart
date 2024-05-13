@@ -21,7 +21,7 @@ import { AuthContext } from "../../context/authContext";
 const SignIn = () => {
     const navigation = useNavigation();
     const isDarkMode = useSelector(state => state.theme.isDarkMode);
-    const { signin } = useContext(AuthContext);
+    const { signin, userInfo } = useContext(AuthContext);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -75,7 +75,12 @@ const SignIn = () => {
                     <Pressable
                         onPress={() => {
                             signin(email, password);
-                            navigation.navigate("Home");
+                            if (userInfo != null) {
+                                navigation.reset({
+                                    index: 0,
+                                    routes: [{ name: 'Home' }],
+                                });
+                            }
                         }}
                         className={'p-4 rounded-xl bg-primary'}
                     >
