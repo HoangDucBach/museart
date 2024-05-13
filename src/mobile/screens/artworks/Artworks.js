@@ -39,7 +39,7 @@ const Artworks = () => {
                     navigation.navigate('ArtworkDetail', { ID: item.id })
                 }}
                 frameImage={`https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`}
-                title={item.artwork_type_title}
+                title={item.title}
                 text={item.thumbnail?.alt_text}
             />
         )

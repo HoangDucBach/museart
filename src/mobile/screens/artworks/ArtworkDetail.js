@@ -45,12 +45,15 @@ const ArtworkDetail = () => {
             ) : (
                 <ScrollView style={styles.body}>
                     <Picture altText={artwork?.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork?.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
-                    <AboutTitle title={artwork?.artwork_type_title} tagRoute={"Artwork"} tagDetail={"Art"} isPrice={false} />
-                    <AboutArtist />
+                    <AboutTitle title={artwork?.title} tagRoute={artwork.artwork_type_title} tagDetail={artwork.department_title} isPrice={false} />
+                    <AboutArtist text={artwork.artist_title} />
                     <View>
                         <FrameButton field="Title" value={artwork?.artwork_type_title} propColor="#231919" />
                         <FrameButton field="Date" value={`${artwork?.date_start}-${artwork?.date_end}`} propColor="#101010" />
+                        <FrameButton field="Date Display" value={artwork?.date_display} propColor="#101010" />
+                        <FrameButton field="Artist Display" value={artwork?.artist_display} propColor="#101010" />
                         <FrameButton field="Place of Origin" value={artwork?.place_of_origin} propColor="#231919" />
+                        <FrameButton field="Fiscal Year" value={artwork?.fiscal_year} propColor="#231919" />
                         <FrameButton
                             field="Dimensions"
                             value={artwork.dimensions}
@@ -59,6 +62,11 @@ const ArtworkDetail = () => {
                         <FrameButton
                             field="Credit Line"
                             value={artwork.credit_line}
+                            propColor="#231919"
+                        />
+                        <FrameButton
+                            field="Inscriptions"
+                            value={artwork.inscriptions}
                             propColor="#231919"
                         />
                         <FrameButton
@@ -75,6 +83,11 @@ const ArtworkDetail = () => {
                         <Text
                             style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
                         >
+                            Description: {artwork.description}
+                        </Text>
+                        <Text
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                        >
                             Provenance: {artwork.provenance_text}
                         </Text>
                         <Text
@@ -82,9 +95,14 @@ const ArtworkDetail = () => {
                         >
                             Medium: {artwork.medium_display}
                         </Text>
+                        <Text
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                        >
+                            Publication History: {artwork.publication_history}
+                        </Text>
                     </View>
-                    <Video title={artwork.artwork_type_title} />
-                    <Sound title={artwork.artwork_type_title} />
+                    <Video title={artwork.title} />
+                    <Sound title={artwork.title} />
                 </ScrollView>
             )}
         </View>

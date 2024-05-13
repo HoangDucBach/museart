@@ -10,7 +10,7 @@ import {
 } from "../../../GlobalStyles";
 import FrameComponent from "./FrameButton";
 
-const AboutArtist = ({ imagePath }) => {
+const AboutArtist = ({ text }) => {
   return (
     <View
       style={[styles.aboutArtistContainer, styles.tagartistofartworkFlexBox]}
@@ -25,7 +25,7 @@ const AboutArtist = ({ imagePath }) => {
       <View
         style={[styles.tagartistofartwork, styles.tagartistofartworkFlexBox]}
       >
-        <Text style={styles.aboutArtist}>About the artist</Text>
+        <Text style={styles.aboutArtist}>Artist: {text}</Text>
       </View>
     </View>
   );
