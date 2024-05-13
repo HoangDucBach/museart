@@ -42,13 +42,13 @@ const ArticleDetail = () => {
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
-                <View style={styles.body}>
+                <ScrollView style={styles.body}>
                     <AboutTitle title={article.title} tagRoute="Article" tagDetail="Document" isPrice={false} />
+                    <View style={{ height: 15 }} />
                     <BoardExtraInfoArtwork commentAmount={"api chưa có"} likeAmount={123} date={"d/m/y"} />
-                    <ScrollView>
-                        <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock]}>{article.copy}</Text>
-                    </ScrollView>
-                </View>
+                    <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock]}>{article.copy}</Text>
+
+                </ScrollView>
             )}
         </View>
     )
@@ -57,11 +57,13 @@ const ArticleDetail = () => {
 
 const styles = StyleSheet.create({
     articleContainer: {
+        paddingHorizontal: Padding.p_3xs,
         backgroundColor: Color.surfaceSurfaceContainer,
+        borderStyle: "solid",
+        borderColor: Color.colorBlack,
+        justifyContent: "space-between",
+        alignItems: "center",
         flex: 1,
-        paddingHorizontal: 10,
-        flexDirection: "column",
-        alignSelf: "stretch"
     },
     body: {
         padding: Padding.p_3xs,

@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch",
-        marginBottom: 80
     },
     textTypo: {
         fontFamily: FontFamily.labelMediumBold,

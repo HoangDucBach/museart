@@ -110,7 +110,7 @@ const SignIn = () => {
                     </Pressable>
                     <Pressable onPress={() => {
                         handleGuess();
-                        navigation.navigate("Artworks");
+                        navigation.navigate("Home");
                     }}
                                className={'p-4 rounded-2xl bg-secondary/50'}
                     >
