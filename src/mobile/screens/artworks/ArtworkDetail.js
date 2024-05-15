@@ -1,7 +1,7 @@
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useTheme } from '@react-navigation/native';
 import axios from 'axios';
 import { baseUrl } from '../../services/api';
 import Picture from '../../components/detail/picure/Picture';
@@ -17,6 +17,7 @@ const ArtworkDetail = () => {
     const route = useRoute();
     const { ID } = route.params;
 
+    const { colors } = useTheme();
     const [artwork, setArtwork] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
@@ -38,7 +39,7 @@ const ArtworkDetail = () => {
     }, []);
 
     return (
-        <View style={styles.artworkContainer}>
+        <View style={[styles.artworkContainer, {backgroundColor: colors.surfaceContainer}]}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
@@ -75,7 +76,7 @@ const ArtworkDetail = () => {
                             propColor="#231919"
                         />
                     </View>
-                    <Button />
+                    {/* <Button /> */}
                     <View style={styles.descriptioncontainerFlexBox}>
                         <Text style={[styles.description, styles.descriptionFlexBox]}>
                             Description
@@ -119,6 +120,9 @@ const styles = StyleSheet.create({
         textAlign: "left",
         color: Color.surfaceOnSurface,
     },
+    description: {
+
+    },
     loremIpsumIsSimply: {
         fontSize: FontSize.labelLargeBold_size,
         fontFamily: FontFamily.typographyLabelLarge,
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
     },
     artworkContainer: {
         paddingHorizontal: Padding.p_3xs,
-        backgroundColor: Color.surfaceSurfaceContainer,
+        // backgroundColor: Color.surfaceSurfaceContainer,
         borderStyle: "solid",
         borderColor: Color.colorBlack,
         justifyContent: "space-between",
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     body: {
-        padding: Padding.p_3xs,
+        // padding: Padding.p_3xs,
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch",

@@ -5,6 +5,7 @@ module.exports = {
         "./pages/**/*.{js,ts,jsx,tsx}",
         "./components/**/*.{js,ts,jsx,tsx}"
     ],
+    darkMode: 'selector',
     theme: {
         extend: {
             fontFamily: {
@@ -21,10 +22,21 @@ module.exports = {
                 lg: '1.125rem',
             },
             colors: {
+                light: {
+                    surface: "#F5F2EC",
+                    primary: "#A00000"
+                },
+                dark: {
+                    surface: "#101010",
+                },
                 primary: {
                     DEFAULT: '#A00000',
-                    light: '#FFFFFF',
-                    dark: '#FFFFFF',
+                    light: '#FF00FF',
+                    dark: '#000000',
+                },
+                primaryShadow: {
+                    DEFAULT: '#D9CFBE',
+                    dark: '#040404',
                 },
                 secondary: {
                     DEFAULT: '#FFFFFF',

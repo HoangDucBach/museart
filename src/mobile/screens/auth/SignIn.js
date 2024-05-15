@@ -41,7 +41,7 @@ const SignIn = () => {
                 setIsLoggedIn(true);
                 dispatch(toggleMove(1));
                 dispatch(toggleTab("Artworks"));
-                navigation.navigate("Artworks");
+                navigation.navigate("Home");
             } else {
                 console.log("Login failed !!!");
             }
@@ -58,7 +58,7 @@ const SignIn = () => {
     }
     return (
         <LinearGradient colors={['#BE0303', '#1c1a1a','#000000']} className={'flex-1 p-4 max-h-screen'}>
-            <ScrollView style={{zIndex: 2}}>
+            <ScrollView>
                 <SafeAreaView style={styles.vectorParent}>
                     <Image
                         style={styles.vectorIcon}
@@ -128,7 +128,7 @@ const SignIn = () => {
                     </View>
                 </View>
             </ScrollView>
-            <View style={styles.ellipseParent}>
+            {/* <View style={styles.ellipseParent}>
                 <Image
                     style={styles.frameLayout}
                     contentFit="cover"
@@ -149,7 +149,7 @@ const SignIn = () => {
                     contentFit="cover"
                     source={require("../../assets/ellipse-6.png")}
                 />
-            </View>
+            </View> */}
         </LinearGradient>
     );
 };
