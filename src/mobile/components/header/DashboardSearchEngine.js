@@ -2,12 +2,18 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, Image, TextInput, Pressable } from "react-native";
 import { FontSize, FontFamily, Color, Border, Padding, ColorDark } from "../../GlobalStyles";
+import { useRoute } from "@react-navigation/native";
+import axios from "axios";
+import { baseUrl } from "../../services/api";
 
-const DashboardSearchEngine = () => {
+const DashboardSearchEngine = ({ children }) => {
 
   const onFrame41Press = () => { console.log("press frame-41") }
   const onFrame40Press = () => { console.log("press frame-40") }
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const route = useRoute();
+
+  React.useEffect(() => { if (route.name == "ArtworkScreen") console.log('iu') }, [])
 
   return (
 
@@ -18,13 +24,7 @@ const DashboardSearchEngine = () => {
         source={require("../../assets/vector1.png")}
       />
       <TextInput placeholder="Search picture, product, . . ." placeholderTextColor="#534341" style={[styles.searchPictureProduct, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
-      <Pressable onPress={onFrame41Press}>
-        <Image
-          style={styles.dashboardsearchengineChild}
-          contentFit="cover"
-          source={require("../../assets/frame-41.png")}
-        />
-      </Pressable>
+
       <Pressable onPress={onFrame40Press}>
         <Image
           style={styles.dashboardsearchengineChild}
@@ -47,21 +47,21 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.typographyLabelLarge,
     color: Color.surfaceOnSurfaceVarient,
     textAlign: "left",
-    marginLeft: 5,
+    marginLeft: 10,
   },
   dashboardsearchengineChild: {
     width: 25,
     height: 25,
-    marginLeft: 5,
   },
   dashboardsearchengine: {
     alignSelf: "stretch",
     alignItems: "center",
+    justifyContent: "center",
     borderRadius: Border.br_81xl,
     backgroundColor: Color.surfaceSurfaceContainerHighest,
     flexDirection: "row",
-    padding: Padding.p_mini,
-    marginTop: 15,
+    padding: 10,
+    margin: 10,
   },
 });
 

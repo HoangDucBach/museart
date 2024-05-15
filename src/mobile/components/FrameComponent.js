@@ -16,7 +16,7 @@ const FrameComponent = ({
 
     return (
         // style={[styles.frameWrapper]}
-        <Pressable className={'w-screen flex flex-col gap-4 items-center justify-center p-2.5'}
+        <Pressable className={'w-screen flex flex-col gap-4 items-center justify-center self-center pt-2.5'}
             onPress={onFramePressablePress}>
             <Image
                 source={{ uri: frameImage }}

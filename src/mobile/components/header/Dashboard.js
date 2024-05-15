@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { Text, StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import NavbarTop from "./NavbarTop";
 import DashboardSearchEngine from "./DashboardSearchEngine";
 import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../../GlobalStyles";
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     },
     body: {
         alignSelf: "stretch",
-        padding: Padding.p_3xs,
         alignItems: "center",
         overflow: "hidden",
     },

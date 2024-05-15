@@ -38,7 +38,7 @@ const App = () => {
       console.log(res.data);
       setLoading(false);
     } catch (e) {
-      console.log(`sign up error: ${e}`);
+      console.error(`sign up error: ${e}`);
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,7 @@ const App = () => {
       console.log(userInfo);
       console.log(userToken);
     } catch (e) {
-      console.log(`sign in error: ${e}`);
+      console.error(`sign in error: ${e}`);
     } finally {
       setLoading(false);
     }

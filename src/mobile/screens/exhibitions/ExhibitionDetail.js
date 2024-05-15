@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -19,13 +19,13 @@ const ExhibitionDetail = () => {
     const route = useRoute();
     const { ID } = route.params;
 
-    const [exhibition, setexhibition] = useState([]);
+    const [exhibition, setExhibition] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     const getExhibition = async () => {
         try {
             const response = await axios.get(`${baseUrl}/exhibitions/${ID}`);
-            setexhibition(response.data.data);
+            setExhibition(response.data.data);
             console.log(ID);
         } catch (error) {
             //console.log(exhibition);
@@ -33,6 +33,11 @@ const ExhibitionDetail = () => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleLoading = () => {
+        setLoading(true);
+        setTimeout(() => setLoading(false), 1000);
     };
 
     useEffect(() => {
@@ -77,7 +82,7 @@ const ExhibitionDetail = () => {
                             <View>
                                 {exhibition.artwork_ids.map((item, index) => {
                                     return (
-                                        <TouchableHighlight underlayColor={'gray'} onPress={() => {
+                                        <TouchableHighlight key={item} underlayColor={'gray'} onPress={() => {
                                             navigation.navigate('ArtworkDetail', { ID: item });
                                         }}>
                                             <Text style={[styles.descriptionFlexBox]}>{exhibition.artwork_titles[index]}</Text>
