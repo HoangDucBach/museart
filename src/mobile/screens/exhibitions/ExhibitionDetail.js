@@ -1,7 +1,7 @@
-import { ActivityIndicator, FlatList, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
 import axios from 'axios';
 import { baseUrl } from '../../services/api';
 import Picture from '../../components/detail/picure/Picture';
@@ -12,20 +12,20 @@ import Button from '../../components/detail/content/Button';
 import Video from '../../components/detail/content/Video';
 import Sound from '../../components/detail/content/Sound';
 import NavbarTop from '../../components/header/NavbarTop';
-import FrameComponent from '../../components/FrameComponent';
 
 const ExhibitionDetail = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const { ID } = route.params;
 
-    const [exhibition, setexhibition] = useState([]);
+    const [exhibition, setExhibition] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const { colors } = useTheme();
 
     const getExhibition = async () => {
         try {
             const response = await axios.get(`${baseUrl}/exhibitions/${ID}`);
-            setexhibition(response.data.data);
+            setExhibition(response.data.data);
             console.log(ID);
         } catch (error) {
             //console.log(exhibition);
@@ -35,12 +35,17 @@ const ExhibitionDetail = () => {
         }
     };
 
+    const handleLoading = () => {
+        setLoading(true);
+        setTimeout(() => setLoading(false), 1000);
+    };
+
     useEffect(() => {
         getExhibition();
     }, []);
 
     return (
-        <View style={styles.exhibitionContainer}>
+        <View style={[styles.exhibitionContainer, {backgroundColor: colors.surfaceContainer}]}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
@@ -50,20 +55,20 @@ const ExhibitionDetail = () => {
                     <AboutTitle title={exhibition.title} tagRoute={"Exhibition"} tagDetail={"Exhibition"} isPrice={false} />
                     <AboutArtist />
                     <View>
-                        <FrameButton field="AIC start time" value={exhibition.aic_start_at} propColor="#231919" />
-                        <FrameButton field="AIC end time" value={exhibition.aic_end_at} propColor="#231919" />
-                        <FrameButton field="Status" value={exhibition.status} propColor="#231919" />
-                        <FrameButton field="Gallery" value={exhibition.gallery_title} propColor="#231919" />
-                        <FrameButton field="Source Updated At" value={exhibition.source_updated_at.slice(0, 10)} propColor="#231919" />
+                        <FrameButton field="AIC start time" value={exhibition.aic_start_at} />
+                        <FrameButton field="AIC end time" value={exhibition.aic_end_at} />
+                        <FrameButton field="Status" value={exhibition.status} />
+                        <FrameButton field="Gallery" value={exhibition.gallery_title} />
+                        <FrameButton field="Source Updated At" value={exhibition.source_updated_at.slice(0, 10)} />
                     </View>
                     <Button />
                     {exhibition.short_description != null &&
                         <View style={styles.descriptioncontainerFlexBox}>
-                            <Text style={[styles.description, styles.descriptionFlexBox]}>
+                            <Text style={[styles.description, {color: colors.onSurface}]}>
                                 Description
                             </Text>
                             <Text
-                                style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                                style={[styles.loremIpsumIsSimply, {color: colors.onSurface}]}
                             >
                                 {exhibition.short_description}
                             </Text>
@@ -71,16 +76,16 @@ const ExhibitionDetail = () => {
                     }
                     {
                         <View style={styles.descriptioncontainerFlexBox}>
-                            <Text style={[styles.description, styles.descriptionFlexBox]}>
+                            <Text style={[styles.description, {color: colors.onSurface}]}>
                                 Artworks
                             </Text>
                             <View>
                                 {exhibition.artwork_ids.map((item, index) => {
                                     return (
-                                        <TouchableHighlight underlayColor={'gray'} onPress={() => {
+                                        <TouchableHighlight key={item} underlayColor={'gray'} onPress={() => {
                                             navigation.navigate('ArtworkDetail', { ID: item });
                                         }}>
-                                            <Text style={[styles.descriptionFlexBox]}>{exhibition.artwork_titles[index]}</Text>
+                                            <Text style={[{color: colors.onSurface}]}>{exhibition.artwork_titles[index]}</Text>
                                         </TouchableHighlight>
                                     );
                                 })}
@@ -100,10 +105,9 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
     },
     descriptionFlexBox: {
-        textAlign: "left",
-        color: Color.surfaceOnSurface,
     },
     description: {
+        textAlign: "left",
         fontSize: FontSize.titleMediumBold_size,
         fontWeight: "700",
         fontFamily: FontFamily.labelMediumBold,
@@ -115,7 +119,6 @@ const styles = StyleSheet.create({
     },
     exhibitionContainer: {
         paddingHorizontal: Padding.p_3xs,
-        backgroundColor: Color.surfaceSurfaceContainer,
         borderStyle: "solid",
         borderColor: Color.colorBlack,
         justifyContent: "space-between",
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     body: {
-        padding: Padding.p_3xs,
+        // padding: Padding.p_3xs,
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch",

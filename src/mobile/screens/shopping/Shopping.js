@@ -1,4 +1,4 @@
-import { View, ActivityIndicator, FlatList, StyleSheet, TouchableOpacity, Text } from "react-native"
+import { View, ActivityIndicator, StyleSheet, TouchableOpacity, Text } from "react-native"
 import Dashboard from "../../components/header/Dashboard"
 import ProductShopping from "../../components/product/ProductShopping"
 import { useEffect, useState } from "react";
@@ -84,7 +84,7 @@ const Shopping = () => {
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
-                <Dashboard namePage={"Dashboard"}>
+                <Dashboard namePage={"Shopping"}>
                     <MyFlatList data={products} renderItem={renderItem}
                         isLoading={isLoading} handleLoading={handleLoading}
                         renderPaginationButtons={renderPaginationButtons} />

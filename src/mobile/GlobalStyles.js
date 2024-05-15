@@ -95,6 +95,7 @@ export const MyLightTheme = {
     onPrimary: "#F5F2EC",
     primaryFixed: "#868686",
     primaryShadow:"#D9CFBE",
+    outline: "#857371",
   }
 }
 
@@ -109,8 +110,9 @@ export const MyDarkTheme = {
     surfaceContainerHigh: "#0F0F0F",
     surfaceContainerHighest: "#1C1B19",
     onSurfaceVarient: "#827775",
-    onSurface:"#F5F2EC",
-    primary:"rgba(208, 0, 0, 0.9)",
+    // onSurface:"#F5F2EC",
+    primary:"#D00000",
     primaryShadow: "#040404",
+    outline: "#FFFFFF",
   }
 }

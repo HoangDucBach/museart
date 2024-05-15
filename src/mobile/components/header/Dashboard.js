@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     },
     body: {
         alignSelf: "stretch",
-        padding: Padding.p_3xs,
         alignItems: "center",
         overflow: "hidden",
     },

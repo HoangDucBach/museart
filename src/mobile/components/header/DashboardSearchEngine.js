@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, TextInput, Pressable } from "react-native";
 import { FontSize, FontFamily, Border, Padding } from "../../GlobalStyles";
 import { useTheme } from "@react-navigation/native";
 
-const DashboardSearchEngine = () => {
+const DashboardSearchEngine = ({ children }) => {
 
   const onFrame41Press = () => { console.log("press frame-41") }
   const onFrame40Press = () => { console.log("press frame-40") }
@@ -45,20 +45,20 @@ const styles = StyleSheet.create({
     fontSize: FontSize.labelMediumBold_size,
     fontFamily: FontFamily.typographyLabelLarge,
     textAlign: "left",
-    marginLeft: 5,
+    marginLeft: 10,
   },
   dashboardsearchengineChild: {
     width: 25,
     height: 25,
-    marginLeft: 5,
   },
   dashboardsearchengine: {
     alignSelf: "stretch",
     alignItems: "center",
+    justifyContent: "center",
     borderRadius: Border.br_81xl,
     flexDirection: "row",
-    padding: Padding.p_mini,
-    marginTop: 15,
+    padding: 10,
+    margin: 10,
   },
 });
 

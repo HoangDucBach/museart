@@ -49,12 +49,12 @@ const ArtworkDetail = () => {
                     <AboutTitle title={artwork?.title} tagRoute={artwork.artwork_type_title} tagDetail={artwork.department_title} isPrice={false} />
                     <AboutArtist text={artwork.artist_title} />
                     <View>
-                        <FrameButton field="Title" value={artwork?.artwork_type_title} propColor="#231919" />
-                        <FrameButton field="Date" value={`${artwork?.date_start}-${artwork?.date_end}`} propColor="#101010" />
-                        <FrameButton field="Date Display" value={artwork?.date_display} propColor="#101010" />
-                        <FrameButton field="Artist Display" value={artwork?.artist_display} propColor="#101010" />
-                        <FrameButton field="Place of Origin" value={artwork?.place_of_origin} propColor="#231919" />
-                        <FrameButton field="Fiscal Year" value={artwork?.fiscal_year} propColor="#231919" />
+                        <FrameButton field="Title" value={artwork?.artwork_type_title} />
+                        <FrameButton field="Date" value={`${artwork?.date_start}-${artwork?.date_end}`} />
+                        <FrameButton field="Date Display" value={artwork?.date_display} />
+                        <FrameButton field="Artist Display" value={artwork?.artist_display} />
+                        <FrameButton field="Place of Origin" value={artwork?.place_of_origin} />
+                        <FrameButton field="Fiscal Year" value={artwork?.fiscal_year} />
                         <FrameButton
                             field="Dimensions"
                             value={artwork.dimensions}
@@ -78,26 +78,26 @@ const ArtworkDetail = () => {
                     </View>
                     {/* <Button /> */}
                     <View style={styles.descriptioncontainerFlexBox}>
-                        <Text style={[styles.description, styles.descriptionFlexBox]}>
+                        <Text style={[styles.description, styles.descriptionFlexBox, {color: colors.onSurface}]}>
                             Description
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Description: {artwork.description}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Provenance: {artwork.provenance_text}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Medium: {artwork.medium_display}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Publication History: {artwork.publication_history}
                         </Text>
@@ -118,10 +118,12 @@ const styles = StyleSheet.create({
     },
     descriptionFlexBox: {
         textAlign: "left",
-        color: Color.surfaceOnSurface,
     },
     description: {
-
+        marginBottom: 10,
+        fontFamily: FontFamily.labelMediumBold,
+        fontSize: FontSize.titleMediumBold_size,
+        fontWeight: 700,
     },
     loremIpsumIsSimply: {
         fontSize: FontSize.labelLargeBold_size,

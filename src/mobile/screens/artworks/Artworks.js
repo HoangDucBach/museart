@@ -16,7 +16,6 @@ const Artworks = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalpages] = useState(0);
 
-
     const getArtworks = async () => {
         setLoading(true);
         try {

@@ -57,9 +57,7 @@ const Picture = ({ imagePath, commentAmount, likeAmount, date, altText }) => {
 const styles = StyleSheet.create({
   fullscreenpictureicon: {
     position: "absolute",
-    marginLeft: -10.5,
-    top: 26,
-    left: "50%",
+    top: 20,
     width: 20,
     height: 20,
     zIndex: 1,

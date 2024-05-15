@@ -18,10 +18,10 @@ const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
         <Text className={'text-2xl font-playfairBold'} style={{color: colors.onSurface}}>{title}</Text>
         <View style={styles.tagstype}>
           <View style={[styles.artworkWrapper]}>
-            <Text style={{color: colors.onSurface}}>{tagRoute}</Text>
+            <Text style={styles.tagText}>{tagRoute}</Text>
           </View>
           <View style={[styles.artworkWrapper]}>
-            <Text style={{color: colors.onSurface}}>{tagDetail}</Text>
+            <Text style={styles.tagText}>{tagDetail}</Text>
           </View>
         </View>
       </View>
@@ -32,7 +32,7 @@ const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
       ) : (
         <View style={[styles.vectorWrapper, {backgroundColor: colors.primary}]}>
           <Image
-            style={[styles.vectorIcon, {backgroundColor: colors.primary}]}
+            style={[styles.vectorIcon]}
             contentFit="cover"
             source={require("../../../assets/vector3.png")}
           />
@@ -68,6 +68,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     gap: 15,
+  },
+  tagText: {
+    color: "#F5F2EC",
+    fontFamily: FontFamily.labelMediumBold,
+    fontSize: FontSize.labelMediumBold_size,
+    fontWeight: 400,
   },
   containerartworktitle: {
     justifyContent: "center",
