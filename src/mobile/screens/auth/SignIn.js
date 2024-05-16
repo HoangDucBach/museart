@@ -20,15 +20,14 @@ import { AuthContext } from "../../context/authContext";
 
 const SignIn = () => {
     const navigation = useNavigation();
-    const isDarkMode = useSelector(state => state.theme.isDarkMode);
     const { signin, userInfo } = useContext(AuthContext);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
 
     return (
-        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'p-4 max-h-screen'}>
-            <ScrollView style={{ zIndex: 2 }}>
+        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'flex-1 p-4 max-h-screen'}>
+            <ScrollView>
                 <SafeAreaView style={styles.vectorParent}>
                     <Image
                         style={styles.vectorIcon}

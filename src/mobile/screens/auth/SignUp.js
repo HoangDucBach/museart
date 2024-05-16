@@ -15,7 +15,7 @@ const SignUp = () => {
     const [password, setPassword] = useState(null);
 
     return (
-        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'p-4 max-h-screen'}>
+        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'flex-1 p-4 max-h-screen'}>
             <ScrollView>
                 <View style={styles.vectorParent}>
                     <Image
