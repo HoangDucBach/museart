@@ -14,12 +14,12 @@ const ArticleComponent = ({
 
     return (
         <View style={{ padding: 10 }}>
-            <Text style={[styles.username, styles.usernameTypo, {color: colors.onSurfaceVarient}]}>{article}</Text>
-            <Text style={[styles.ddmmyyyy, styles.usernameTypo, {color: colors.onSurfaceVarient}]}>{date}</Text>
-            <Text numberOfLines={3} style={[styles.text, {color: colors.onSurface}]}>{text}</Text>
+            <Text style={[styles.username, styles.usernameTypo, { color: colors.onSurfaceVarient }]}>{article}</Text>
+            <Text style={[styles.ddmmyyyy, styles.usernameTypo, { color: colors.onSurfaceVarient }]}>{date}</Text>
+            <Text numberOfLines={3} style={[styles.text, { color: colors.onSurface }]}>{text}</Text>
             <TouchableOpacity onPress={() =>
                 navigation.navigate('ArticleDetail', { ID: id })} style={{ marginTop: 5 }}>
-                <Text style={[styles.readMore, {color: colors.primary}]}>Read more</Text>
+                <Text style={[styles.readMore, { color: colors.primary }]}>Read more</Text>
             </TouchableOpacity>
             <View
                 style={{

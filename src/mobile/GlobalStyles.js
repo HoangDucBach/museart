@@ -3,7 +3,7 @@ import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 
 /* Colors */
 export const Color = {
-  surface:"#F5F2EC",
+  surface: "#F5F2EC",
   SurfaceContainer: "#efe8dc",
   SurfaceContainerLow: "#F2ECE4",
   SurfaceContainerLowest: "#FFFFFF",
@@ -25,7 +25,7 @@ export const Color = {
   colorDarkslategray: "#363636",
   colorWhite: "#fff",
   primaryPrimary1: "rgba(208, 0, 0, 0.9)",
-  primaryShadow:"#D9CFBE",
+  primaryShadow: "#D9CFBE",
 };
 export const ColorDark = {
   surface: "#101010",
@@ -35,54 +35,54 @@ export const ColorDark = {
   SurfaceContainerHigh: "#0F0F0F",
   SurfaceContainerHighest: "#1C1B19",
   surfaceOnSurfaceVarient: "#827775",
-  surfaceOnSurface:"#F5F2EC",
-  primaryPrimary:"#D00000",
+  surfaceOnSurface: "#F5F2EC",
+  primaryPrimary: "#D00000",
   primaryShadow: "#040404",
 }
 /* fonts */
-  export const FontFamily = {
-      typographyLabelLarge: "PlayfairDisplay-Regular",
-      labelMediumBold: "PlayfairDisplay-Bold",
-      labelLargeMedium: "PlayfairDisplay-Medium",
-    };
-    /* font sizes */
-    export const FontSize = {
-      labelSmallRegular_size: 10,
-      typographyLabelSmall_size: 11,
-      labelMediumBold_size: 13,
-      size_sm: 14,
-      labelLargeBold_size: 16,
-      titleMediumBold_size: 20,
-      headline5Bold_size: 24,
-      bodyXlargeBold_size: 25,
-      headline3Bold_size: 35,
-      headline2Bold_size: 41,
-    };
-  /* Paddings */
-  export const Padding = {
-    p_3xs: 10,
-    p_8xs: 5,
-    p_xl: 20,
-    p_mini: 15,
-    p_31xl: 50,
-    p_6xl: 25,
-    p_181xl: 200,
-  };
-  /* border radiuses */
-  export const Border = {
-    br_18xl: 37,
-    br_81xl: 100,
-    br_12xs: 1,
-    br_3xs: 10,
-    br_xl: 20,
-    br_6xl: 25,
-    br_981xl: 1000,
-    br_8xs: 5,
-  };
+export const FontFamily = {
+  typographyLabelLarge: "PlayfairDisplay-Regular",
+  labelMediumBold: "PlayfairDisplay-Bold",
+  labelLargeMedium: "PlayfairDisplay-Medium",
+};
+/* font sizes */
+export const FontSize = {
+  labelSmallRegular_size: 10,
+  typographyLabelSmall_size: 11,
+  labelMediumBold_size: 13,
+  size_sm: 14,
+  labelLargeBold_size: 16,
+  titleMediumBold_size: 20,
+  headline5Bold_size: 24,
+  bodyXlargeBold_size: 25,
+  headline3Bold_size: 35,
+  headline2Bold_size: 41,
+};
+/* Paddings */
+export const Padding = {
+  p_3xs: 10,
+  p_8xs: 5,
+  p_xl: 20,
+  p_mini: 15,
+  p_31xl: 50,
+  p_6xl: 25,
+  p_181xl: 200,
+};
+/* border radiuses */
+export const Border = {
+  br_18xl: 37,
+  br_81xl: 100,
+  br_12xs: 1,
+  br_3xs: 10,
+  br_xl: 20,
+  br_6xl: 25,
+  br_981xl: 1000,
+  br_8xs: 5,
+};
 
 export const MyLightTheme = {
   colors: {
-    surface:"#F5F2EC",
+    surface: "#F5F2EC",
     onSurface: "#231919",
     surfaceContainer: "#efe8dc",
     surfaceContainerLow: "#F2ECE4",
@@ -91,10 +91,10 @@ export const MyLightTheme = {
     surfaceContainerHighest: "#e7ddcc",
     onSurfaceVarient: "#534341",
     // onSurface: "#ffffff",
-    primary: "#A000000",
+    primary: "rgb(160,0,0)",
     onPrimary: "#F5F2EC",
     primaryFixed: "#868686",
-    primaryShadow:"#D9CFBE",
+    primaryShadow: "#D9CFBE",
     outline: "#857371",
   }
 }
@@ -111,7 +111,7 @@ export const MyDarkTheme = {
     surfaceContainerHighest: "#1C1B19",
     onSurfaceVarient: "#827775",
     // onSurface:"#F5F2EC",
-    primary:"#D00000",
+    primary: "#D00000",
     primaryShadow: "#040404",
     outline: "#FFFFFF",
   }

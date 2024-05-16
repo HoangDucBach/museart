@@ -15,7 +15,12 @@ const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
   return (
     <View style={styles.containerartworktitleParent}>
       <View style={styles.containerartworktitle}>
-        <Text className={'text-2xl font-playfairBold'} style={{color: colors.onSurface}}>{title}</Text>
+        <Text
+          className={"text-2xl font-playfairBold"}
+          style={{ color: colors.onSurface }}
+        >
+          {title}
+        </Text>
         <View style={styles.tagstype}>
           <View style={[styles.artworkWrapper]}>
             <Text style={styles.tagText}>{tagRoute}</Text>
@@ -27,10 +32,14 @@ const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
       </View>
       {isPrice ? (
         <View style={{ flex: 1 }}>
-          <Text style={[styles.text, {color: colors.onSurface}]}>${price}</Text>
+          <Text style={[styles.text, { color: colors.onSurface }]}>
+            ${price}
+          </Text>
         </View>
       ) : (
-        <View style={[styles.vectorWrapper, {backgroundColor: colors.primary}]}>
+        <View
+          style={[styles.vectorWrapper, { backgroundColor: colors.primary }]}
+        >
           <Image
             style={[styles.vectorIcon]}
             contentFit="cover"
@@ -73,7 +82,7 @@ const styles = StyleSheet.create({
     color: "#F5F2EC",
     fontFamily: FontFamily.labelMediumBold,
     fontSize: FontSize.labelMediumBold_size,
-    fontWeight: 400,
+    fontWeight: "400",
   },
   containerartworktitle: {
     justifyContent: "center",

@@ -76,7 +76,7 @@ const ArtworkDetail = () => {
                             propColor="#231919"
                         />
                     </View>
-                    {/* <Button /> */}
+                    <Button />
                     <View style={styles.descriptioncontainerFlexBox}>
                         <Text style={[styles.description, styles.descriptionFlexBox, { color: colors.onSurface }]}>
                             Description
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontFamily: FontFamily.labelMediumBold,
         fontSize: FontSize.titleMediumBold_size,
-        fontWeight: 700,
+        fontWeight: "700",
     },
     loremIpsumIsSimply: {
         fontSize: FontSize.labelLargeBold_size,

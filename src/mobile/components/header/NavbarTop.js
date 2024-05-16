@@ -22,13 +22,13 @@ const NavbarTop = () => {
 
   return (
     <SafeAreaView style={styles.navbartop}>
-      <Pressable onPress={onBackPress} style={[styles.iconContainer, {backgroundColor: colors.primary}]}>
+      <Pressable onPress={onBackPress} style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
         <Image
           contentFit="cover"
           source={require("../../assets/vector.png")}
         />
       </Pressable>
-      <Pressable onPress={() => { setIsModalVisible(true) }} style={[styles.iconContainer, {backgroundColor: colors.primary}]}>
+      <Pressable onPress={() => { setIsModalVisible(true) }} style={[styles.iconContainer, { backgroundColor: colors.primary }]}>
         <Image
           contentFit="cover"
           source={require("../../assets/frame-45.png")}
