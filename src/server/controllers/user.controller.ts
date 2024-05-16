@@ -116,13 +116,15 @@ export class UserController implements IBaseController {
             const token = jwt.sign({
                 email: newUser.email,
             }, process.env.SECRET_KEY as string, {expiresIn: '1h'});
-            res.status(201).json({"user": {
-                "id": newUser.id,
-                "name": newUser.username,
-                "email": newUser.email,
-                "password": newUser.password,
-                "role": newUser.role
-            }, "token": token});
+            res.status(201).json({
+                "user": {
+                    "id": newUser.id,
+                    "name": newUser.username,
+                    "email": newUser.email,
+                    "password": newUser.password,
+                    "role": newUser.role
+                }, "token": token
+            });
         } catch (error) {
             res.status(500).json({error: 'Error signing up', message: error});
         }
@@ -142,14 +144,16 @@ export class UserController implements IBaseController {
                 id: user.id,
                 email: user.email,
             }, process.env.SECRET_KEY as string, {expiresIn: '1h'});
-            res.json({"user": {
-                "id": user.id,
-                "name": user.username,
-                "email": user.email,
-                "password": user.password,
-                "role": user.role
-            },
-            "token": token});
+            res.json({
+                "user": {
+                    "id": user.id,
+                    "name": user.username,
+                    "email": user.email,
+                    "password": user.password,
+                    "role": user.role
+                },
+                "token": token
+            });
         } catch (error) {
             res.status(500).json({error: 'Error signing in', message: error});
             console.log(error);
@@ -298,7 +302,10 @@ export class CommentsController implements IBaseController {
     async getAll(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
         Comment.findAll().then(comments => {
             res.status(200).json(comments);
-        });
+        })
+            .catch(err => {
+                res.status(500).json({error: 'Error getting comments'});
+            });
     }
 
     async create(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
