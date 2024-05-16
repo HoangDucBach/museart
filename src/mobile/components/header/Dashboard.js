@@ -1,30 +1,27 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
-import { Text, StyleSheet, View, SafeAreaView, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import { Text, StyleSheet, View, SafeAreaView } from "react-native";
 import NavbarTop from "./NavbarTop";
 import DashboardSearchEngine from "./DashboardSearchEngine";
-import { Color, Border, Padding, FontSize, FontFamily, ColorDark } from "../../GlobalStyles";
+import { Padding } from "../../GlobalStyles";
+import { useTheme } from "@react-navigation/native";
 
 const Dashboard = ({
     namePage,
     children,
 
 }) => {
-    const isDarkMode = useSelector(state => state.theme.isDarkMode);
-
+    // const isDarkMode = useSelector(state => state.theme.isDarkMode);
+    const { colors } = useTheme();
     return (
-        // style={[styles.artworks, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]}
-        <SafeAreaView className={'w-screen flex-1'}>
-            {/* <View style={{paddingHorizontal: 10}}> */}
+        <SafeAreaView className={`w-screen flex-1`} style={{backgroundColor: colors.surfaceContainer}}>
             <NavbarTop />
-            {/* </View> */}
             <View style={styles.body}>
                 <View style={styles.dashboardtitleFlexBox}>
-                    <Text className={'text-white text-xl font-playfairBold'}>{namePage}</Text>
+                    <Text className={'text-xl font-playfairBold'} style={{color: colors.onSurface}}>{namePage}</Text>
                 </View>
                 <DashboardSearchEngine />
             </View>
-            <SafeAreaView className={'w-full flex-1'}>
+            <SafeAreaView className={'w-full flex-1 justify-center items-center'}>
                 {children}
             </SafeAreaView>
         </SafeAreaView>

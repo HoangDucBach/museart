@@ -8,29 +8,31 @@ import {
   Color,
   Border,
 } from "../../../GlobalStyles";
+import { useTheme } from "@react-navigation/native";
 
 const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
+  const { colors } = useTheme();
   return (
     <View style={styles.containerartworktitleParent}>
       <View style={styles.containerartworktitle}>
-        <Text className={'text-white text-2xl font-playfairBold'}>{title}</Text>
+        <Text className={'text-2xl font-playfairBold'} style={{color: colors.onSurface}}>{title}</Text>
         <View style={styles.tagstype}>
-          <View style={[styles.artworkWrapper, styles.wrapperSpaceBlock]}>
-            <Text style={styles.artwork}>{tagRoute}</Text>
+          <View style={[styles.artworkWrapper]}>
+            <Text style={styles.tagText}>{tagRoute}</Text>
           </View>
-          <View style={[styles.artWrapper, styles.wrapperSpaceBlock]}>
-            <Text style={styles.artwork}>{tagDetail}</Text>
+          <View style={[styles.artworkWrapper]}>
+            <Text style={styles.tagText}>{tagDetail}</Text>
           </View>
         </View>
       </View>
       {isPrice ? (
         <View style={{ flex: 1 }}>
-          <Text style={[styles.text, styles.textTypo]}>${price}</Text>
+          <Text style={[styles.text, {color: colors.onSurface}]}>${price}</Text>
         </View>
       ) : (
-        <View style={styles.vectorWrapper}>
+        <View style={[styles.vectorWrapper, {backgroundColor: colors.primary}]}>
           <Image
-            style={styles.vectorIcon}
+            style={[styles.vectorIcon]}
             contentFit="cover"
             source={require("../../../assets/vector3.png")}
           />
@@ -41,41 +43,37 @@ const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
 };
 
 const styles = StyleSheet.create({
-  wrapperSpaceBlock: {
-    padding: Padding.p_3xs,
-    flexDirection: "row",
-  },
-  aboutOfTitle: {
-    fontSize: FontSize.headline5Bold_size,
-    fontWeight: "700",
-    fontFamily: FontFamily.labelSmallBold,
-    color: Color.surfaceOnSurface,
-    textAlign: "left",
-  },
-  artwork: {
-    fontSize: FontSize.typographyLabelSmall_size,
-    fontFamily: FontFamily.typographyLabelLarge,
-    color: Color.colorWhite,
-    textAlign: "left",
-  },
+  // aboutOfTitle: {
+  //   fontSize: FontSize.headline5Bold_size,
+  //   fontWeight: "700",
+  //   fontFamily: FontFamily.labelSmallBold,
+  //   color: Color.surfaceOnSurface,
+  //   textAlign: "left",
+  // },
+  // artwork: {
+  //   fontSize: FontSize.typographyLabelSmall_size,
+  //   fontFamily: FontFamily.typographyLabelLarge,
+  //   color: Color.colorWhite,
+  //   textAlign: "left",
+  // },
   artworkWrapper: {
     backgroundColor: Color.colorDarkslategray,
     borderRadius: Border.br_81xl,
     padding: Padding.p_3xs,
     justifyContent: "center",
     alignItems: "center",
-  },
-  artWrapper: {
-    backgroundColor: Color.colorDarkslategray,
-    borderRadius: Border.br_81xl,
-    padding: Padding.p_3xs,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "row",
   },
   tagstype: {
     flexDirection: "row",
     alignItems: "flex-start",
     gap: 15,
+  },
+  tagText: {
+    color: "#F5F2EC",
+    fontFamily: FontFamily.labelMediumBold,
+    fontSize: FontSize.labelMediumBold_size,
+    fontWeight: 400,
   },
   containerartworktitle: {
     justifyContent: "center",
@@ -85,13 +83,11 @@ const styles = StyleSheet.create({
     width: "75%",
   },
   vectorIcon: {
-    backgroundColor: Color.primaryPrimary,
     width: 20,
     height: 20,
   },
   vectorWrapper: {
     borderRadius: Border.br_3xs,
-    backgroundColor: Color.primaryPrimary,
     paddingHorizontal: Padding.p_mini,
     paddingVertical: Padding.p_3xs,
     alignItems: "center",
@@ -105,11 +101,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: FontSize.bodyXlargeBold_size,
-    textAlign: "right",
-    color: Color.surfaceOnSurface,
-  },
-  textTypo: {
     fontFamily: FontFamily.labelMediumBold,
+    textAlign: "right",
     fontWeight: "700",
   },
 });

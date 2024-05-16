@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from "react-native";
-import { Color, ColorDark, Border, FontFamily, FontSize, Padding } from "../../GlobalStyles";
+import { Color, Border, FontFamily, FontSize, Padding } from "../../GlobalStyles";
 import ButtonPrimary from "../button/ButtonPrimary";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 const ProductShopping = ({
   title,
@@ -13,11 +13,12 @@ const ProductShopping = ({
   id
 }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const { colors } = useTheme();
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity onPress={() =>
-      navigation.navigate('ProductDetail', { ID: id })} style={[styles.frameParent, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
+      navigation.navigate('ProductDetail', { ID: id })} className={'w-screen flex flex-col gap-4 items-center justify-center p-2.5'} style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHigh}]}>
       <View>
         <Image style={[styles.componentChild]}
           contentFit={"contain"}
@@ -25,9 +26,9 @@ const ProductShopping = ({
       </View>
       <View style={[styles.frameGroup]}>
         <View style={{ justifyContent: "space-between" }}>
-          <Text numberOfLines={2} style={[styles.product, styles.buyNowTypo, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{title}</Text>
-          <Text style={[styles.product1, styles.textTypo, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]}>{text}</Text>
-          <Text style={[styles.text, styles.textTypo, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>${price}</Text>
+          <Text numberOfLines={2} style={[styles.product, styles.buyNowTypo, {color: colors.onSurface}]}>{title}</Text>
+          <Text style={[styles.product1, styles.textTypo, {color: colors.onSurfaceVarient}]}>{text}</Text>
+          <Text style={[styles.text, styles.textTypo, {color: colors.onSurface}]}>${price}</Text>
         </View>
         <View style={{ flex: 1, marginTop: 10 }}>
           <View style={{ alignItems: "stretch", flexDirection: "row" }}>
@@ -80,12 +81,10 @@ const styles = StyleSheet.create({
     color: Color.surfaceOnSurface,
   },
   product1: {
-    color: Color.surfaceOnSurfaceVarient,
     fontSize: FontSize.labelSmallRegular_size,
   },
   text: {
     fontSize: FontSize.labelMediumBold_size,
-    color: Color.surfaceOnSurface,
   },
   frameGroup: {
     marginLeft: 10,
@@ -93,15 +92,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   frameParent: {
-    backgroundColor: Color.surfaceSurfaceContainerHigh,
     borderRadius: Border.br_3xs,
     margin: 5,
     padding: Padding.p_3xs,
-    flex: 1,
     flexDirection: "row",
-    alignItems: "center",
     gap: 10,
-    alignSelf: "stretch"
   },
 });
 

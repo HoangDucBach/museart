@@ -1,4 +1,4 @@
-import { View, ActivityIndicator, FlatList, StyleSheet, TouchableOpacity, Text } from "react-native"
+import { View, ActivityIndicator, StyleSheet, TouchableOpacity, Text } from "react-native"
 import Dashboard from "../../components/header/Dashboard"
 import ProductShopping from "../../components/product/ProductShopping"
 import { useEffect, useState } from "react";

@@ -1,30 +1,29 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
 import { StyleSheet, View, Image, TextInput, Pressable } from "react-native";
-import { FontSize, FontFamily, Color, Border, Padding, ColorDark } from "../../GlobalStyles";
-import { useRoute } from "@react-navigation/native";
-import axios from "axios";
-import { baseUrl } from "../../services/api";
+import { FontSize, FontFamily, Border, Padding } from "../../GlobalStyles";
+import { useTheme } from "@react-navigation/native";
 
 const DashboardSearchEngine = ({ children }) => {
 
   const onFrame41Press = () => { console.log("press frame-41") }
   const onFrame40Press = () => { console.log("press frame-40") }
-  const isDarkMode = useSelector(state => state.theme.isDarkMode);
-  const route = useRoute();
-
-  React.useEffect(() => { if (route.name == "ArtworkScreen") console.log('iu') }, [])
+  const { colors } = useTheme();
 
   return (
-
-    <View style={[styles.dashboardsearchengine, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]}>
+    <View style={[styles.dashboardsearchengine, {backgroundColor: colors.surfaceContainerHighest}]}>
       <Image
         style={styles.vectorIcon}
         contentFit="cover"
         source={require("../../assets/vector1.png")}
       />
-      <TextInput placeholder="Search picture, product, . . ." placeholderTextColor="#534341" style={[styles.searchPictureProduct, isDarkMode ? { color: ColorDark.surfaceOnSurfaceVarient } : null]} />
-
+      <TextInput placeholder="Search picture, product, . . ." placeholderTextColor="#534341" style={[styles.searchPictureProduct, {color: colors.onSurfaceVarient}]} />
+      <Pressable onPress={onFrame41Press}>
+        <Image
+          style={styles.dashboardsearchengineChild}
+          contentFit="cover"
+          source={require("../../assets/frame-41.png")}
+        />
+      </Pressable>
       <Pressable onPress={onFrame40Press}>
         <Image
           style={styles.dashboardsearchengineChild}
@@ -45,7 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FontSize.labelMediumBold_size,
     fontFamily: FontFamily.typographyLabelLarge,
-    color: Color.surfaceOnSurfaceVarient,
     textAlign: "left",
     marginLeft: 10,
   },
@@ -58,7 +56,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: Border.br_81xl,
-    backgroundColor: Color.surfaceSurfaceContainerHighest,
     flexDirection: "row",
     padding: 10,
     margin: 10,

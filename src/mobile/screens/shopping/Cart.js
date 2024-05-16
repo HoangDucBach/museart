@@ -72,7 +72,7 @@ const Cart = () => {
                     <ButtonPrimary
                         text={"Pay now"}
                         buttonPrimaryMarginTop={30}
-                        onPressButton={() => navigation.navigate("Payment", { Amount: numberOfProduct, Price: totalAmount })}
+                        onPressButton={() => navigation.navigate("Payment", {Amount: numberOfProduct, Price: totalAmount})}
                     />
                 </View>
             </View>
