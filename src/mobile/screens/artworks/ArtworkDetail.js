@@ -1,6 +1,6 @@
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
+import {Border, Color, ColorDark, FontFamily, FontSize, Padding} from '../../GlobalStyles';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { baseUrl } from '../../services/api';
@@ -38,12 +38,12 @@ const ArtworkDetail = () => {
     }, []);
 
     return (
-        <View style={styles.artworkContainer}>
+        <View style={styles.artworkContainer} className={'!font-playfair'}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
-                <ScrollView style={styles.body}>
+                <ScrollView style={styles.body} className={'!font-playfair'}>
                     <Picture altText={artwork?.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork?.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
                     <AboutTitle title={artwork?.title} tagRoute={artwork.artwork_type_title} tagDetail={artwork.department_title} isPrice={false} />
                     <AboutArtist text={artwork.artist_title} />
@@ -126,12 +126,13 @@ const styles = StyleSheet.create({
     },
     artworkContainer: {
         paddingHorizontal: Padding.p_3xs,
-        backgroundColor: Color.surfaceSurfaceContainer,
+        backgroundColor: ColorDark.surfaceSurfaceContainer,
         borderStyle: "solid",
         borderColor: Color.colorBlack,
         justifyContent: "space-between",
         alignItems: "center",
         flex: 1,
+        display: "flex",
     },
     body: {
         padding: Padding.p_3xs,

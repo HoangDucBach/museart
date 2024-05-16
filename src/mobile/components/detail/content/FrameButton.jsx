@@ -4,9 +4,9 @@ import { FontFamily, FontSize, Color } from "../../../GlobalStyles";
 
 const FrameButton = ({ field, value, propColor }) => {
   return (
-    <View style={styles.fieldParent}>
-      <Text style={[styles.field, styles.fieldTypo]}>{field}</Text>
-      <Text style={[styles.value, styles.fieldTypo, propColor]}>{value}</Text>
+    <View style={styles.fieldParent} className={'!font-playfair'}>
+      <Text  className={'!font-playfairBold'} style={[styles.field]}>{field}</Text>
+      <Text className={'!font-playfairBold'} style={[styles.value,propColor]}>{value}</Text>
     </View>
   );
 };
