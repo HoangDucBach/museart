@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useState} from "react";
+import { useState, useContext, useEffect } from "react";
 import {
     Text,
     StyleSheet,
@@ -11,53 +11,22 @@ import {
     TextInput,
     ScrollView
 } from "react-native";
-import {useNavigation} from "@react-navigation/native";
-import {FontFamily, Padding, Color, Border, FontSize} from "../../GlobalStyles";
-import {useDispatch, useSelector} from "react-redux";
-import {toggleMove, toggleTab} from "../../store";
-import {LinearGradient} from "expo-linear-gradient";
-import axios from "axios";
-import { localhost } from "../../services/api";
+import { useNavigation } from "@react-navigation/native";
+import { FontFamily, Padding, Color, Border, FontSize } from "../../GlobalStyles";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMove, toggleTab } from "../../store";
+import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../../context/authContext";
 
 const SignIn = () => {
     const navigation = useNavigation();
-    const dispatch = useDispatch();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    
-    const isDarkMode = useSelector(state => state.theme.isDarkMode);
-    const handleSignIn = async () => {
-        var payload = {
-            email: `${email}`,
-            password: `${password}`,
-        }
-        console.log(payload);
-        try{
-            const res = await axios.post(`${localhost}/auth/signin`, payload);
-            console.log(res);
-            if (res.status === 200) {
-                // Xử lý đăng nhập thành công
-                setIsLoggedIn(true);
-                dispatch(toggleMove(1));
-                dispatch(toggleTab("Artworks"));
-                navigation.navigate("Home");
-            } else {
-                console.log("Login failed !!!");
-            }
-        } catch(error) {
-            console.log(error);
-        }
-        // console.log(isLoggedIn);
-    };
+    const { signin, userInfo } = useContext(AuthContext);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
 
-    const handleGuess = () => {
-        setIsLoggedIn(true);
-        dispatch(toggleMove(1));
-        dispatch(toggleTab("Artworks"));
-    }
+
     return (
-        <LinearGradient colors={['#BE0303', '#1c1a1a','#000000']} className={'flex-1 p-4 max-h-screen'}>
+        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'flex-1 p-4 max-h-screen'}>
             <ScrollView>
                 <SafeAreaView style={styles.vectorParent}>
                     <Image
@@ -84,7 +53,10 @@ const SignIn = () => {
                             contentFit="cover"
                             source={require("../../assets/group-19.png")}
                         />
-                        <TextInput placeholder="Username" onChangeText={(text) => setEmail(text)} className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
+                        <TextInput placeholder="Email"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
+                            className={'text-white font-playfair w-full'} placeholderTextColor={'white'} />
                     </View>
                     <View
                         className={'flex flex-row p-4 bg-surfaceContainer-dark rounded-2xl focus:outline-none'}
@@ -94,27 +66,29 @@ const SignIn = () => {
                             contentFit="cover"
                             source={require("../../assets/group-20.png")}
                         />
-                        <TextInput placeholder="Password" secureTextEntry={true} onChangeText={(text) => setPassword(text)} className={'text-white font-playfair w-full'} placeholderTextColor={'white'}/>
+                        <TextInput placeholder="Password"
+                            value={password}
+                            onChangeText={text => setPassword(text)}
+                            secureTextEntry={true} className={'text-white font-playfair w-full'} placeholderTextColor={'white'} />
                     </View>
                     <Pressable
-                        onPress={ async () => {
-                            await handleSignIn();
-                            console.log(isLoggedIn);
-                            if (isLoggedIn) {
-                                setIsLoggedIn(false);
+                        onPress={() => {
+                            signin(email, password);
+                            if (userInfo != null) {
+                                navigation.reset({
+                                    index: 0,
+                                    routes: [{ name: 'Home' }],
+                                });
                             }
                         }}
                         className={'p-4 rounded-xl bg-primary'}
                     >
                         <Text className={'text-white text-center font-playfairBold'}>Sign in</Text>
                     </Pressable>
-                    <Pressable onPress={() => {
-                        handleGuess();
-                        navigation.navigate("Home");
-                    }}
-                               className={'p-4 rounded-2xl bg-secondary/50'}
+                    <Pressable onPress={() => { navigation.navigate("Home") }}
+                        className={'p-4 rounded-2xl bg-secondary/50'}
                     >
-                        <Text className={'text-white text-center font-playfairBold'}>Guess</Text>
+                        <Text className={'text-white text-center font-playfairBold'}>Guest</Text>
                     </Pressable>
                     <View className={'flex flex-row items-center w-full justify-center'}>
                         <Text style={[styles.dontHaveAccount, styles.signTypo]}>
@@ -155,25 +129,6 @@ const SignIn = () => {
 };
 
 const styles = StyleSheet.create({
-    signTypo1: {
-        fontFamily: FontFamily.labelMediumBold,
-        fontWeight: "700",
-    },
-    usernamecontainerFlexBox: {
-        padding: Padding.p_mini,
-        backgroundColor: Color.surfaceSurfaceContainerHighest,
-        borderRadius: Border.br_81xl,
-        flexDirection: "row",
-        alignSelf: "stretch",
-        alignItems: "center",
-        overflow: "hidden",
-    },
-    signinbuttonSpaceBlock: {
-        borderRadius: Border.br_3xs,
-        padding: Padding.p_mini,
-        marginTop: 15,
-        alignItems: "center",
-    },
     signTypo: {
         fontSize: FontSize.labelLargeBold_size,
         textAlign: "center",
@@ -199,80 +154,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flex: 1,
     },
-    welcomeToOnline: {
-        fontSize: FontSize.headline2Bold_size,
-        textAlign: "left",
-        color: Color.colorWhite,
-        alignSelf: "stretch",
-        fontFamily: FontFamily.labelMediumBold,
-    },
-    signInTo: {
-        fontSize: FontSize.headline3Bold_size,
-        fontFamily: FontFamily.typographyLabelLarge,
-        fontWeight: "400",
-        textAlign: "left",
-        marginTop: 15,
-        color: Color.colorWhite,
-        alignSelf: "stretch",
-    },
-    welcomeToOnlineMuseumParent: {
-        alignSelf: "stretch",
-        marginLeft: 10,
-        flex: 2,
-    },
     usernamecontainerChild: {
         width: 25,
         height: 25,
-    },
-    username: {
-        fontSize: FontSize.labelMediumBold_size,
-        color: Color.surfaceOnSurface,
-        marginLeft: 5,
-        fontFamily: FontFamily.typographyLabelLarge,
-        textAlign: "left",
-        flex: 1,
-    },
-    passwordcontainer: {
-        marginTop: 15,
-    },
-    signIn1: {
-        color: Color.primaryOnPrimary,
-        fontFamily: FontFamily.labelMediumBold,
-        fontWeight: "700",
-    },
-    signinbutton: {
-        backgroundColor: Color.primaryPrimary,
-        alignSelf: "stretch",
-        marginHorizontal: 10,
-    },
-    guessbutton: {
-        backgroundColor: Color.primaryPrimaryFixed,
-        alignSelf: "stretch",
-        marginHorizontal: 10,
     },
     dontHaveAccount: {
         fontFamily: FontFamily.typographyLabelLarge,
         color: Color.colorWhite,
         marginRight: 15,
-    },
-    signUp: {
-        color: Color.colorWhite,
-        fontFamily: FontFamily.labelMediumBold,
-        fontWeight: "700",
-    },
-    dontHaveAccountParent: {
-        justifyContent: "center",
-        flexDirection: "row",
-        marginTop: 15,
-        alignSelf: "stretch",
-    },
-    usernamecontainerParent: {
-        paddingTop: 20,
-        // paddingBottom: Padding.p_31xl,
-        margin: 10,
-        alignSelf: "stretch",
-        alignItems: "center",
-        flex: 3,
     },
     frameItem: {
         marginLeft: 15,
@@ -283,11 +172,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         flexDirection: "row",
         bottom: 20,
-    },
-    signinBackground: {
-        width: "100%",
-        height: "100%",
-        overflow: "hidden",
     },
 });
 
