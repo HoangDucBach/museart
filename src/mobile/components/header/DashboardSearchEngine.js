@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View, Image, TextInput, Pressable } from "react-native";
-import { FontSize, FontFamily, Border, Padding } from "../../GlobalStyles";
+import { FontSize, FontFamily, Border } from "../../GlobalStyles";
 import { useTheme } from "@react-navigation/native";
 
 const DashboardSearchEngine = ({ children }) => {
@@ -16,7 +16,7 @@ const DashboardSearchEngine = ({ children }) => {
         contentFit="cover"
         source={require("../../assets/vector1.png")}
       />
-      <TextInput placeholder="Search picture, product, . . ." placeholderTextColor="#534341" style={[styles.searchPictureProduct, {color: colors.onSurfaceVarient}]} />
+      <TextInput placeholder="Search picture, product, . . ." placeholderTextColor={colors.onSurface} style={[styles.searchPictureProduct, {color: colors.onSurfaceVarient}]} />
       <Pressable onPress={onFrame41Press}>
         <Image
           style={styles.dashboardsearchengineChild}

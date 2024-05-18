@@ -1,15 +1,12 @@
 import * as React from "react";
 import { useState } from "react";
 import {
-  Text,
   StyleSheet,
-  View,
   ImageBackground,
   Dimensions,
   TouchableWithoutFeedback,
   Modal,
-  TouchableOpacity,
-  Pressable,
+  Pressable
 } from "react-native";
 import { Image } from "expo-image";
 import BoardExtraInfoArtwork from "./BoardExtraInfoArtwork";
@@ -36,19 +33,15 @@ const Picture = ({ imagePath, commentAmount, likeAmount, date, altText }) => {
           source={require("../../../assets/fullscreenpictureicon.png")}
         />
       </TouchableWithoutFeedback>
-      <Modal visible={modalVisible} animationType="slide" transparent={true}>
-        <ImageBackground
-          contentFit="cover"
-          style={{ width: "100%", height: "100%" }}
-          source={{
-            uri: imagePath,
-          }}
-          alt={altText}
-        >
-          <Pressable onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textX}>x</Text>
-          </Pressable>
-        </ImageBackground>
+      <Modal visible={modalVisible} animationType="fade" transparent={true} style={{flex: 1}}>
+        <Pressable style={{flex: 1, backgroundColor: "rgba(0, 0, 0, 0.85)"}} onPress={() => setModalVisible(false)}>
+          <ImageBackground
+          style={{ flex: 1 }}
+          source={{ uri: imagePath }}
+          resizeMode="contain"
+          accessibilityLabel={altText}
+           />
+        </Pressable>
       </Modal>
     </ImageBackground>
   );

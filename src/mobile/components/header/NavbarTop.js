@@ -1,18 +1,15 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, Image, Pressable, Modal, SafeAreaView, Dimensions, StatusBar, TouchableOpacity } from "react-native";
-import { Border, Color, ColorDark, Padding } from "../../GlobalStyles";
-import { useNavigation, useNavigationState, useTheme } from "@react-navigation/native";
+import { StyleSheet, Image, Pressable, Modal, SafeAreaView, Dimensions, StatusBar, TouchableOpacity } from "react-native";
+import { Border, Padding } from "../../GlobalStyles";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import SettingsMenu from "./SettingsMenu";
-import { toggleMove, toggleTab } from "../../store";
 
 const NavbarTop = () => {
 
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const isDarkMode = useSelector(state => state.theme.isDarkMode);
   const { colors } = useTheme();
 
   const onBackPress = () => {

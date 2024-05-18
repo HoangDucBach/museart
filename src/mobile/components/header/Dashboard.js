@@ -13,7 +13,7 @@ const Dashboard = ({
     // const isDarkMode = useSelector(state => state.theme.isDarkMode);
     const { colors } = useTheme();
     return (
-        <SafeAreaView className={`w-screen flex-1`} style={{backgroundColor: colors.surfaceContainer}}>
+        <View className={`w-screen flex-1`} style={{backgroundColor: colors.surfaceContainer}}>
             <NavbarTop />
             <View style={styles.body}>
                 <View style={styles.dashboardtitleFlexBox}>
@@ -24,7 +24,7 @@ const Dashboard = ({
             <SafeAreaView className={'w-full flex-1 justify-center items-center'}>
                 {children}
             </SafeAreaView>
-        </SafeAreaView>
+        </View>
     );
 };
 

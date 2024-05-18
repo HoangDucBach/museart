@@ -1,19 +1,21 @@
-import { FlatList, Image, Modal, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, Modal, RefreshControl, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
+import { FontFamily, FontSize, Padding } from '../../GlobalStyles';
 import CommentFrame from './CommentFrame';
 import { localhost } from '../../services/api';
 import axios from 'axios';
+import { useTheme } from '@react-navigation/native';
 
 const Comment = ({ modalVisible, }) => {
     const [isLoading, setLoading] = useState(false);
     const [comments, setComments] = useState(null);
     const [openInput, setOpenInput] = useState(false);
+    const { colors } = useTheme();
 
     const getComments = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`${localhost}/user/comments`);
+            const response = await axios.get(`${localhost}/users/comments`);
             setComments(response.data);
             setLoading(false);
         } catch (error) {
@@ -40,7 +42,7 @@ const Comment = ({ modalVisible, }) => {
     }, []);
 
     return (
-        <View style={styles.frameParent}>
+        <View style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHigh}]}>
             <View style={styles.frameGroupFlexBox}>
                 <TouchableOpacity onPress={modalVisible}>
                     <Image
@@ -49,7 +51,7 @@ const Comment = ({ modalVisible, }) => {
                         source={require("../../assets/frame-67.png")}
                     />
                 </TouchableOpacity>
-                <Text style={[styles.comment, styles.commentTypo]}>Comment</Text>
+                    <Text style={[styles.commentTypo, {color: colors.onSurface}]}>Comment</Text>
                 <TouchableOpacity onPress={() => {
                     setOpenInput(true);
                     console.log("add comment");
@@ -93,21 +95,17 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
     },
     commentTypo: {
-        textAlign: "left",
         fontFamily: FontFamily.labelMediumBold,
+        fontSize: FontSize.bodyXlargeBold_size,
         fontWeight: "700",
+        textAlign: "left",
     },
     frameChild: {
         width: 25,
         height: 25,
         overflow: "hidden",
     },
-    comment: {
-        fontSize: FontSize.bodyXlargeBold_size,
-        color: Color.surfaceOnSurface,
-    },
     frameParent: {
-        backgroundColor: Color.surfaceSurfaceContainerHigh,
         padding: Padding.p_xl,
         height: "100%",
         width: "100%",

@@ -44,7 +44,7 @@ const ArtworkDetail = () => {
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
-                <ScrollView style={styles.body} className={'!font-playfair'}>
+                <ScrollView style={styles.body}>
                     <Picture altText={artwork?.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork?.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
                     <AboutTitle title={artwork?.title} tagRoute={artwork.artwork_type_title} tagDetail={artwork.department_title} isPrice={false} />
                     <AboutArtist text={artwork.artist_title} />
