@@ -8,7 +8,14 @@ const FrameButton = ({ field, value }) => {
   return (
     <View style={styles.fieldParent}>
       <Text style={[styles.field, styles.fieldTypo]}>{field}</Text>
-      <Text style={[styles.fieldTypo, {textAlign: "right", marginLeft: 10, color: colors.onSurface}]}>{value}</Text>
+      <Text
+        style={[
+          styles.fieldTypo,
+          { textAlign: "right", marginLeft: 10, color: colors.onSurface },
+        ]}
+      >
+        {value}
+      </Text>
     </View>
   );
 };

@@ -24,6 +24,9 @@ const SignIn = () => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
+    useEffect(() => {
+        if (!navigation.canGoBack() && userInfo != null) { navigation.navigate("Home") }
+    }, [navigation, userInfo])
 
     return (
         <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'flex-1 p-4 max-h-screen'}>
@@ -74,12 +77,6 @@ const SignIn = () => {
                     <Pressable
                         onPress={() => {
                             signin(email, password);
-                            if (userInfo != null) {
-                                navigation.reset({
-                                    index: 0,
-                                    routes: [{ name: 'Home' }],
-                                });
-                            }
                         }}
                         className={'p-4 rounded-xl bg-primary'}
                     >

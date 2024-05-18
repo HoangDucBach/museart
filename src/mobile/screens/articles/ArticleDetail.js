@@ -37,7 +37,7 @@ const ArticleDetail = () => {
     }, []);
 
     return (
-        <View className={`w-screen flex-1`} style={[{backgroundColor: colors.surfaceContainer}]}>
+        <View className={`w-screen flex-1`} style={[{ backgroundColor: colors.surfaceContainer }]}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
@@ -45,8 +45,8 @@ const ArticleDetail = () => {
                 <ScrollView style={styles.body}>
                     <AboutTitle title={article.title} tagRoute="Article" tagDetail="Document" isPrice={false} />
                     <View style={{ height: 15 }} />
-                    <BoardExtraInfoArtwork commentAmount={"api chưa có"} likeAmount={123} date={"d/m/y"} />
-                    <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock, {color: colors.onSurface}]}>{article.copy}</Text>
+                    <BoardExtraInfoArtwork commentAmount={""} likeAmount={''} date={article.timestamp} />
+                    <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock, { color: colors.onSurface }]}>{article.copy}</Text>
 
                 </ScrollView>
             )}

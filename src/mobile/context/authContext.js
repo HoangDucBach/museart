@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { localhost } from '../services/api';
+import { Alert } from 'react-native';
 
 export const AuthContext = createContext();
 
@@ -21,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem('userToken', userInfo.token);
     } catch (e) {
       console.log(`sign up error: ${e}`);
+      return Alert.alert("All field are required. Email must be valid and Password must be at least 6 characters long");
     } finally {
       setLoading(false);
     }
@@ -37,6 +39,7 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem('userToken', userInfo.token);
     } catch (e) {
       console.log(`sign in error: ${e}`);
+      return Alert.alert("All field are required. Email must be valid and Password must be at least 6 characters long");
     } finally {
       setLoading(false);
     }
