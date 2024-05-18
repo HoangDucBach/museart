@@ -163,8 +163,10 @@ export class UserController implements IBaseController {
 
 export class CartController implements IBaseController {
     async get(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
-        const cartId = req.params.id;
-        Cart.findByPk(cartId).then(cart => {
+        const userId = req.params.id;
+        Cart.findOne({
+            where: {userId: userId}
+        }).then(cart => {
             if (cart) {
                 res.status(200).json(cart);
             } else {
@@ -198,9 +200,13 @@ export class CartController implements IBaseController {
     }
 
     async update(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
-        const cartId = req.params.id;
-        const {userId, productIds, total, address, payMethod} = req.body;
-        Cart.findByPk(cartId).then(cart => {
+        const userId = req.params.id || req.body.userId;
+        const {productIds, total, address, payMethod} = req.body;
+        Cart.findOne({
+            where: {
+                userId: userId
+            }
+        }).then(cart => {
             if (cart) {
                 cart.update({userId, productIds, total, address, payMethod}).then(() => {
                     res.status(200).json({message: 'Cart updated successfully'});
@@ -212,8 +218,12 @@ export class CartController implements IBaseController {
     }
 
     async delete(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
-        const cartId = req.params.id;
-        Cart.findByPk(cartId).then(cart => {
+        const userId = req.params.id;
+        Cart.findOne({
+            where: {
+                userId: userId
+            }
+        }).then(cart => {
             if (cart) {
                 cart.destroy().then(() => {
                     res.status(200).json({message: 'Cart deleted successfully'});
@@ -225,9 +235,13 @@ export class CartController implements IBaseController {
     }
 
     async addProduct(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
-        const cartId = req.params.id;
+        const userId = req.params.id || req.body.userId;
         const productId = req.body.productId
-        Cart.findByPk(cartId).then(cart => {
+        Cart.findOne({
+            where: {
+                userId: userId
+            }
+        }).then(cart => {
             if (cart) {
                 cart.productIds.push(productId);
                 cart.update({productIds: cart.productIds}).then(() => {
@@ -240,9 +254,14 @@ export class CartController implements IBaseController {
     }
 
     async removeProduct(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
-        const cartId = req.params.id;
+        const userId = req.params.id || req.body.userId;
         const productId = req.body.productId
-        Cart.findByPk(cartId).then(cart => {
+        Cart.findOne({
+            where: {
+                userId: userId
+            }
+
+        }).then(cart => {
             if (cart) {
                 cart.productIds = cart.productIds.filter((id: string) => id !== productId);
                 cart.update({productIds: cart.productIds}).then(() => {
@@ -255,9 +274,13 @@ export class CartController implements IBaseController {
     }
 
     async increaseProductQuantity(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
-        const cartId = req.params.id;
+        const userId = req.params.id;
         const productId = req.body.productId
-        Cart.findByPk(cartId).then(cart => {
+        Cart.findOne({
+            where: {
+                userId: userId
+            }
+        }).then(cart => {
             if (cart) {
                 cart.productIds.push(productId);
                 cart.update({productIds: cart.productIds}).then(() => {
@@ -270,9 +293,13 @@ export class CartController implements IBaseController {
     }
 
     async decreaseProductQuantity(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: NextFunction): Promise<void> {
-        const cartId = req.params.id;
+        const userId = req.params.id;
         const productId = req.body.productId
-        Cart.findByPk(cartId).then(cart => {
+        Cart.findOne({
+            where: {
+                userId: userId
+            }
+        }).then(cart => {
             if (cart) {
                 cart.productIds.push(productId);
                 cart.update({productIds: cart.productIds}).then(() => {
