@@ -13,11 +13,11 @@ const Dashboard = ({
     // const isDarkMode = useSelector(state => state.theme.isDarkMode);
     const { colors } = useTheme();
     return (
-        <View className={`w-screen flex-1`} style={{backgroundColor: colors.surfaceContainer}}>
+        <View className={`w-screen flex-1`} style={{ backgroundColor: colors.surfaceContainer }}>
             <NavbarTop />
             <View style={styles.body}>
                 <View style={styles.dashboardtitleFlexBox}>
-                    <Text className={'text-xl font-playfairBold'} style={{color: colors.onSurface}}>{namePage}</Text>
+                    <Text className={'text-xl font-playfairBold'} style={{ color: colors.onSurface }}>{namePage}</Text>
                 </View>
                 <DashboardSearchEngine />
             </View>
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     body: {
         alignSelf: "stretch",
         alignItems: "center",
-        overflow: "hidden",
     },
 });
 
