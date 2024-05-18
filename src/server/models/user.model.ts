@@ -46,6 +46,8 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     public role!: string;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
+    // public readonly carts?: Cart[];
+    // public readonly status?: Status[];
 }
 
 User.init({
@@ -68,7 +70,7 @@ User.init({
     },
     role: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     createdAt: {
         type: DataTypes.DATE,
@@ -79,7 +81,8 @@ User.init({
         type: DataTypes.DATE,
         allowNull: false,
         field: 'updated_at'
-    }
+    },
+
 }, {
     sequelize,
     modelName: 'users'

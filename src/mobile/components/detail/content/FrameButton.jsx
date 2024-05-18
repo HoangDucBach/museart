@@ -15,7 +15,8 @@ const FrameButton = ({ field, value }) => {
 
 const styles = StyleSheet.create({
   fieldTypo: {
-    textAlign: "left",
+    marginLeft: 10,
+    textAlign: "right",
     fontFamily: FontFamily.labelMediumBold,
     fontWeight: "700",
     fontSize: FontSize.labelLargeBold_size,

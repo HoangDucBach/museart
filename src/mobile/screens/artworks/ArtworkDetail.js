@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         flex: 1,
+        display: "flex",
     },
     body: {
         // padding: Padding.p_3xs,
