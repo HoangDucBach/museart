@@ -91,10 +91,10 @@ export const MyLightTheme = {
     surfaceContainerHighest: "#e7ddcc",
     onSurfaceVarient: "#534341",
     // onSurface: "#ffffff",
-    primary: "#A000000",
+    primary: "#A00000",
     onPrimary: "#F5F2EC",
     primaryFixed: "#868686",
-    primaryShadow:"#D9CFBE",
+    primaryShadow:"#000000",
     outline: "#857371",
   }
 }
@@ -107,7 +107,7 @@ export const MyDarkTheme = {
     surfaceContainer: "#0D0D0D",
     surfaceContainerLow: "#0C0C0C",
     surfaceContainerLowest: "#0B0B0B",
-    surfaceContainerHigh: "#0F0F0F",
+    surfaceContainerHigh: "#101010",
     surfaceContainerHighest: "#1C1B19",
     onSurfaceVarient: "#827775",
     // onSurface:"#F5F2EC",
