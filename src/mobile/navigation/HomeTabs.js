@@ -8,8 +8,7 @@ import ShoppingStackScreen from "./ShoppingStack";
 const Tab = createBottomTabNavigator();
 export default function HomeTabs() {
     return (
-
-        <Tab.Navigator tabBar={props => <NavbarBottom  {...props} />} tabBarLabel={{ color: "none" }} screenOptions={{ headerShown: false }}>
+        <Tab.Navigator tabBar={props => <NavbarBottom  {...props} />} screenOptions={{ headerShown: false }}>
             <Tab.Screen
                 name="Artworks"
                 component={ArtworkStackScreen}
