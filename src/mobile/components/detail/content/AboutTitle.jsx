@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     color: "#F5F2EC",
     fontFamily: FontFamily.labelMediumBold,
     fontSize: FontSize.labelMediumBold_size,
-    fontWeight: 400,
+    fontWeight: "400",
   },
   containerartworktitle: {
     justifyContent: "center",
