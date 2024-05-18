@@ -1,10 +1,9 @@
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import React from 'react';
-import { FontSize, FontFamily, Color, Padding, Border } from "../../GlobalStyles";
+import { FontSize, FontFamily, Color, Padding } from "../../GlobalStyles";
 import AboutTitle from '../../components/detail/content/AboutTitle';
 import BoardExtraInfoArtwork from '../../components/detail/picure/BoardExtraInfoArtwork';
 import NavbarTop from '../../components/header/NavbarTop';
-import AboutArtist from '../../components/detail/content/AboutArtist';
 import { useRoute, useTheme } from '@react-navigation/native';
 import { useEffect, useState } from "react";
 import { baseUrl } from "../../services/api";
@@ -38,7 +37,7 @@ const ArticleDetail = () => {
     }, []);
 
     return (
-        <View style={[styles.articleContainer, {backgroundColor: colors.surfaceContainer}]}>
+        <View className={`w-screen flex-1`} style={[{backgroundColor: colors.surfaceContainer}]}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     body: {
-        // padding: Padding.p_3xs,
+        padding: Padding.p_3xs,
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch"
