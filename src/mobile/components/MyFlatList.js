@@ -3,7 +3,6 @@ import React from 'react'
 
 const MyFlatList = ({ data, renderItem, isLoading,
     handleLoading, renderPaginationButtons }) => {
-
     const handleEmpty = () => {
         return <Text> No Institution!</Text>;
     };
@@ -18,10 +17,12 @@ const MyFlatList = ({ data, renderItem, isLoading,
                 refreshControl={
                     <RefreshControl refreshing={isLoading} onRefresh={handleLoading} />
                 }
+                ListFooterComponent={
+                    <View style={styles.paginationContainer}>
+                        {renderPaginationButtons()}
+                    </View>
+                }
             />
-            <View style={styles.paginationContainer}>
-                {renderPaginationButtons()}
-            </View>
         </>
     );
 }
@@ -30,6 +31,7 @@ export default MyFlatList;
 
 const styles = StyleSheet.create({
     paginationContainer: {
+        paddingBottom: 80,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

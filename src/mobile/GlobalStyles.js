@@ -1,29 +1,20 @@
 import store from "./store/index";
-
-// Hàm helper để truy cập trạng thái Redux
-export const getDarkModeState = () => {
-  // return true;
-    return store.getState().isDarkMode;
-};
-
-// Sử dụng hàm helper để lấy giá trị isDarkMode
-const isDarkMode = getDarkModeState();
+import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 
 /* Colors */
 export const Color = {
   surface:"#F5F2EC",
-  surfaceSurfaceContainer: "#efe8dc",
-  colorBlack: "#000",
-  surfaceSurfaceContainerLow: "#F2ECE4",
-  surfaceSurfaceContainerLowest: "#FFFFFF",
-  surfaceSurfaceContainerHigh: "#f0e8d9",
-  surfaceSurfaceContainerHighest: "#e7ddcc",
-  colorDimgray_100: "#5b5b5b",
+  SurfaceContainer: "#efe8dc",
+  SurfaceContainerLow: "#F2ECE4",
+  SurfaceContainerLowest: "#FFFFFF",
+  SurfaceContainerHigh: "#f0e8d9",
+  SurfaceContainerHighest: "#e7ddcc",
   surfaceOnSurfaceVarient: "#534341",
+  surfaceOnSurface: "#ffffff",
+  colorDimgray_100: "#5b5b5b",
   primaryPrimaryFixed: "#868686",
   surfaceOutline: "#857371",
   colorGray_100: "#262626",
-  surfaceOnSurface: "#ffffff",
   colorGray_200: "#1c1b14",
   colorGray_300: "#101010",
   colorGray_400: "rgba(12, 12, 12, 0.8)",
@@ -38,16 +29,15 @@ export const Color = {
 };
 export const ColorDark = {
   surface: "#101010",
-  surfaceSurfaceContainer: "#0D0D0D",
-  surfaceSurfaceContainerLow: "#0C0C0C",
-  surfaceSurfaceContainerLowest: "#0B0B0B",
-  surfaceSurfaceContainerHigh: "#0F0F0F",
-  surfaceSurfaceContainerHighest: "#1C1B19",
+  SurfaceContainer: "#0D0D0D",
+  SurfaceContainerLow: "#0C0C0C",
+  SurfaceContainerLowest: "#0B0B0B",
+  SurfaceContainerHigh: "#0F0F0F",
+  SurfaceContainerHighest: "#1C1B19",
   surfaceOnSurfaceVarient: "#827775",
   surfaceOnSurface:"#F5F2EC",
   primaryPrimary:"#D00000",
   primaryShadow: "#040404",
-
 }
 /* fonts */
   export const FontFamily = {
@@ -89,3 +79,40 @@ export const ColorDark = {
     br_981xl: 1000,
     br_8xs: 5,
   };
+
+export const MyLightTheme = {
+  colors: {
+    surface:"#F5F2EC",
+    onSurface: "#231919",
+    surfaceContainer: "#efe8dc",
+    surfaceContainerLow: "#F2ECE4",
+    surfaceContainerLowest: "#FFFFFF",
+    surfaceContainerHigh: "#f0e8d9",
+    surfaceContainerHighest: "#e7ddcc",
+    onSurfaceVarient: "#534341",
+    // onSurface: "#ffffff",
+    primary: "#A00000",
+    onPrimary: "#F5F2EC",
+    primaryFixed: "#868686",
+    primaryShadow:"#000000",
+    outline: "#857371",
+  }
+}
+
+export const MyDarkTheme = {
+  colors: {
+    ...MyLightTheme.colors,
+    surface: "#101010",
+    onSurface: "#F5F2EC",
+    surfaceContainer: "#0D0D0D",
+    surfaceContainerLow: "#0C0C0C",
+    surfaceContainerLowest: "#0B0B0B",
+    surfaceContainerHigh: "#101010",
+    surfaceContainerHighest: "#1C1B19",
+    onSurfaceVarient: "#827775",
+    // onSurface:"#F5F2EC",
+    primary:"#D00000",
+    primaryShadow: "#040404",
+    outline: "#FFFFFF",
+  }
+}

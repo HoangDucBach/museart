@@ -15,7 +15,7 @@ const SignUp = () => {
     const [password, setPassword] = useState(null);
 
     return (
-        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'p-4 max-h-screen'}>
+        <LinearGradient colors={['#BE0303', '#1c1a1a', '#000000']} className={'flex-1 p-4 max-h-screen'}>
             <ScrollView>
                 <View style={styles.vectorParent}>
                     <Image
@@ -102,7 +102,7 @@ const SignUp = () => {
                     </View>
                 </View>
             </ScrollView>
-            <View style={styles.ellipseParent}>
+            {/* <View style={styles.ellipseParent}>
                 <Image
                     style={styles.frameLayout}
                     contentFit="cover"
@@ -123,7 +123,7 @@ const SignUp = () => {
                     contentFit="cover"
                     source={require("../../assets/ellipse-6.png")}
                 />
-            </View>
+            </View> */}
         </LinearGradient>
     );
 };

@@ -1,7 +1,7 @@
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import {Border, Color, ColorDark, FontFamily, FontSize, Padding} from '../../GlobalStyles';
-import { useRoute } from '@react-navigation/native';
+import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
+import { useRoute, useTheme } from '@react-navigation/native';
 import axios from 'axios';
 import { baseUrl } from '../../services/api';
 import Picture from '../../components/detail/picure/Picture';
@@ -17,6 +17,7 @@ const ArtworkDetail = () => {
     const route = useRoute();
     const { ID } = route.params;
 
+    const { colors } = useTheme();
     const [artwork, setArtwork] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
@@ -38,22 +39,22 @@ const ArtworkDetail = () => {
     }, []);
 
     return (
-        <View style={styles.artworkContainer} className={'!font-playfair'}>
+        <View style={[styles.artworkContainer, {backgroundColor: colors.surfaceContainer}]}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
-                <ScrollView style={styles.body} className={'!font-playfair'}>
+                <ScrollView style={styles.body}>
                     <Picture altText={artwork?.thumbnail.alt_text} imagePath={`https://www.artic.edu/iiif/2/${artwork?.image_id}/full/843,/0/default.jpg`} commentAmount={artwork.number_of_comments} likeAmount={artwork.number_of_likes} date={artwork.timestamp} />
                     <AboutTitle title={artwork?.title} tagRoute={artwork.artwork_type_title} tagDetail={artwork.department_title} isPrice={false} />
                     <AboutArtist text={artwork.artist_title} />
                     <View>
-                        <FrameButton field="Title" value={artwork?.artwork_type_title} propColor="#231919" />
-                        <FrameButton field="Date" value={`${artwork?.date_start}-${artwork?.date_end}`} propColor="#101010" />
-                        <FrameButton field="Date Display" value={artwork?.date_display} propColor="#101010" />
-                        <FrameButton field="Artist Display" value={artwork?.artist_display} propColor="#101010" />
-                        <FrameButton field="Place of Origin" value={artwork?.place_of_origin} propColor="#231919" />
-                        <FrameButton field="Fiscal Year" value={artwork?.fiscal_year} propColor="#231919" />
+                        <FrameButton field="Title" value={artwork?.artwork_type_title} />
+                        <FrameButton field="Date" value={`${artwork?.date_start}-${artwork?.date_end}`} />
+                        <FrameButton field="Date Display" value={artwork?.date_display} />
+                        <FrameButton field="Artist Display" value={artwork?.artist_display} />
+                        <FrameButton field="Place of Origin" value={artwork?.place_of_origin} />
+                        <FrameButton field="Fiscal Year" value={artwork?.fiscal_year} />
                         <FrameButton
                             field="Dimensions"
                             value={artwork.dimensions}
@@ -75,28 +76,28 @@ const ArtworkDetail = () => {
                             propColor="#231919"
                         />
                     </View>
-                    <Button />
+                    {/* <Button /> */}
                     <View style={styles.descriptioncontainerFlexBox}>
-                        <Text style={[styles.description, styles.descriptionFlexBox]}>
+                        <Text style={[styles.description, styles.descriptionFlexBox, {color: colors.onSurface}]}>
                             Description
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Description: {artwork.description}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Provenance: {artwork.provenance_text}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Medium: {artwork.medium_display}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
                             Publication History: {artwork.publication_history}
                         </Text>
@@ -117,7 +118,12 @@ const styles = StyleSheet.create({
     },
     descriptionFlexBox: {
         textAlign: "left",
-        color: Color.surfaceOnSurface,
+    },
+    description: {
+        marginBottom: 10,
+        fontFamily: FontFamily.labelMediumBold,
+        fontSize: FontSize.titleMediumBold_size,
+        fontWeight: 700,
     },
     loremIpsumIsSimply: {
         fontSize: FontSize.labelLargeBold_size,
@@ -126,7 +132,7 @@ const styles = StyleSheet.create({
     },
     artworkContainer: {
         paddingHorizontal: Padding.p_3xs,
-        backgroundColor: ColorDark.surfaceSurfaceContainer,
+        // backgroundColor: Color.surfaceSurfaceContainer,
         borderStyle: "solid",
         borderColor: Color.colorBlack,
         justifyContent: "space-between",
@@ -135,7 +141,7 @@ const styles = StyleSheet.create({
         display: "flex",
     },
     body: {
-        padding: Padding.p_3xs,
+        // padding: Padding.p_3xs,
         flexDirection: "column",
         gap: 15,
         alignSelf: "stretch",

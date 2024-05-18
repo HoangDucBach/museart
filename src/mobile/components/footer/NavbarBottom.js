@@ -1,17 +1,14 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { Image } from "expo-image";
-import { StyleSheet, Text, View, Pressable, Image, Animated, TouchableOpacity } from "react-native";
-import { Padding, Border, FontSize, FontFamily, Color, ColorDark } from "../../GlobalStyles";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { toggleTab } from "../../store";
-
+import React from "react";
+import { useSelector } from "react-redux";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Padding, Border } from "../../GlobalStyles";
+import { useTheme } from "@react-navigation/native";
 
 const NavbarBottom = ({ state, descriptors, navigation }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
+  const { colors } = useTheme();
   return (
-
-    <View style={[styles.navbarbottom, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainer } : null]}>
+    <View style={[styles.navbarbottom, {backgroundColor: colors.surfaceContainerHigh}]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -64,14 +61,14 @@ const NavbarBottom = ({ state, descriptors, navigation }) => {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[styles.navbaritemFlexBox, isFocused && [styles.navbaritem, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHighest } : null]]}
+            style={[styles.navbaritemFlexBox, isFocused && [styles.navbaritem, {backgroundColor: colors.surfaceContainerHighest}]]}
           >
             <Image
               style={styles.navbaritemChild}
               contentFit="cover"
               source={iconPath}
             />
-            {isFocused ? <Text className={'pl-1 text-white font-playfairBold'}>{label}</Text> : null}
+            {isFocused ? <Text className={'pl-1 font-playfairBold'} style={{color: colors.onSurface}}>{label}</Text> : null}
           </TouchableOpacity>
         );
       })}
@@ -92,18 +89,20 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   navbaritem: {
-    backgroundColor: Color.surfaceSurfaceContainerHighest,
     paddingHorizontal: Padding.p_mini,
     alignItems: "center",
   },
   navbarbottom: {
-    backgroundColor: Color.surfaceSurfaceContainer,
-    alignSelf: "stretch",
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    alignSelf: "center",
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     borderRadius: Border.br_81xl,
-    margin: 5,
+    padding: 10,
+    elevation: 10,
   },
 });
 

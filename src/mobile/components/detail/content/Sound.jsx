@@ -8,16 +8,18 @@ import {
   FontSize,
   Border,
 } from "../../../GlobalStyles";
+import { useTheme } from "@react-navigation/native";
 
 const Sound = ({ title }) => {
+  const { colors } = useTheme();
   return (
     <View style={[styles.Sound, styles.SoundSpaceBlock]}>
-      <Text style={styles.soundTypo}>Sound</Text>
+      <Text style={[styles.soundTypo, {color: colors.onSurface}]}>Sound</Text>
       <View
         style={[styles.aboutOfTitleOfPictureParent, styles.frameWrapperFlexBox]}
       >
-        <Text style={[styles.aboutOfTitle, styles.soundTypo]}>{title}</Text>
-        <Text style={styles.aboutOfTitle1}>{title}</Text>
+        <Text style={[styles.aboutOfTitle, styles.soundTypo, {color: colors.onSurface}]}>{title}</Text>
+        <Text style={[styles.aboutOfTitle1, {color: colors.onSurface}]}>{title}</Text>
         {/*
         //Play video/sound
         // Load the module
@@ -89,7 +91,6 @@ const styles = StyleSheet.create({
   },
   soundTypo: {
     textAlign: "left",
-    color: Color.surfaceOnSurface,
     fontFamily: FontFamily.headline5Bold,
     fontWeight: "700",
     fontSize: FontSize.titleMediumBold_size,
@@ -102,7 +103,6 @@ const styles = StyleSheet.create({
     fontSize: FontSize.labelMediumRegular_size,
     fontFamily: FontFamily.labelMediumRegular,
     textAlign: "left",
-    color: Color.surfaceOnSurface,
   },
   aboutOfTitle: {
     alignSelf: "stretch",
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     fontSize: FontSize.labelLargeBold_size,
     fontFamily: FontFamily.labelMediumRegular,
     textAlign: "left",
-    color: Color.surfaceOnSurface,
     alignSelf: "stretch",
   },
   frameChild: {

@@ -1,36 +1,34 @@
 import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, Text, View, Pressable, Switch } from "react-native";
-import { Padding, Color, ColorDark, FontSize, Border, FontFamily } from "../../GlobalStyles";
+import { Padding, Color, FontSize, Border, FontFamily } from "../../GlobalStyles";
 import ButtonPrimary from "../button/ButtonPrimary";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMove, toggleTab, toggleTheme } from "../../store";
-import { useEffect, useContext, useState } from "react";
+import { toggleTheme } from "../../store";
+import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const SettingsMenu = () => {
+  const { colors } = useTheme();
   const { logout, userToken, userInfo } = useContext(AuthContext);
-
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
-
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const toggleSwitch = () => {
     dispatch(toggleTheme());
   };
 
   return (
-    <View style={[styles.settingsMenu, isDarkMode ? { backgroundColor: ColorDark.surfaceSurfaceContainerHigh } : null]}>
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text="About" />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/item.png") : require("../../assets/navbaritem.png")} text="Setting" />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame14.png") : require("../../assets/frame-14.png")} text="Cart" func={() => {
+    <View style={[styles.settingsMenu, {backgroundColor: colors.surfaceContainerHigh}]}>
+      <MenuItem colors={colors} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text="About" />
+      <MenuItem colors={colors} imageSource={isDarkMode ? require("../../assets/item.png") : require("../../assets/navbaritem.png")} text="Setting" />
+      <MenuItem colors={colors} imageSource={isDarkMode ? require("../../assets/Frame14.png") : require("../../assets/frame-14.png")} text="Cart" func={() => {
         navigation.navigate("Cart");
       }} />
-      <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" />
+      <MenuItem colors={colors} isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Frame15.png") : require("../../assets/frame-141.png")} text="Feedback" />
       {userToken != null &&
-        <MenuItem isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text={userInfo.user.email} />
+        <MenuItem colors={colors} isDarkMode={isDarkMode} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text={userInfo.user.email} />
       }
       {userToken == null ?
         <View style={[styles.flexRow, styles.flexRowButton]}>
@@ -42,7 +40,7 @@ const SettingsMenu = () => {
           />
           <ButtonPrimary text="Sign up"
             textSize={FontSize.labelLargeBold_size}
-            buttonPrimaryBackgroundColor={Color.primaryPrimaryFixed}
+            buttonPrimaryBackgroundColor={colors.primaryFixed}
             buttonPrimaryMarginLeft={15}
             buttonPrimaryFlex={1}
             onPressButton={() => { navigation.navigate("SignUp") }}
@@ -57,7 +55,7 @@ const SettingsMenu = () => {
           />
         </View>
       }
-      <View style={{ justifyContent: "center", alignItems: "center", alignSelf: "center" }} >
+      <View style={{ marginTop: 10, justifyContent: "center", alignItems: "center", alignSelf: "center" }} >
         <Switch
           trackColor={{ false: '#81b0ff', true: '#767577' }}
           thumbColor={isDarkMode ? '#f4f3f4' : '#f5dd4b'}
@@ -70,11 +68,11 @@ const SettingsMenu = () => {
   );
 };
 
-const MenuItem = ({ isDarkMode, imageSource, text, func }) => {
+const MenuItem = ({ colors, imageSource, text, func }) => {
   return (
     <Pressable onPress={func} style={[styles.menuItem, styles.flexRow]}>
       <Image style={styles.menuItemImage} source={imageSource} />
-      <Text style={[styles.menuItemText, isDarkMode ? { color: ColorDark.surfaceOnSurface } : null]}>{text}</Text>
+      <Text style={[styles.menuItemText, {color: colors.onSurface}]}>{text}</Text>
     </Pressable>
   );
 };
@@ -93,7 +91,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontFamily: FontFamily.labelLargeMedium,
     fontSize: FontSize.labelLargeBold_size,
-    color: Color.surfaceOnSurface,
     fontWeight: "500",
   },
   flexRow: {
@@ -104,28 +101,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     justifyContent: "space-between",
   },
-  ellipseParent: {
-    flexDirection: "row",
-    borderRadius: Border.br_81xl,
-    shadowRadius: 5,
-    elevation: 5,
-    padding: Padding.p_8xs,
-    alignItems: "center",
-    backgroundColor: Color.surfaceSurfaceContainerHigh,
-    marginTop: 10,
-    justifyContent: "center",
-    shadowOpacity: 1,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowColor: Color.colorBlack,
-  },
   settingsMenu: {
     alignSelf: "flex-end",
     marginTop: 50,
     marginLeft: 10,
-    backgroundColor: Color.surfaceSurfaceContainer,
     shadowRadius: 20,
     elevation: 20,
     width: 237,

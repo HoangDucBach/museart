@@ -1,11 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import {
   Text,
   StyleSheet,
   View,
   TouchableOpacity,
   Modal,
-  Pressable,
 } from "react-native";
 import { Image } from "expo-image";
 import {
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "700",
-    fontFamily: FontFamily.labelSmallBold,
+    fontFamily: FontFamily.labelLargeMedium,
     marginLeft: 10,
   },
   groupParent: {
@@ -129,22 +128,6 @@ const styles = StyleSheet.create({
     paddingVertical: Padding.p_mini,
     alignItems: "center",
     alignSelf: "stretch",
-  },
-  textX: {
-    color: "white",
-    fontSize: FontSize.headline2Bold_size,
-    textAlign: "right",
-    padding: 10,
-  },
-  modalContainer: {
-    paddingHorizontal: Padding.p_3xs,
-    borderRadius: Border.br_18xl,
-    backgroundColor: Color.surfaceSurfaceContainer,
-    borderStyle: "solid",
-    borderColor: Color.colorBlack,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flex: 1,
   },
 });
 

@@ -8,19 +8,21 @@ import {
   FontSize,
   Border,
 } from "../../../GlobalStyles";
+import { useTheme } from "@react-navigation/native";
 
 const Video = ({ title }) => {
+  const { colors } = useTheme();
   return (
-    <View style={styles.VideoFlexBox}>
-      <Text style={styles.videoTypo}>Video</Text>
+    <View style={[styles.VideoFlexBox, {color: colors.onSurface}]}>
+      <Text style={[styles.videoTypo, {color: colors.onSurface}]}>Video</Text>
       <View
         style={[
           styles.aboutOfTitleOfPictureParent,
           styles.frameWrapperSpaceBlock,
         ]}
       >
-        <Text style={[styles.aboutOfTitle, styles.videoTypo]}>{title}</Text>
-        <Text style={[styles.aboutOfTitle1, styles.frameSpaceBlock]}>
+        <Text style={[styles.aboutOfTitle, styles.videoTypo, {color: colors.onSurface}]}>{title}</Text>
+        <Text style={[styles.aboutOfTitle1, styles.frameSpaceBlock, {color: colors.onSurface}]}>
           {title}
         </Text>
         {/*
@@ -96,7 +98,6 @@ const styles = StyleSheet.create({
   },
   videoTypo: {
     textAlign: "left",
-    color: Color.surfaceOnSurface,
     fontFamily: FontFamily.headline5Bold,
     fontWeight: "700",
     fontSize: FontSize.titleMediumBold_size,

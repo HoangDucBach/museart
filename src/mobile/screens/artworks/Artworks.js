@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View, FlatList, TouchableOpacity, RefreshControl, InteractionManager } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Dashboard from "../../components/header/Dashboard";
@@ -15,8 +15,6 @@ const Artworks = () => {
     //pagination
     const [page, setPage] = useState(1);
     const [totalPages, setTotalpages] = useState(0);
-
-    const state = useState();
 
     const getArtworks = async () => {
         setLoading(true);
