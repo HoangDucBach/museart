@@ -13,7 +13,7 @@ const ArticleComponent = ({
     const { colors } = useTheme();
 
     return (
-        <View style={{ padding: 10 }}>
+        <View style={{ paddingHorizontal: 10 }}>
             <Text style={[styles.username, styles.usernameTypo, { color: colors.onSurfaceVarient }]}>{article}</Text>
             <Text style={[styles.ddmmyyyy, styles.usernameTypo, { color: colors.onSurfaceVarient }]}>{date}</Text>
             <Text numberOfLines={3} style={[styles.text, { color: colors.onSurface }]}>{text}</Text>

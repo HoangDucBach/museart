@@ -39,26 +39,28 @@ const ProductDetail = () => {
     }, []);
 
     return (
-        <View style={[styles.productContainer, {backgroundColor: colors.surfaceContainer}]}>
+        <View style={[styles.productContainer, { backgroundColor: colors.surfaceContainer }]}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
                 <ScrollView style={styles.body}>
-                    <Picture imagePath={product.image_url} commentAmount={"api chua co"} likeAmount={123} date={"d/m/y"} />
+                    <Picture imagePath={product.image_url} commentAmount={''} likeAmount={''} date={product.timestamp} />
                     <AboutTitle title={product.title} tagRoute="Product" tagDetail="Shop" isPrice={true} price={product.max_current_price} />
                     <ScrollView style={styles.descriptioncontainer}>
-                        <Text style={[styles.buyNowTypo, {color: colors.onSurface}]}>Description</Text>
+                        <Text style={[styles.buyNowTypo, { color: colors.onSurface }]}>Description</Text>
                         <HTMLRender source={{ html: product.description }}
-                                    baseStyle={{color: colors.onSurface,
-                                                fontFamily: FontFamily.typographyLabelLarge,
-                                                textAlign: "justify",
-                                                alignSelf: "stretch"}}
-                                    contentWidth={Dimensions.get("window").width} />
+                            baseStyle={{
+                                color: colors.onSurface,
+                                fontFamily: FontFamily.typographyLabelLarge,
+                                textAlign: "justify",
+                                alignSelf: "stretch"
+                            }}
+                            contentWidth={Dimensions.get("window").width} />
 
                         <View style={styles.containerutilbuttons}>
-                            <TouchableOpacity onPress={() => { navigation.navigate('Payment', { Amount: 1, Price: product.max_current_price }) }} style={[styles.savebuttonSpaceBlock, {backgroundColor: colors.primary}]}>
-                                <Text style={[styles.buyNowTypo, {color: colors.onPrimary}]}>Buy now</Text>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Payment', { Amount: 1, Price: product.max_current_price }) }} style={[styles.savebuttonSpaceBlock, { backgroundColor: colors.primary }]}>
+                                <Text style={[styles.buyNowTypo, { color: colors.onPrimary }]}>Buy now</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { navigation.navigate('Cart') }} style={[styles.savebutton, styles.savebuttonSpaceBlock]}>
                                 <Image
@@ -66,7 +68,7 @@ const ProductDetail = () => {
                                     contentFit="cover"
                                     source={require("../../assets/vector7.png")}
                                 />
-                                <Text style={[styles.buyNowTypo, {color: colors.primary}]}>Add to cart</Text>
+                                <Text style={[styles.buyNowTypo, { color: colors.primary }]}>Add to cart</Text>
                             </TouchableOpacity>
                         </View>
                     </ScrollView>
