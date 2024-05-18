@@ -8,7 +8,7 @@ const NavbarBottom = ({ state, descriptors, navigation }) => {
   const isDarkMode = useSelector(state => state.theme.isDarkMode);
   const { colors } = useTheme();
   return (
-    <View style={[styles.navbarbottom, {backgroundColor: colors.surfaceContainer}]}>
+    <View style={[styles.navbarbottom, {backgroundColor: colors.surfaceContainerHigh}]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -93,12 +93,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   navbarbottom: {
-    alignSelf: "stretch",
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    alignSelf: "center",
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     borderRadius: Border.br_81xl,
-    margin: 5,
+    padding: 10,
+    elevation: 10,
   },
 });
 
