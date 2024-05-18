@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 20,
         elevation: 5,
-        shadowOpacity: 1,
+        shadowOpacity: 0.5,
         borderRadius: Border.br_3xs,
         padding: Padding.p_3xs,
     },

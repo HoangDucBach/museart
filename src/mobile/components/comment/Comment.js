@@ -1,4 +1,4 @@
-import { FlatList, Image, Modal, RefreshControl, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, Modal, RefreshControl, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { FontFamily, FontSize, Padding } from '../../GlobalStyles';
 import CommentFrame from './CommentFrame';
@@ -42,7 +42,7 @@ const Comment = ({ modalVisible, }) => {
     }, []);
 
     return (
-        <View style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHigh}]}>
+        <SafeAreaView style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHigh}]}>
             <View style={styles.frameGroupFlexBox}>
                 <TouchableOpacity onPress={modalVisible}>
                     <Image
@@ -84,7 +84,7 @@ const Comment = ({ modalVisible, }) => {
                     <RefreshControl refreshing={isLoading} onRefresh={handleLoading} />
                 }
             />
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     frameParent: {
-        padding: Padding.p_xl,
+        padding: 10,
         height: "100%",
         width: "100%",
         alignSelf: "center",

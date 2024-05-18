@@ -101,8 +101,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     borderRadius: Border.br_81xl,
-    padding: 10,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowRadius: 10,
     elevation: 10,
+    shadowOpacity: 0.5,
+    padding: 10,
   },
 });
 

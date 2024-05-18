@@ -92,6 +92,7 @@ const ExhibitionDetail = () => {
                             </View>
                         </View>
                     }
+                    <View style={{paddingBottom: 70}} />
                 </ScrollView>
             )}
         </View>

@@ -41,7 +41,7 @@ const ProductCash = ({
                   />
                 </View>
                 <View>
-                  <Text style={[styles.textTypo, { fontSize: FontSize.labelLargeBold_size, color: Color.primaryPrimaryFixed }]}>{99}</Text>
+                  <Text style={[styles.textTypo, { fontSize: FontSize.labelLargeBold_size, color: Color.primaryPrimaryFixed }]}>{1}</Text>
                 </View>
                 <View style={{ alignSelf: "flex-end" }}>
                   <ButtonPrimary
@@ -111,12 +111,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     elevation: 5,
-    // shadowOffset: {
-    //   width: 1,
-    //   height: 1,
-    // },
-    // shadowRadius: 20,
-    // shadowOpacity: 1,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowRadius: 3,
+    shadowOpacity: 0.3,
   },
 });
 

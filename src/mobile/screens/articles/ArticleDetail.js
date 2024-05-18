@@ -47,7 +47,7 @@ const ArticleDetail = () => {
                     <View style={{ height: 15 }} />
                     <BoardExtraInfoArtwork commentAmount={"api chưa có"} likeAmount={123} date={"d/m/y"} />
                     <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock, {color: colors.onSurface}]}>{article.copy}</Text>
-
+                    <View style={{paddingBottom: 100}} />
                 </ScrollView>
             )}
         </View>

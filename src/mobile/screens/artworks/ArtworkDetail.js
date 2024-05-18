@@ -104,6 +104,7 @@ const ArtworkDetail = () => {
                     </View>
                     <Video title={artwork.title} />
                     <Sound title={artwork.title} />
+                    <View style={{paddingBottom: 70}} />
                 </ScrollView>
             )}
         </View>

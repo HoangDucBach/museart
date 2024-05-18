@@ -73,16 +73,16 @@ const Payment = () => {
                         <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
                             <ButtonPrimary
                                 image={require("../../assets/frame.png")}
-                                buttonPrimaryBackgroundColor={{backgroundColor: colors.surfaceContainerHighest}}
+                                buttonPrimaryBackgroundColor={colors.surfaceContainerHighest}
                             />
                             <ButtonPrimary
                                 image={require("../../assets/frame1.png")}
-                                buttonPrimaryBackgroundColor={{backgroundColor: colors.surfaceContainerHighest}}
+                                buttonPrimaryBackgroundColor={ colors.surfaceContainerHighest}
                                 buttonPrimaryMarginLeft={15}
                             />
                             <ButtonPrimary
                                 image={require("../../assets/frame2.png")}
-                                buttonPrimaryBackgroundColor={{backgroundColor: colors.surfaceContainerHighest}}
+                                buttonPrimaryBackgroundColor={ colors.surfaceContainerHighest}
                                 buttonPrimaryMarginLeft={15}
                             />
                         </View>
@@ -125,17 +125,16 @@ const styles = StyleSheet.create({
     },
     totalContainer: {
         marginTop: 15,
-        elevation: 5,
-        shadowRadius: 20,
         padding: Padding.p_3xs,
         justifyContent: "flex-start",
-        shadowOpacity: 1,
+        elevation: 10,
         shadowOffset: {
             width: 2,
             height: 2,
         },
+        shadowRadius: 10,
+        shadowOpacity: 0.5,
         borderRadius: Border.br_3xs,
-        overflow: "hidden",
     },
     headline: {
         textAlign: "left",

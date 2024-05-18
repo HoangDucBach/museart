@@ -94,6 +94,12 @@ const styles = StyleSheet.create({
   frameParent: {
     marginTop: 10,
     elevation: 5,
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowRadius: 3,
+    shadowOpacity: 0.3,
     borderRadius: Border.br_3xs,
     padding: Padding.p_3xs,
     flexDirection: "row",
