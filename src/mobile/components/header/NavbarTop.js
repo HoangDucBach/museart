@@ -16,8 +16,9 @@ const NavbarTop = () => {
   const { colors } = useTheme();
 
   const onBackPress = () => {
-    if (navigation.canGoBack()) navigation.goBack();
-    else return;
+    const routes = navigation.getState()?.routes;
+    const prevRoute = routes[routes.length - 1];
+    if (navigation.canGoBack() && (prevRoute.name == "SignIn" || prevRoute.name == "SignUp")) navigation.goBack();
   };
 
   return (
