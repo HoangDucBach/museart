@@ -40,7 +40,7 @@ const ArtworkDetail = () => {
     }, []);
 
     return (
-        <View style={[styles.artworkContainer, {backgroundColor: colors.surfaceContainer}]}>
+        <View style={[styles.artworkContainer, { backgroundColor: colors.surfaceContainer }]}>
             <NavbarTop />
             {isLoading ? (
                 <ActivityIndicator />
@@ -77,13 +77,13 @@ const ArtworkDetail = () => {
                             propColor="#231919"
                         />
                     </View>
-                    {/* <Button /> */}
+                    <Button />
                     <View style={styles.descriptioncontainerFlexBox}>
-                        <Text style={[styles.description, styles.descriptionFlexBox, {color: colors.onSurface}]}>
+                        <Text style={[styles.description, styles.descriptionFlexBox, { color: colors.onSurface }]}>
                             Description
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, { color: colors.onSurface }]}
                         >
                             Description:
                         </Text>
@@ -95,17 +95,17 @@ const ArtworkDetail = () => {
                                                 alignSelf: "stretch"}}
                                     contentWidth={Dimensions.get("window").width} />
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, { color: colors.onSurface }]}
                         >
                             Provenance: {artwork.provenance_text}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, { color: colors.onSurface }]}
                         >
                             Medium: {artwork.medium_display}
                         </Text>
                         <Text
-                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
+                            style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, { color: colors.onSurface }]}
                         >
                             Publication History: {artwork.publication_history}
                         </Text>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontFamily: FontFamily.labelMediumBold,
         fontSize: FontSize.titleMediumBold_size,
-        fontWeight: 700,
+        fontWeight: "700",
     },
     loremIpsumIsSimply: {
         fontSize: FontSize.labelLargeBold_size,

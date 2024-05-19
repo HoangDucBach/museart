@@ -17,7 +17,7 @@ const ProductShopping = ({
   return (
     <View className={'w-screen items-center justify-center px-2.5'}>
       <TouchableOpacity onPress={() =>
-        navigation.navigate('ProductDetail', { ID: id })} style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHigh}]}>
+        navigation.navigate('ProductDetail', { ID: id })} style={[styles.frameParent, { backgroundColor: colors.surfaceContainerHigh }]}>
         <View>
           <Image style={[styles.componentChild]}
             contentFit={"contain"}
@@ -25,9 +25,9 @@ const ProductShopping = ({
         </View>
         <View style={[styles.frameGroup]}>
           <View style={{ justifyContent: "space-between" }}>
-            <Text numberOfLines={2} style={[styles.product, styles.buyNowTypo, {color: colors.onSurface}]}>{title}</Text>
-            <Text style={[styles.product1, styles.textTypo, {color: colors.onSurfaceVarient}]}>{text}</Text>
-            <Text style={[styles.text, styles.textTypo, {color: colors.onSurface}]}>${price}</Text>
+            <Text numberOfLines={2} style={[styles.product, styles.buyNowTypo, { color: colors.onSurface }]}>{title}</Text>
+            <Text style={[styles.product1, styles.textTypo, { color: colors.onSurfaceVarient }]}>{text}</Text>
+            <Text style={[styles.text, styles.textTypo, { color: colors.onSurface }]}>${price}</Text>
           </View>
           <View style={{ flex: 1, marginTop: 10 }}>
             <View style={{ alignItems: "stretch", flexDirection: "row" }}>
