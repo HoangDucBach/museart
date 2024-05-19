@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   navbarbottom: {
-<<<<<<< HEAD
     position: "absolute",
     bottom: 5,
     width: "100%",
@@ -112,12 +111,6 @@ const styles = StyleSheet.create({
     elevation: 10,
     shadowOpacity: 0.5,
     padding: 10,
-=======
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    margin: 5,
->>>>>>> 65a12dff9741e812c6ed9f3cfb6a70aff496fb18
   },
 });
 
