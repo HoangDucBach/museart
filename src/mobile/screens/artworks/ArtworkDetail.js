@@ -1,6 +1,6 @@
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View, Dimensions } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
+import { Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
 import { useRoute, useTheme } from '@react-navigation/native';
 import axios from 'axios';
 import { baseUrl } from '../../services/api';
@@ -8,10 +8,10 @@ import Picture from '../../components/detail/picure/Picture';
 import AboutTitle from '../../components/detail/content/AboutTitle';
 import AboutArtist from '../../components/detail/content/AboutArtist';
 import FrameButton from '../../components/detail/content/FrameButton';
-import Button from '../../components/detail/content/Button';
 import Video from '../../components/detail/content/Video';
 import Sound from '../../components/detail/content/Sound';
 import NavbarTop from '../../components/header/NavbarTop';
+import HTMLRender from "react-native-render-html";
 
 const ArtworkDetail = () => {
     const route = useRoute();
@@ -26,6 +26,7 @@ const ArtworkDetail = () => {
             console.log(`${baseUrl}/api/v1/artworks/${ID}`);
             const response = await axios.get(`${baseUrl}/artworks/${ID}`);
             setArtwork(response.data.data);
+            console.log(response.data.data.description);
         } catch (error) {
             //console.log(artwork);
             console.error(error);
@@ -84,8 +85,15 @@ const ArtworkDetail = () => {
                         <Text
                             style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >
-                            Description: {artwork.description}
+                            Description:
                         </Text>
+                        <HTMLRender source={{ html: artwork.description }}
+                                    baseStyle={{color: colors.onSurface,
+                                                fontFamily: FontFamily.typographyLabelLarge,
+                                                fontSize: FontSize.labelLargeBold_size,
+                                                textAlign: "justify",
+                                                alignSelf: "stretch"}}
+                                    contentWidth={Dimensions.get("window").width} />
                         <Text
                             style={[styles.loremIpsumIsSimply, styles.descriptionFlexBox, {color: colors.onSurface}]}
                         >

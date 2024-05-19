@@ -29,10 +29,15 @@ const Comment = ({ modalVisible, }) => {
         setLoading(true);
         setTimeout(() => setLoading(false), 1000);
     };
-
+    const a = [
+        "Hoàng Đức Bách",
+        "Trần Đức Lương",
+        "Đặng Thị Thanh Hiền",
+        "Phạm Minh Tâm",
+    ];
     const renderItem = ({ item }) => {
         return (
-            <CommentFrame key={item.id} userName={'username'} date={item.updatedAt.slice(0, 10)} text={item.comment} />
+            <CommentFrame key={item.id} userName={a[item.id % 4]} date={item.updatedAt.slice(0, 10)} text={item.comment} />
 
         )
     }
@@ -90,9 +95,11 @@ const Comment = ({ modalVisible, }) => {
 
 const styles = StyleSheet.create({
     frameGroupFlexBox: {
+        margin: 10,
         justifyContent: "space-between",
         flexDirection: "row",
         alignSelf: "stretch",
+        alignItems: "center",
     },
     commentTypo: {
         fontFamily: FontFamily.labelMediumBold,

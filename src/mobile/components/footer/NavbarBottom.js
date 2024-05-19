@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   navbarbottom: {
     position: "absolute",
-    bottom: 0,
+    bottom: 5,
     width: "100%",
     alignSelf: "center",
     alignItems: "center",

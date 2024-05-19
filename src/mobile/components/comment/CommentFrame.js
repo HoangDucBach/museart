@@ -11,7 +11,7 @@ const CommentFrame = ({
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHighest}]}>
+    <View style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHighest, shadowColor: colors.primaryShadow}]}>
       <View style={styles.usernameParent}>
         <Text style={[styles.username, styles.usernameTypo, {color: colors.onSurfaceVarient}]}>{userName}</Text>
         <Text style={[styles.ddmmyyyy, styles.usernameTypo, {color: colors.primary}]}>{date}</Text>
@@ -51,10 +51,17 @@ const styles = StyleSheet.create({
   },
   frameParent: {
     borderRadius: Border.br_3xs,
-    marginVertical: 10,
+    marginTop: 10,
+    marginHorizontal: 10,
     padding: Padding.p_3xs,
-    overflow: "hidden",
     alignSelf: "stretch",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowRadius: 5,
+    elevation: 5,
+    shadowOpacity: 0.4,
   },
 });
 

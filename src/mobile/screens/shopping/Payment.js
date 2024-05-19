@@ -40,10 +40,10 @@ const Payment = () => {
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <View style={[styles.textInContainer, {backgroundColor: colors.surfaceContainerHighest}]}>
-                                <TextInput placeholder="Your Name" placeholderTextColor={colors.onSurface} style={[styles.textLayout, {color: colors.onSurfaceVarient}]} />
+                                <TextInput placeholder="Your Name" placeholderTextColor={colors.onSurfaceVarient} style={[styles.textLayout, {color: colors.onSurface}]} />
                             </View>
                             <View style={[styles.textInContainer, {backgroundColor: colors.surfaceContainerHighest}, { marginLeft: 15 }]}>
-                                <TextInput placeholder="+84" placeholderTextColor={colors.onSurface} style={[styles.textLayout, {color: colors.onSurfaceVarient}]} />
+                                <TextInput placeholder="+84" placeholderTextColor={colors.onSurfaceVarient} style={[styles.textLayout, {color: colors.onSurface}]} />
                             </View>
                         </View>
                     </View>
@@ -53,16 +53,16 @@ const Payment = () => {
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <View style={[styles.textInContainer, {backgroundColor: colors.surfaceContainerHighest}]}>
-                                <TextInput placeholder="Your Wards" placeholderTextColor={colors.onSurface} style={[styles.textLayout, {color: colors.onSurfaceVarient}]} />
+                                <TextInput placeholder="Your Wards" placeholderTextColor={colors.onSurfaceVarient} style={[styles.textLayout, {color: colors.onSurface}]} />
                             </View>
                             <View style={[styles.textInContainer, {backgroundColor: colors.surfaceContainerHighest}, { marginLeft: 15 }]}>
-                                <TextInput placeholder="+Your Province" placeholderTextColor={colors.onSurface} style={[styles.textLayout, {color: colors.onSurfaceVarient}]} />
+                                <TextInput placeholder="Your Province" placeholderTextColor={colors.onSurfaceVarient} style={[styles.textLayout, {color: colors.onSurface}]} />
                             </View>
                         </View>
                         <View style={{ flexDirection: "row" }}>
                             <View style={[styles.textInContainer, {backgroundColor: colors.surfaceContainerHighest}, { marginTop: 15 }]}>
                                 <Image source={require("../../assets/frame-83.png")} />
-                                <TextInput placeholder="Your detail address" placeholderTextColor={colors.onSurface} style={[styles.textLayout, {color: colors.onSurfaceVarient}]} />
+                                <TextInput placeholder="Your detail address" placeholderTextColor={colors.onSurfaceVarient} style={[styles.textLayout, {color: colors.onSurface}]} />
                             </View>
                         </View>
                     </View>

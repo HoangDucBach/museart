@@ -87,7 +87,7 @@ const Artworks = () => {
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
-                <Dashboard namePage={"Dashboard"}>
+                <Dashboard namePage={"Artworks"}>
                     <MyFlatList data={artworks} renderItem={renderItem}
                         isLoading={isLoading} handleLoading={handleLoading}
                         renderPaginationButtons={renderPaginationButtons} />
