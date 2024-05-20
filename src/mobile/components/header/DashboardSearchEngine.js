@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { StyleSheet, View, Image, TextInput, Pressable, FlatList, Text, Touchable, TouchableOpacity, Dimensions } from "react-native";
 import { FontSize, FontFamily, Border } from "../../GlobalStyles";
-import { useIsFocused, useNavigation, useRoute, useTheme } from "@react-navigation/native";
+import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import axios from "axios";
 import { baseUrl } from "../../services/api";
 
