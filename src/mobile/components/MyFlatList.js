@@ -31,6 +31,7 @@ export default MyFlatList;
 
 const styles = StyleSheet.create({
     paginationContainer: {
+        paddingBottom: 70,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

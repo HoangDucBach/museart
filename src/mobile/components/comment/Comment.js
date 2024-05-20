@@ -57,12 +57,8 @@ const Comment = ({ modalVisible, }) => {
     ];
     const renderItem = ({ item }) => {
         return (
-<<<<<<< HEAD
-            <CommentFrame key={item.id} userName={a[item.id % 4]} date={item.updatedAt.slice(0, 10)} text={item.comment} />
-=======
             <CommentFrame key={item.id} id={item.userId}
                 date={item.updatedAt.slice(0, 10)} text={item.comment} />
->>>>>>> 65a12dff9741e812c6ed9f3cfb6a70aff496fb18
 
         )
     }
@@ -72,11 +68,7 @@ const Comment = ({ modalVisible, }) => {
     }, []);
 
     return (
-<<<<<<< HEAD
         <SafeAreaView style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHigh}]}>
-=======
-        <View style={[styles.frameParent, { backgroundColor: colors.surfaceContainerHigh }]}>
->>>>>>> 65a12dff9741e812c6ed9f3cfb6a70aff496fb18
             <View style={styles.frameGroupFlexBox}>
                 <TouchableOpacity onPress={modalVisible}>
                     <Svg width={25} height={25} viewBox="0 0 25 25" fill="none">

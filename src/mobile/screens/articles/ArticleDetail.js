@@ -45,15 +45,9 @@ const ArticleDetail = () => {
                 <ScrollView style={styles.body}>
                     <AboutTitle title={article.title} tagRoute="Article" tagDetail="Document" isPrice={false} />
                     <View style={{ height: 15 }} />
-<<<<<<< HEAD
-                    <BoardExtraInfoArtwork commentAmount={"api chưa có"} likeAmount={123} date={"d/m/y"} />
-                    <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock, {color: colors.onSurface}]}>{article.copy}</Text>
-                    <View style={{paddingBottom: 100}} />
-=======
                     <BoardExtraInfoArtwork commentAmount={""} likeAmount={''} date={article.timestamp} />
                     <Text style={[styles.thereAreMany, styles.thereAreManySpaceBlock, { color: colors.onSurface }]}>{article.copy}</Text>
 
->>>>>>> 65a12dff9741e812c6ed9f3cfb6a70aff496fb18
                 </ScrollView>
             )}
         </View>

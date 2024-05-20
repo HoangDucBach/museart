@@ -37,11 +37,7 @@ const CommentFrame = ({
   }, [])
 
   return (
-<<<<<<< HEAD
     <View style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHighest, shadowColor: colors.primaryShadow}]}>
-=======
-    <View style={[styles.frameParent, { backgroundColor: colors.surfaceContainerHighest }]}>
->>>>>>> 65a12dff9741e812c6ed9f3cfb6a70aff496fb18
       <View style={styles.usernameParent}>
         <Text style={[styles.username, styles.usernameTypo, { color: colors.onSurfaceVarient }]}>{data}</Text>
         <Text style={[styles.ddmmyyyy, styles.usernameTypo, { color: colors.primary }]}>{date}</Text>

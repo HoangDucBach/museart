@@ -112,7 +112,7 @@ export const MyDarkTheme = {
     onSurfaceVarient: "#827775",
     // onSurface:"#F5F2EC",
     primary: "#D00000",
-    primaryShadow: "#040404",
+    primaryShadow: "#444444",
     outline: "#FFFFFF",
   }
 }

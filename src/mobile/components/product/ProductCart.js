@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, TextInput } from "react-native";
 import { Color, Border, FontFamily, FontSize, Padding } from "../../GlobalStyles";
 import ButtonPrimary from "../button/ButtonPrimary";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -10,11 +10,23 @@ const ProductCash = ({
   text,
   price,
   image,
-  number,
+  amount,
+  onAmoutChange,
 }) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
+  const [number, setNumber] = useState(amount);
+  const [deleted, setDeleted] = useState(false);
 
+  useEffect(() => {
+    onAmoutChange(id, number);
+  }, [number]);
+
+  useEffect(() => {
+    if (deleted) setNumber(0);
+  }, [deleted]);
+
+  if (deleted) return;
   return (
     <View className={'w-screen items-center justify-center px-2.5'}>
       <TouchableOpacity onPress={() =>
@@ -38,16 +50,25 @@ const ProductCash = ({
                     image={require("../../assets/group-21.png")}
                     buttonPrimaryBackgroundColor={"unset"}
                     buttonPrimaryPaddingHorizontal={0}
+                    onPressButton={() => { if (number > 1) setNumber(number - 1) }}
                   />
                 </View>
                 <View>
-                  <Text style={[styles.textTypo, { fontSize: FontSize.labelLargeBold_size, color: Color.primaryPrimaryFixed }]}>{1}</Text>
+                  <TextInput style={[styles.textTypo, { marginTop: 0, fontSize: FontSize.labelLargeBold_size, color: Color.primaryPrimaryFixed }]}
+                              value={String(number)}
+                              onChangeText={text => setNumber(text)}
+                              onEndEditing={() => {
+                                if (number < 1) setNumber(1);
+                                else if (number > 99) setNumber(99);
+                                }}
+                              />
                 </View>
                 <View style={{ alignSelf: "flex-end" }}>
                   <ButtonPrimary
                     image={require("../../assets/plusicon.png")}
                     buttonPrimaryBackgroundColor={"unset"}
                     buttonPrimaryPaddingHorizontal={0}
+                    onPressButton={() => { if (number < 99) setNumber(number + 1) }}
                   />
                 </View>
               </View>
@@ -57,6 +78,7 @@ const ProductCash = ({
                     image={require("../../assets/group-22.png")}
                     buttonPrimaryBackgroundColor={"unset"}
                     buttonPrimaryPaddingHorizontal={0}
+                    onPressButton={() => setDeleted(true)}
                   />
                 </View>
               </View>

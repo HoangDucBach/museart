@@ -77,7 +77,6 @@ const ArtworkDetail = () => {
                             propColor="#231919"
                         />
                     </View>
-                    <Button />
                     <View style={styles.descriptioncontainerFlexBox}>
                         <Text style={[styles.description, styles.descriptionFlexBox, { color: colors.onSurface }]}>
                             Description

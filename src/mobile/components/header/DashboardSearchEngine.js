@@ -82,8 +82,8 @@ const DashboardSearchEngine = () => {
           source={require("../../assets/vector1.png")}
         />
         <TextInput placeholder="Search picture, product, . . ."
-          placeholderTextColor={colors.onSurface}
-          style={[styles.searchPictureProduct, { color: colors.onSurfaceVarient }]}
+          placeholderTextColor={colors.onSurfaceVarient}
+          style={[styles.searchPictureProduct, { color: colors.onSurface }]}
           onChangeText={(text) => {
             setFilter(text);
             if (text != '') searchData(text);
