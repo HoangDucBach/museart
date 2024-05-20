@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState, useContext } from "react";
-import { Text, StyleSheet, View, Image, ImageBackground, ScrollView, Pressable, TextInput } from "react-native";
-// import { Image } from "expo-image";
+import { Text, StyleSheet, View, Image, ScrollView, Pressable, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FontFamily, Color, Padding, FontSize, Border } from "../../GlobalStyles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -100,28 +99,6 @@ const SignUp = () => {
                     </View>
                 </View>
             </ScrollView>
-            {/* <View style={styles.ellipseParent}>
-                <Image
-                    style={styles.frameLayout}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-5.png")}
-                />
-                <Image
-                    style={[styles.frameItem, styles.frameLayout]}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-6.png")}
-                />
-                <Image
-                    style={[styles.frameItem, styles.frameLayout]}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-6.png")}
-                />
-                <Image
-                    style={[styles.frameItem, styles.frameLayout]}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-6.png")}
-                />
-            </View> */}
         </LinearGradient>
     );
 };

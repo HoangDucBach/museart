@@ -22,10 +22,7 @@ const ArticleDetail = () => {
         try {
             const response = await axios.get(`${baseUrl}/articles/${ID}`);
             setArticle(response.data.data);
-            // console.log(ID);
-            // console.log(article);
         } catch (error) {
-            //console.log(article);
             console.error(error);
         } finally {
             setLoading(false);

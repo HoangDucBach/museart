@@ -1,6 +1,6 @@
-import { FlatList, Image, Modal, RefreshControl, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
+import { FlatList, Modal, RefreshControl, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
 import React, { useState, useEffect, useContext } from 'react'
-import { FontFamily, FontSize, Padding } from '../../GlobalStyles';
+import { FontFamily, FontSize } from '../../GlobalStyles';
 import CommentFrame from './CommentFrame';
 import { localhost } from '../../services/api';
 import axios from 'axios';

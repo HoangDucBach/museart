@@ -1,6 +1,3 @@
-import store from "./store/index";
-import { DarkTheme, DefaultTheme } from "@react-navigation/native";
-
 /* Colors */
 export const Color = {
   surface: "#F5F2EC",
@@ -27,18 +24,6 @@ export const Color = {
   primaryPrimary1: "rgba(208, 0, 0, 0.9)",
   primaryShadow: "#D9CFBE",
 };
-export const ColorDark = {
-  surface: "#101010",
-  SurfaceContainer: "#0D0D0D",
-  SurfaceContainerLow: "#0C0C0C",
-  SurfaceContainerLowest: "#0B0B0B",
-  SurfaceContainerHigh: "#0F0F0F",
-  SurfaceContainerHighest: "#1C1B19",
-  surfaceOnSurfaceVarient: "#827775",
-  surfaceOnSurface: "#F5F2EC",
-  primaryPrimary: "#D00000",
-  primaryShadow: "#040404",
-}
 /* fonts */
 export const FontFamily = {
   typographyLabelLarge: "PlayfairDisplay-Regular",

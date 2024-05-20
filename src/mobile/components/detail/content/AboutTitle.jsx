@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, StyleSheet, View, Dimensions } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
 import {
   Padding,
@@ -52,19 +52,6 @@ const AboutTitle = ({ title, tagRoute, tagDetail, isPrice, price }) => {
 };
 
 const styles = StyleSheet.create({
-  // aboutOfTitle: {
-  //   fontSize: FontSize.headline5Bold_size,
-  //   fontWeight: "700",
-  //   fontFamily: FontFamily.labelSmallBold,
-  //   color: Color.surfaceOnSurface,
-  //   textAlign: "left",
-  // },
-  // artwork: {
-  //   fontSize: FontSize.typographyLabelSmall_size,
-  //   fontFamily: FontFamily.typographyLabelLarge,
-  //   color: Color.colorWhite,
-  //   textAlign: "left",
-  // },
   artworkWrapper: {
     backgroundColor: Color.colorDarkslategray,
     borderRadius: Border.br_81xl,
