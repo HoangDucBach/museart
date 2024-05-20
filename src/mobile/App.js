@@ -9,7 +9,7 @@ import SignIn from "./screens/auth/SignIn";
 import SignUp from "./screens/auth/SignUp";
 import Cart from "./screens/shopping/Cart";
 import Payment from "./screens/shopping/Payment";
-import { ActivityIndicator, Dimensions, StatusBar, View } from "react-native";
+import { StatusBar } from "react-native";
 import { AuthContext, AuthProvider } from "./context/authContext";
 import HomeTabs from "./navigation/HomeTabs";
 import RequireAuthentication from "./navigation/RequireAuth";

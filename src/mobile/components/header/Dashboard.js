@@ -2,7 +2,6 @@ import * as React from "react";
 import { Text, StyleSheet, View, SafeAreaView } from "react-native";
 import NavbarTop from "./NavbarTop";
 import DashboardSearchEngine from "./DashboardSearchEngine";
-import { Padding } from "../../GlobalStyles";
 import { useTheme } from "@react-navigation/native";
 
 const Dashboard = ({
@@ -10,7 +9,6 @@ const Dashboard = ({
     children,
 
 }) => {
-    // const isDarkMode = useSelector(state => state.theme.isDarkMode);
     const { colors } = useTheme();
     return (
         <View className={`w-screen flex-1`} style={{ backgroundColor: colors.surfaceContainer }}>
@@ -35,6 +33,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
     },
     body: {
+        zIndex: 99,
         alignSelf: "stretch",
         alignItems: "center",
     },

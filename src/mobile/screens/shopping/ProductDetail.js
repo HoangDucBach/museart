@@ -72,6 +72,7 @@ const ProductDetail = () => {
                             </TouchableOpacity>
                         </View>
                     </ScrollView>
+                    <View style={{paddingBottom: 70}} />
                 </ScrollView>
             )}
         </View>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, RefreshControl, InteractionManager } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Dashboard from "../../components/header/Dashboard";
 import FrameComponent from "../../components/FrameComponent";
@@ -87,7 +87,7 @@ const Artworks = () => {
             {isLoading ? (
                 <ActivityIndicator />
             ) : (
-                <Dashboard namePage={"Dashboard"}>
+                <Dashboard namePage={"Artworks"}>
                     <MyFlatList data={artworks} renderItem={renderItem}
                         isLoading={isLoading} handleLoading={handleLoading}
                         renderPaginationButtons={renderPaginationButtons} />

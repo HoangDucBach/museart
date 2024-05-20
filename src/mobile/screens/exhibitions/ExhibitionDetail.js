@@ -1,6 +1,6 @@
-import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Border, Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
+import { Color, FontFamily, FontSize, Padding } from '../../GlobalStyles';
 import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
 import axios from 'axios';
 import { baseUrl } from '../../services/api';
@@ -9,8 +9,6 @@ import AboutTitle from '../../components/detail/content/AboutTitle';
 import AboutArtist from '../../components/detail/content/AboutArtist';
 import FrameButton from '../../components/detail/content/FrameButton';
 import Button from '../../components/detail/content/Button';
-import Video from '../../components/detail/content/Video';
-import Sound from '../../components/detail/content/Sound';
 import NavbarTop from '../../components/header/NavbarTop';
 
 const ExhibitionDetail = () => {
@@ -92,6 +90,7 @@ const ExhibitionDetail = () => {
                             </View>
                         </View>
                     }
+                    <View style={{paddingBottom: 70}} />
                 </ScrollView>
             )}
         </View>

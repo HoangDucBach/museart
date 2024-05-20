@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem('userToken', userInfo.token);
     } catch (e) {
       console.log(`sign up error: ${e}`);
-      return Alert.alert("All field are required. Email must be valid and Password must be at least 6 characters long");
+      return Alert.alert("All field are required.", "Email must be valid and Password must be at least 6 characters long.");
     } finally {
       setLoading(false);
     }
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem('userToken', userInfo.token);
     } catch (e) {
       console.log(`sign in error: ${e}`);
-      return Alert.alert("All field are required. Email must be valid and Password must be at least 6 characters long");
+      return Alert.alert("All field are required.", "Email must be valid and Password must be at least 6 characters long.");
     } finally {
       setLoading(false);
     }

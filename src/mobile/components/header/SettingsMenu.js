@@ -20,7 +20,7 @@ const SettingsMenu = () => {
   };
 
   return (
-    <View style={[styles.settingsMenu, {backgroundColor: colors.surfaceContainerHigh}]}>
+    <View style={[styles.settingsMenu, {backgroundColor: colors.surfaceContainerHigh, shadowColor: colors.primaryShadow}]}>
       <MenuItem colors={colors} imageSource={isDarkMode ? require("../../assets/Explore2.png") : require("../../assets/explore.png")} text="About" />
       <MenuItem colors={colors} imageSource={isDarkMode ? require("../../assets/item.png") : require("../../assets/navbaritem.png")} text="Setting" />
       <MenuItem colors={colors} imageSource={isDarkMode ? require("../../assets/Frame14.png") : require("../../assets/frame-14.png")} text="Cart" func={() => {
@@ -103,21 +103,21 @@ const styles = StyleSheet.create({
   },
   settingsMenu: {
     alignSelf: "flex-end",
-    marginTop: 50,
+    // marginTop: 50,
     marginLeft: 10,
-    shadowRadius: 20,
-    elevation: 20,
+    top: 90,
+    right: 5,
     width: 237,
     padding: Padding.p_3xs,
     justifyContent: "center",
-    shadowOpacity: 1,
     shadowOffset: {
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
     },
-    shadowColor: Color.colorBlack,
+    shadowRadius: 10,
+    elevation: 10,
+    shadowOpacity: 0.5,
     borderRadius: Border.br_3xs,
-    overflow: "hidden",
   },
 });
 

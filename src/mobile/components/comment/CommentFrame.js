@@ -1,23 +1,49 @@
 import * as React from "react";
+import { useState, useContext } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Padding, FontFamily, Border, FontSize } from "../../GlobalStyles";
 import { useTheme } from "@react-navigation/native";
+import axios from "axios";
+import { localhost } from "../../services/api";
+import { AuthContext } from "../../context/authContext";
 
 const CommentFrame = ({
-  userName,
+  id,
   date,
   text,
 }) => {
   const { colors } = useTheme();
+  const [isLoading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const { userInfo } = useContext(AuthContext);
+
+
+  const getUserById = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`${localhost}/auth/${id}`);
+      setData(response.data.username);
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    getUserById();
+  }, [])
 
   return (
-    <View style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHighest}]}>
+    <View style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHighest, shadowColor: colors.primaryShadow}]}>
       <View style={styles.usernameParent}>
-        <Text style={[styles.username, styles.usernameTypo, {color: colors.onSurfaceVarient}]}>{userName}</Text>
-        <Text style={[styles.ddmmyyyy, styles.usernameTypo, {color: colors.primary}]}>{date}</Text>
+        <Text style={[styles.username, styles.usernameTypo, { color: colors.onSurfaceVarient }]}>{data}</Text>
+        <Text style={[styles.ddmmyyyy, styles.usernameTypo, { color: colors.primary }]}>{date}</Text>
       </View>
       <Text
-        style={[styles.text, {color: colors.onSurface}]}>
+        style={[styles.text, { color: colors.onSurface }]}>
         {text}
       </Text>
     </View>
@@ -51,10 +77,17 @@ const styles = StyleSheet.create({
   },
   frameParent: {
     borderRadius: Border.br_3xs,
-    marginVertical: 10,
+    marginTop: 10,
+    marginHorizontal: 10,
     padding: Padding.p_3xs,
-    overflow: "hidden",
     alignSelf: "stretch",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowRadius: 5,
+    elevation: 5,
+    shadowOpacity: 0.4,
   },
 });
 

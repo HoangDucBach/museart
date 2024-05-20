@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 import {
   FontSize,
   FontFamily,
-  Color,
   Border,
   Padding,
 } from "../../../GlobalStyles";

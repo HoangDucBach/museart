@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Text, StyleSheet, View, SafeAreaView, FlatList, PanResponder, TouchableOpacity, RefreshControl } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Dashboard from "../../components/header/Dashboard";
 import FrameComponent from "../../components/FrameComponent";

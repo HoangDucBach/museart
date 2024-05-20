@@ -1,16 +1,19 @@
-import { FlatList, Image, Modal, RefreshControl, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { FontFamily, FontSize, Padding } from '../../GlobalStyles';
+import { FlatList, Modal, RefreshControl, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react'
+import { FontFamily, FontSize } from '../../GlobalStyles';
 import CommentFrame from './CommentFrame';
 import { localhost } from '../../services/api';
 import axios from 'axios';
 import { useTheme } from '@react-navigation/native';
 import { Path, Svg } from 'react-native-svg';
+import { AuthContext } from '../../context/authContext';
 
 const Comment = ({ modalVisible, }) => {
     const [isLoading, setLoading] = useState(false);
-    const [comments, setComments] = useState(null);
+    const [comments, setComments] = useState([]);
     const [openInput, setOpenInput] = useState(false);
+    const [input, setInput] = useState(null);
+    const { userInfo } = useContext(AuthContext);
     const { colors } = useTheme();
 
     const getComments = async () => {
@@ -26,14 +29,36 @@ const Comment = ({ modalVisible, }) => {
         }
     };
 
+    const createComments = async () => {
+        setLoading(true);
+        if (userInfo != null)
+            try {
+                const response = await axios.post(`${localhost}/users/comments`,
+                    { userId: userInfo.user.id, comment: input }, { headers: { 'Authorization': `${userInfo.token}` } });
+                comments.push(response.data);
+                setOpenInput(false);
+                setLoading(false);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+    };
+
     const handleLoading = () => {
         setLoading(true);
         setTimeout(() => setLoading(false), 1000);
     };
-
+    const a = [
+        "Hoàng Đức Bách",
+        "Trần Đức Lương",
+        "Đặng Thị Thanh Hiền",
+        "Phạm Minh Tâm",
+    ];
     const renderItem = ({ item }) => {
         return (
-            <CommentFrame key={item.id} userName={'username'} date={item.updatedAt.slice(0, 10)} text={item.comment} />
+            <CommentFrame key={item.id} id={item.userId}
+                date={item.updatedAt.slice(0, 10)} text={item.comment} />
 
         )
     }
@@ -43,7 +68,7 @@ const Comment = ({ modalVisible, }) => {
     }, []);
 
     return (
-        <View style={[styles.frameParent, { backgroundColor: colors.surfaceContainerHigh }]}>
+        <SafeAreaView style={[styles.frameParent, {backgroundColor: colors.surfaceContainerHigh}]}>
             <View style={styles.frameGroupFlexBox}>
                 <TouchableOpacity onPress={modalVisible}>
                     <Svg width={25} height={25} viewBox="0 0 25 25" fill="none">
@@ -76,10 +101,26 @@ const Comment = ({ modalVisible, }) => {
             >
                 <TouchableOpacity onPressOut={() => { setOpenInput(false) }}
                     style={{ justifyContent: "center", alignSelf: "center", alignItems: "center", flex: 1 }}>
-                    <View style={{ backgroundColor: colors.surfaceContainerHighest, }}>
-                        <TextInput placeholderTextColor={colors.onSurface} style={{ color: colors.onSurfaceVarient }}
+                    <View style={{ backgroundColor: colors.surface, padding: 10, borderRadius: 15, flexDirection: "row", alignSelf: "stretch", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                        <View style={{ width: 25, height: 25 }} />
+                        <TextInput placeholderTextColor={colors.onSurface}
+                            style={{ height: 40, borderColor: 'gray', color: colors.onSurfaceVarient, borderWidth: 1, padding: 5 }}
                             placeholder="Write your comment here"
+                            onChangeText={(text) => { setInput(text) }}
                         />
+                        <TouchableOpacity style={{ color: colors.onSurfaceVarient }} onPress={() => { createComments() }}>
+                            <Svg width={25} height={25} viewBox="0 -0.5 25 25" fill={colors.primary}>
+                                <Path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M18.455 9.8834L7.063 4.1434C6.76535 3.96928 6.40109 3.95274 6.08888 4.09916C5.77667 4.24558 5.55647 4.53621 5.5 4.8764C5.5039 4.98942 5.53114 5.10041 5.58 5.2024L7.749 10.4424C7.85786 10.7903 7.91711 11.1519 7.925 11.5164C7.91714 11.8809 7.85789 12.2425 7.749 12.5904L5.58 17.8304C5.53114 17.9324 5.5039 18.0434 5.5 18.1564C5.55687 18.4961 5.77703 18.7862 6.0889 18.9323C6.40078 19.0785 6.76456 19.062 7.062 18.8884L18.455 13.1484C19.0903 12.8533 19.4967 12.2164 19.4967 11.5159C19.4967 10.8154 19.0903 10.1785 18.455 9.8834V9.8834Z"
+                                    stroke={"black"}
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </Svg>
+                        </TouchableOpacity>
                     </View>
                 </TouchableOpacity>
             </Modal>
@@ -91,15 +132,17 @@ const Comment = ({ modalVisible, }) => {
                     <RefreshControl refreshing={isLoading} onRefresh={handleLoading} />
                 }
             />
-        </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     frameGroupFlexBox: {
+        margin: 10,
         justifyContent: "space-between",
         flexDirection: "row",
         alignSelf: "stretch",
+        alignItems: "center",
     },
     commentTypo: {
         fontFamily: FontFamily.labelMediumBold,
@@ -113,7 +156,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     frameParent: {
-        padding: Padding.p_xl,
+        padding: 10,
         height: "100%",
         width: "100%",
         alignSelf: "center",

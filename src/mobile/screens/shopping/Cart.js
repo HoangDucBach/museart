@@ -16,14 +16,15 @@ const Cart = () => {
     const [products, setProducts] = useState([]);
     //pagination
     const [page, setPage] = useState(1);
-    const [numberOfProduct, setNumberOfProudct] = useState(0);
+    const [numberOfProduct, setNumberOfProduct] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
 
     const getProducts = async () => {
         setLoading(true);
         try {
             const response = await axios.get(`${baseUrl}/products?page=${page}`);
-            setProducts(response.data.data);
+            const productsWithAmount = response.data.data.map(item => ({ ...item, amount: 1 }));
+            setProducts(productsWithAmount);
             setLoading(false);
         } catch (error) {
             console.error(error);
@@ -67,17 +68,31 @@ const Cart = () => {
         return buttons;
     };
 
+    const updateCart = () => {
+        const count = products.reduce((count, item) => count += parseInt(item.amount), 0);
+        const total = Math.round(100 * products.reduce((sum, item) => sum + item.max_current_price * item.amount, 0)) / 100;
+        
+        setNumberOfProduct(count);
+        setTotalPrice(total);
+    }
+
     useEffect(() => {
         getProducts();
     }, [page]);
 
     useEffect(() => {
-        const numberOfProducts = products.length;
-        const total = Math.round(100 * products.reduce((sum, item) => sum + item.max_current_price, 0)) / 100;
-
-        setNumberOfProudct(numberOfProducts);
-        setTotalPrice(total);
+        updateCart();
     }, [products]);
+
+    const handleAmountChange = (id, newAmount) => {
+        setProducts((prevProducts) =>
+            prevProducts.map((product) =>
+              product.id === id ? { ...product, amount: newAmount } : product
+            )
+        );
+        updateCart();
+
+    }
 
     const renderItem = ({ item }) => {
         return (
@@ -87,7 +102,8 @@ const Cart = () => {
                 text={"Product"}
                 price={item.max_current_price}
                 image={item.image_url}
-                // number={item.number}
+                amount={item.amount}
+                onAmoutChange={handleAmountChange}
                 >
             </ProductCart>
         )
@@ -210,7 +226,7 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 20,
         elevation: 5,
-        shadowOpacity: 1,
+        shadowOpacity: 0.5,
         borderRadius: Border.br_3xs,
         padding: Padding.p_3xs,
     },

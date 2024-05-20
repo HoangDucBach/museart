@@ -1,13 +1,12 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { Border, FontSize, FontFamily, Color, Padding } from "../../GlobalStyles";
+import { useTheme } from "@react-navigation/native";
 
 const NotificationSuccess = () => {
-  const isDarkMode = useSelector(state => state.theme.isDarkMode);
-
+  const { colors } = useTheme();
   return (
-    <View style={styles.notificationsuccess}>
+    <View style={[styles.notificationsuccess, {backgroundColor: colors.surfaceContainerHighest, shadowColor: colors.primaryShadow}]}>
       <View style={styles.notificationsuccessInner}>
         <Image
           style={styles.frameChild}
@@ -21,7 +20,7 @@ const NotificationSuccess = () => {
         source={require("../../assets/frame-97.png")}
       />
       <Text style={[styles.success, styles.successFlexBox]}>Success</Text>
-      <Text style={[styles.referenceSiteAboutLorem, styles.successFlexBox]}>
+      <Text style={[styles.referenceSiteAboutLorem, styles.successFlexBox, {marginBottom: 5}]}>
         Reference site about Lorem Ipsum, giving information on its origins, as
         well as a random Lipsum generator.
       </Text>
@@ -37,7 +36,6 @@ const styles = StyleSheet.create({
   frameChild: {
     width: 25,
     height: 25,
-    overflow: "hidden",
   },
   notificationsuccessInner: {
     flexDirection: "row",
@@ -50,7 +48,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginTop: 15,
-    overflow: "hidden",
   },
   success: {
     fontSize: FontSize.headline3Bold_size,
@@ -67,8 +64,6 @@ const styles = StyleSheet.create({
   },
   notificationsuccess: {
     borderRadius: Border.br_3xs,
-    backgroundColor: Color.surfaceSurfaceContainerHighest,
-    shadowColor: "#d9cfbe",
     shadowOffset: {
       width: 2,
       height: 2,
@@ -81,7 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: Padding.p_3xs,
     alignItems: "center",
-    overflow: "hidden",
   },
 });
 

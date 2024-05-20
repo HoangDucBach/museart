@@ -18,8 +18,8 @@ userRouter.post('/carts', authenticateToken, CartControllerInstance.create);
 
 userRouter.get('/comments', CommentsControllerInstance.getAll);
 userRouter.get('/comments/:id', CommentsControllerInstance.get);
-userRouter.put('/comments/:id', authenticateAdmin, CommentsControllerInstance.update);
-userRouter.delete('/comments/:id', authenticateAdmin, CommentsControllerInstance.delete);
+userRouter.put('/comments/:id', authenticateToken, CommentsControllerInstance.update);
+userRouter.delete('/comments/:id', authenticateToken, CommentsControllerInstance.delete);
 userRouter.post('/comments', authenticateToken, CommentsControllerInstance.create);
 
 userRouter.get('/status', StatusControllerInstance.getAll);

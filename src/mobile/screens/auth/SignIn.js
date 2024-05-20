@@ -12,9 +12,7 @@ import {
     ScrollView
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { FontFamily, Padding, Color, Border, FontSize } from "../../GlobalStyles";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleMove, toggleTab } from "../../store";
+import { FontFamily, Color, FontSize } from "../../GlobalStyles";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../../context/authContext";
 
@@ -99,28 +97,6 @@ const SignIn = () => {
                     </View>
                 </View>
             </ScrollView>
-            {/* <View style={styles.ellipseParent}>
-                <Image
-                    style={styles.frameLayout}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-5.png")}
-                />
-                <Image
-                    style={[styles.frameItem, styles.frameLayout]}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-6.png")}
-                />
-                <Image
-                    style={[styles.frameItem, styles.frameLayout]}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-6.png")}
-                />
-                <Image
-                    style={[styles.frameItem, styles.frameLayout]}
-                    contentFit="cover"
-                    source={require("../../assets/ellipse-6.png")}
-                />
-            </View> */}
         </LinearGradient>
     );
 };

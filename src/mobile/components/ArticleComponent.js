@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Pressable, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { FontFamily, FontSize } from "../GlobalStyles";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
